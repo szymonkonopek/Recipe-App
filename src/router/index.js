@@ -3,6 +3,7 @@ import Home from "@/views/Home";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
 import Feed from "@/views/Feed";
+import Profile from "@/views/Profile";
 import { getAuth } from "firebase/auth";
 
 const routes = [
@@ -27,11 +28,19 @@ const routes = [
     component: Feed,
     meta: {
       requiresAuth: true,
-    },
+    }
   },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
+  }
 ];
 
-const getCurrentUser = () => {
+export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const removeListener = getAuth().onAuthStateChanged((user) => {
       removeListener();
