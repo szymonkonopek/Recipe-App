@@ -18,7 +18,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div v-bind:class="{'modal-content': true, [noteColor]: true}">
+      <div v-bind:class="{'modal-content': true, [recipeColor]: true}">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">New recipe</h1>
           <button
@@ -38,7 +38,7 @@
                 id="titleInput"
                 maxlength="60"
                 aria-describedby="textHelp"
-                v-model="noteTitle"
+                v-model="recipeTitle"
                 required
                 v-if="enhancedTitle.length == 0"
               />
@@ -86,31 +86,31 @@
                 rows="3"
                 aria-describedby="textAreaHelpblock"
                 maxlength="255"
-                v-model="noteContent"
+                v-model="recipeContent"
                 required
               ></textarea>
             </div>
             <small id="textAreaHelpblock" class="form-text text-muted">
-              {{ noteContent.length }}/255
+              {{ recipeContent.length }}/255
             </small>
             <div>
                 Recipe visible for others?
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="noteVisibleForOthers" checked>
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="recipeVisibleForOthers" checked>
               <label class="form-check-label" for="flexRadioDefault2">
                 Yes
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="noteVisibleForOthers">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="recipeVisibleForOthers">
               <label class="form-check-label" for="flexRadioDefault1">
                 No
               </label> 
             </div>
             <div class="form-group">
               <label for="exampleFormSelect">Set color recipe </label>
-              <select class="form-select" id="selectColor" v-model="noteColor">
+              <select class="form-select" id="selectColor" v-model="recipeColor">
                 <option value="text-bg-white">White</option>
                 <option value="text-bg-primary">Light Brown</option>
                 <option value="text-bg-secondary">Dark Brown</option>
@@ -164,8 +164,8 @@
                 Submit
               </button>
               <EnhanceTitleButton
-                :noteTitle="noteTitle"
-                :noteContent="noteContent"
+                :recipeTitle="recipeTitle"
+                :recipeContent="recipeContent"
               />
             </div>
           </form>
@@ -182,7 +182,7 @@ import { mapState } from 'vuex'
 import { mutationTypes } from '@/store/modules/chatgpt'
 
 export default {
-  name: 'NewNoteButton',
+  name: 'NewRecipeButton',
   computed: {
     ...mapState({
       enhancedTitle: (state) => state.chatgpt.enhancedTitle,
@@ -191,24 +191,24 @@ export default {
   },
   data () {
     return {
-      noteTitle: ref(''),
-      noteContent: '',
+      recipeTitle: ref(''),
+      recipeContent: '',
       checkedTags: ref([]),
-      noteColor: 'text-bg-white',
+      recipeColor: 'text-bg-white',
       isLoading: false,
-      noteVisibleForOthers: 'true'
+      recipeVisibleForOthers: 'true'
     }
   },
   methods: {
     submit () {
-      if (this.noteTitle.length > 0 && this.noteContent.length > 0) {
+      if (this.recipeTitle.length > 0 && this.recipeContent.length > 0) {
         this.$store
-          .dispatch(actionTypes.addNote, {
-            title: this.noteTitle,
-            content: this.noteContent,
+          .dispatch(actionTypes.addRecipe, {
+            title: this.recipeTitle,
+            content: this.recipeContent,
             tags: this.checkedTags,
-            color: this.noteColor,
-            visibleForOthers: this.noteVisibleForOthers === 'true'
+            color: this.recipeColor,
+            visibleForOthers: this.recipeVisibleForOthers === 'true'
           }
           )
           .then(async () => {
@@ -218,11 +218,11 @@ export default {
       }
     },
     updateTitle () {
-      this.noteTitle = this.enhancedTitle
+      this.recipeTitle = this.enhancedTitle
       this.$store.commit(mutationTypes.setEnhancedTitle, '')
     },
     discardTitle () {
-      this.noteTitle = ''
+      this.recipeTitle = ''
       this.$store.commit(mutationTypes.setEnhancedTitle, '')
     }
   },

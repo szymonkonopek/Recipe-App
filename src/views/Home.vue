@@ -23,7 +23,7 @@
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-md-11 d-flex flex-column justify-content-center">
-                <img src="../assets/carousel/2-share-notes.png" class="d-block img-fluid" alt="Information about sharing notes.">
+                <img src="../assets/carousel/2-share-recipes.png" class="d-block img-fluid" alt="Information about sharing recipes.">
               </div>
             </div>
           </div>

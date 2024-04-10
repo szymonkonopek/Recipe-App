@@ -1,17 +1,17 @@
 <template>
-  <NotesListProfileView  v-if="userDetails" :uid="userDetails.uid"></NotesListProfileView >
-  <NewNoteButton></NewNoteButton>
+  <RecipesListProfileView  v-if="userDetails" :uid="userDetails.uid"></RecipesListProfileView >
+  <NewRecipeButton></NewRecipeButton>
 </template>
 
 <script>
-import NotesListProfileView from '@/components/NotesListProfile'
-import NewNoteButton from '@/components/NewNoteButton'
+import RecipesListProfileView from '@/components/RecipesListProfile'
+import NewRecipeButton from '@/components/NewRecipeButton'
 import { mapActions } from 'vuex'
 import { actionTypes } from '@/store/modules/firebasedb'
 
 export default {
-  name: 'AppUserNotes',
-  components: { NotesListProfileView, NewNoteButton },
+  name: 'AppUserRecipes',
+  components: { RecipesListProfileView, NewRecipeButton },
   data () {
     return {
       userDetails: null

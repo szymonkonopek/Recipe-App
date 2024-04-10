@@ -16,71 +16,71 @@ import {
 import { db } from '@/main.js'
 
 export const actionTypes = {
-  getNotesByUserId: '[firedb] getNotesByUserId',
-  addNote: '[firedb] addNote',
+  getRecipesByUserId: '[firedb] getRecipesByUserId',
+  addRecipe: '[firedb] addRecipe',
   updatePassword: '[auth] Update Password',
   getUserDetails: '[auth] Get User Details'
 }
 
 export const mutationType = {
-  setNotes: '[firedb] setNotes',
-  addNoteSuccess: '[firedb] addNoteSuccess',
-  addNoteStart: '[firedb] addNoteStart'
+  setRecipes: '[firedb] setRecipes',
+  addRecipeSuccess: '[firedb] addRecipeSuccess',
+  addRecipeStart: '[firedb] addRecipeStart'
 }
 
 const state = {
-  notes: undefined,
+  recipes: undefined,
   isLoading: false
 }
 const mutations = {
-  [mutationType.setNotes] (state, payload) {
-    state.notes = payload
+  [mutationType.setRecipes] (state, payload) {
+    state.recipes = payload
   },
-  [mutationType.addNoteSuccess] (state) {
+  [mutationType.addRecipeSuccess] (state) {
     state.isLoading = false
   },
 
-  [mutationType.addNoteStart] (state) {
+  [mutationType.addRecipeStart] (state) {
     state.isLoading = true
   }
 }
 
 const actions = {
-  [actionTypes.getNotesByUserId] (context, { uid }) {
+  [actionTypes.getRecipesByUserId] (context, { uid }) {
     return new Promise((resolve) => {
-      context.commit(mutationType.addNoteStart)
-      let q = query(collection(db, 'notes'), orderBy('created', 'desc'))
+      context.commit(mutationType.addRecipeStart)
+      let q = query(collection(db, 'recipes'), orderBy('created', 'desc'))
       if (uid) {
         q = query(
-          collection(db, 'notes'),
+          collection(db, 'recipes'),
           where('uid', '==', uid),
           orderBy('created', 'desc')
         )
       }
 
       getDocs(q).then((result) => {
-        const notes = result.docs.map((doc) => {
+        const recipes = result.docs.map((doc) => {
           doc.data()
           return {
             id: doc.id,
             data: doc.data()
           }
         })
-        context.commit(mutationType.setNotes, notes)
+        context.commit(mutationType.setRecipes, recipes)
         resolve()
       })
     })
   },
-  [actionTypes.addNote] (context, data) {
+  [actionTypes.addRecipe] (context, data) {
     return new Promise((resolve) => {
       const auth = getAuth()
       onAuthStateChanged(auth, (user) => {
-        addDoc(collection(db, 'notes'), {
+        addDoc(collection(db, 'recipes'), {
           data,
           uid: user.uid,
           created: serverTimestamp()
         })
-        context.commit(mutationType.addNoteSuccess)
+        context.commit(mutationType.addRecipeSuccess)
         resolve()
       })
     })

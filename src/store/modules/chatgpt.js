@@ -34,8 +34,8 @@ const mutations = {
 }
 
 const actions = {
-  [actionTypes.enhanceTitle] (context, { noteTitle, noteContent }) {
-    titleParams.messages[0].content = `Note content: ${noteContent}, title: ${noteTitle}`
+  [actionTypes.enhanceTitle] (context, { recipeTitle, recipeContent }) {
+    titleParams.messages[0].content = `Recipe content: ${recipeContent}, title: ${recipeTitle}`
     return new Promise((resolve) => {
       context.commit(mutationTypes.enhanceTitleStart)
       gptApi.enhanceTitle(titleParams).then((response) => {

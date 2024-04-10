@@ -8,7 +8,7 @@
             <router-link :to="{ name: 'register' }" class="btn btn-outline-dark me-2">Sign Up!</router-link>
           </p>
           <p class="d-flex justify-content-center align-items-center" v-if="isLoggedIn">
-            <span class="me-2">Savor the Spark of Knowledge – Revel in Your Daily Notes!</span>
+            <span class="me-2">Savor the Spark of Knowledge – Revel in Your Daily Recipes!</span>
           </p>
         </section>
       </div>

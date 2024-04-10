@@ -8,7 +8,7 @@ export const titleParams = {
     {
       role: 'system',
       content:
-        'Type enhanced title, based on note Content. Max. 80 characters, return just title string'
+        'Type enhanced title, based on recipe Content. Max. 80 characters, return just title string'
     }
   ],
   max_tokens: 250,

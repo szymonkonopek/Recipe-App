@@ -3,7 +3,7 @@
   <button
     class="btn btn-link text-info"
     data-bs-toggle="modal"
-    :data-bs-target="'#id_edit' + noteId"
+    :data-bs-target="'#id_edit' + recipeId"
   >
     <i class="bi bi-pencil"></i>
   </button>
@@ -11,15 +11,15 @@
   <!-- Modal -->
   <div
     class="modal fade modal-lg"
-    :id="'id_edit' + noteId"
+    :id="'id_edit' + recipeId"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div v-bind:class="{'modal-content': true, [noteColor]: true}">
+      <div v-bind:class="{'modal-content': true, [recipeColor]: true}">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit note</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit recipe</h1>
           <button
             type="button"
             class="btn-close"
@@ -38,7 +38,7 @@
                   id="titleInput"
                   maxlength="60"
                   aria-describedby="textHelp"
-                  v-model="noteTitle"
+                  v-model="recipeTitle"
                 />
               </div>
               <div class="form-group">
@@ -50,30 +50,30 @@
                   aria-describedby="textAreaHelpblock"
                   maxlength="255"
                   required
-                  v-model="noteContent"
+                  v-model="recipeContent"
                 ></textarea>
               </div>
               <small id="textAreaHelpblock" class="form-text text-muted">
-                {{ noteContent.length }}/255
+                {{ recipeContent.length }}/255
               </small>
               <div>
                 Recipe visible for others?
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="noteVisibleForOthers" checked>
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="recipeVisibleForOthers" checked>
               <label class="form-check-label" for="flexRadioDefault2">
                 Yes
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="noteVisibleForOthers">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="recipeVisibleForOthers">
               <label class="form-check-label" for="flexRadioDefault1">
                 No
               </label>
             </div>
               <div class="form-group">
-              <label for="exampleFormSelect">Note color </label>
-              <select class="form-select" id="selectColor" disabled v-model="noteColor">
+              <label for="exampleFormSelect">Recipe color </label>
+              <select class="form-select" id="selectColor" disabled v-model="recipeColor">
                 <option value="text-bg-white">White</option>
                 <option value="text-bg-primary">Light Brown</option>
                 <option value="text-bg-secondary">Dark Brown</option>
@@ -139,31 +139,31 @@ import { doc, updateDoc, getDoc } from 'firebase/firestore'
 import { db } from '@/main.js'
 
 export default {
-  name: 'EditNoteButton',
+  name: 'EditRecipeButton',
   props: {
-    noteData: {
+    recipeData: {
       type: Object,
       required: true
     },
-    noteId: {
+    recipeId: {
       type: String,
       required: true
     }
   },
   data () {
     return {
-      noteTitle: this.noteData.title,
-      noteContent: this.noteData.content,
-      isSchool: this.noteData.tags.includes('School'),
-      isWork: this.noteData.tags.includes('Work'),
-      isPersonal: this.noteData.tags.includes('Personal'),
-      noteColor: this.noteData.color,
-      noteVisibleForOthers: this.noteData.visibleForOthers
+      recipeTitle: this.recipeData.title,
+      recipeContent: this.recipeData.content,
+      isSchool: this.recipeData.tags.includes('School'),
+      isWork: this.recipeData.tags.includes('Work'),
+      isPersonal: this.recipeData.tags.includes('Personal'),
+      recipeColor: this.recipeData.color,
+      recipeVisibleForOthers: this.recipeData.visibleForOthers
     }
   },
   methods: {
     async submit () {
-      const docRef = doc(db, 'notes', this.noteId)
+      const docRef = doc(db, 'recipes', this.recipeId)
       const docSnapshot = await getDoc(docRef)
       const currentData = docSnapshot.data()
 
@@ -171,10 +171,10 @@ export default {
       const updatedData = {
         ...currentData,
         data: {
-          title: this.noteTitle,
-          content: this.noteContent,
-          color: this.noteColor,
-          visibleForOthers: this.noteVisibleForOthers === 'true',
+          title: this.recipeTitle,
+          content: this.recipeContent,
+          color: this.recipeColor,
+          visibleForOthers: this.recipeVisibleForOthers === 'true',
           tags: [
             this.isSchool ? 'School' : null,
             this.isWork ? 'Work' : null,

@@ -7,7 +7,7 @@
       </div>
       <div class="col-md-8 mt-4">
         <div class="badge bg-success text-wrap fs-5 mb-4">Your recipes</div>
-        <app-user-notes></app-user-notes>
+        <app-user-recipes></app-user-recipes>
       </div>
     </div>
   </div>
@@ -15,10 +15,10 @@
 
 <script>
 import AppUserData from '@/components/UserData'
-import AppUserNotes from '@/components/UserNotes'
+import AppUserRecipes from '@/components/UserRecipes'
 
 export default {
   name: 'AppProfileView',
-  components: { AppUserNotes, AppUserData }
+  components: { AppUserRecipes, AppUserData }
 }
 </script>

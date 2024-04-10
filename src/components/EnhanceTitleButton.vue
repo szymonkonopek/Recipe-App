@@ -14,11 +14,11 @@ import { actionTypes } from '../store/modules/chatgpt'
 export default {
   name: 'EnhanceTitleButton',
   props: {
-    noteTitle: {
+    recipeTitle: {
       type: String,
       required: true
     },
-    noteContent: {
+    recipeContent: {
       type: String,
       required: true
     }
@@ -27,8 +27,8 @@ export default {
     enhanceTitle () {
       this.$store
         .dispatch(actionTypes.enhanceTitle, {
-          noteTitle: this.noteTitle,
-          noteContent: this.noteContent
+          recipeTitle: this.recipeTitle,
+          recipeContent: this.recipeContent
         })
         .then((responce) => {
           console.log(responce)
