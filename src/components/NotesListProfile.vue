@@ -1,13 +1,13 @@
 <template>
-  <div
-    v-for="note in notes"
-    :key="note.id"
-    class=""
-    style="width: 100%; max-width: 50rem"
-  >
-    <Note v-if="note.data.data.visibleForOthers == true" :note="note"></Note>
-  </div>
-</template>
+    <div
+      v-for="(note) in notes"
+      :key="note.id"
+      class=""
+      style="width: 100%; max-width: 50rem"
+    >
+      <Note :note="note"></Note>
+    </div>
+  </template>
 
 <script>
 import { actionTypes } from '@/store/modules/firebasedb'
@@ -15,13 +15,12 @@ import { mapState } from 'vuex'
 import Note from '@/components/Note.vue'
 
 export default {
-  name: 'AppNotesView',
+  name: 'AppNotesListProfileView',
   props: {
     uid: {
       type: String,
       required: false
     },
-
     onlyMyNotes: {
       type: Boolean,
       required: false
@@ -35,10 +34,11 @@ export default {
       notes: (state) => state.firebasedb.notes
     })
   },
-  mounted () {
+  created () {
     this.$store.dispatch(actionTypes.getNotesByUserId, {
       uid: this.uid
     })
   }
+
 }
 </script>

@@ -27,34 +27,34 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
-import {actionTypes} from "@/store/modules/firebasedb";
-import AppUserForm from "@/components/UserForm";
+import { mapActions } from 'vuex'
+import { actionTypes } from '@/store/modules/firebasedb'
+import AppUserForm from '@/components/UserForm'
 
 export default {
-  name: "AppUserData",
-  components: {AppUserForm},
-  data() {
+  name: 'AppUserData',
+  components: { AppUserForm },
+  data () {
     return {
-      userDetails: null,
-    };
+      userDetails: null
+    }
   },
   methods: {
     ...mapActions({
       getUserDetails: actionTypes.getUserDetails
     }),
-    fetchUserDetails() {
+    fetchUserDetails () {
       this.getUserDetails().then(userDetails => {
-        this.userDetails = userDetails;
+        this.userDetails = userDetails
       }).catch(error => {
-        console.error(error);
-      });
-    },
+        console.error(error)
+      })
+    }
   },
-  created() {
-    this.fetchUserDetails();
+  created () {
+    this.fetchUserDetails()
   }
-};
+}
 </script>
 
 <style>

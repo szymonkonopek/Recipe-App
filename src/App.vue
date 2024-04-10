@@ -1,21 +1,21 @@
 <template>
-  <div>
+  <div class="bg-light">
     <app-top-bar></app-top-bar>
-    <router-view class="bg-light"></router-view>
+    <router-view style="min-height: 100vh"></router-view>
     <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-import AppTopBar from "@/components/TopBar.vue";
-import AppFooter from "@/components/Footer";
+import AppTopBar from '@/components/TopBar.vue'
+import AppFooter from '@/components/Footer'
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppTopBar,
-    AppFooter,
-  },
-};
+    AppFooter
+  }
+}
 </script>
 
 <style></style>

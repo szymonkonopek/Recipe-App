@@ -1,6 +1,6 @@
 <template>
   <div class="p-5 d-flex flex-column">
-    <h2 class="fw-bold font">Notes</h2>
+    <h2 class="fw-bold font">Recipes</h2>
     <div class="d-flex flex-column align-items-center">
       <NotesList :uid="''"></NotesList>
       <NewNoteButton></NewNoteButton>
@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import NotesList from "@/components/NotesList.vue";
-import NewNoteButton from "@/components/NewNoteButton.vue";
+import NotesList from '@/components/NotesList.vue'
+import NewNoteButton from '@/components/NewNoteButton.vue'
 export default {
-  name: "AppFeedView",
-  components: { NotesList, NewNoteButton },
-};
+  name: 'AppFeedView',
+  components: { NotesList, NewNoteButton }
+}
 </script>

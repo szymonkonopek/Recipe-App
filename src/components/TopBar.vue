@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container-fluid">
-      <router-link :to="{ name: 'home' }" class="navbar-brand fw-bold" aria-current="page">IdeaMerge</router-link>
+      <router-link :to="{ name: 'home' }" class="navbar-brand fw-bold" aria-current="page">Recipe App</router-link>
       <button
           class="navbar-toggler"
           type="button"
@@ -36,34 +36,34 @@
 </template>
 
 <script>
-import {getAuth} from "firebase/auth";
+import { getAuth } from 'firebase/auth'
 
 export default {
-  name: "AppTopBar",
-  data() {
+  name: 'AppTopBar',
+  data () {
     return {
-      isLoggedIn: "",
-      auth: "",
-    };
+      isLoggedIn: '',
+      auth: ''
+    }
   },
-  mounted() {
-    this.auth = getAuth;
+  mounted () {
+    this.auth = getAuth
     this.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.isLoggedIn = true;
+        this.isLoggedIn = true
       } else {
-        this.isLoggedIn = false;
+        this.isLoggedIn = false
       }
-    });
+    })
   },
   methods: {
-    handleSignOut() {
+    handleSignOut () {
       this.auth()
-          .signOut(this.auth)
-          .then(() => {
-            this.$router.push({name: "home"});
-          });
-    },
-  },
-};
+        .signOut(this.auth)
+        .then(() => {
+          this.$router.push({ name: 'home' })
+        })
+    }
+  }
+}
 </script>

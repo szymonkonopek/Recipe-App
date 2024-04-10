@@ -9,36 +9,36 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { actionTypes } from "../store/modules/chatgpt";
+import { mapState } from 'vuex'
+import { actionTypes } from '../store/modules/chatgpt'
 export default {
-  name: "EnhanceTitleButton",
+  name: 'EnhanceTitleButton',
   props: {
     noteTitle: {
       type: String,
-      required: true,
+      required: true
     },
     noteContent: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
-    enhanceTitle() {
+    enhanceTitle () {
       this.$store
         .dispatch(actionTypes.enhanceTitle, {
           noteTitle: this.noteTitle,
-          noteContent: this.noteContent,
+          noteContent: this.noteContent
         })
         .then((responce) => {
-          console.log(responce);
-        });
-    },
+          console.log(responce)
+        })
+    }
   },
   computed: {
     ...mapState({
-      isLoading: (state) => state.chatgpt.isLoading,
-    }),
-  },
-};
+      isLoading: (state) => state.chatgpt.isLoading
+    })
+  }
+}
 </script>

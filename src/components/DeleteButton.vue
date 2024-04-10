@@ -5,25 +5,25 @@
 </template>
 
 <script>
-import { db } from "@/main.js";
-import { doc, deleteDoc } from "firebase/firestore";
+import { db } from '@/main.js'
+import { doc, deleteDoc } from 'firebase/firestore'
 export default {
-  name: "DeleteButton",
+  name: 'DeleteButton',
   props: {
     noteId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
-    deleteNote() {
+    deleteNote () {
       return new Promise((resolve) => {
-        deleteDoc(doc(db, "notes", this.noteId)).then(() => {
-          this.$router.go();
-          resolve();
-        });
-      });
-    },
-  },
-};
+        deleteDoc(doc(db, 'notes', this.noteId)).then(() => {
+          this.$router.go()
+          resolve()
+        })
+      })
+    }
+  }
+}
 </script>

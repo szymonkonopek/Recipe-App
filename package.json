@@ -16,6 +16,7 @@
     "bootstrap-icons": "^1.11.2",
     "core-js": "^3.8.3",
     "firebase": "^10.5.0",
+    "register-service-worker": "^1.7.2",
     "sass": "^1.69.5",
     "sass-loader": "^13.3.2",
     "vue": "^3.2.13",
@@ -27,9 +28,14 @@
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint": "^8.56.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.21.1"
   },
   "eslintConfig": {
     "root": true,

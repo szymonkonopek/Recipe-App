@@ -3,6 +3,21 @@ $secondary: #847D75;
 $primary: #dbd0c9;
 $info: #A088F1;
 $success: #b1c381;
+$warning: #a8c1cf;
+$background-form:rgba(233, 226, 222, 0.85);
+$error: #dc3545!important;
+
+//$form-check-input-checked-color:          $white !default;
+$form-check-input-checked-bg-color:       $success !default;
+
+.auth-form {
+  background: $background-form !important;
+  border-radius: 16px !important; 
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 
   // Re-compile Bootstrap with the overridden variables
 @import "../../node_modules/bootstrap/scss/bootstrap";

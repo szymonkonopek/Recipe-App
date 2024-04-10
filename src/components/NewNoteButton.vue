@@ -18,9 +18,9 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div v-bind:class="{'modal-content': true, [noteColor]: true}">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">New note</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New recipe</h1>
           <button
             type="button"
             class="btn-close"
@@ -75,11 +75,11 @@
                 </div>
               </div>
               <div id="textHelp" class="form-text">
-                Type title of your new note
+                Type title of your new recipe
               </div>
             </div>
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Note content</label>
+              <label for="exampleFormControlTextarea1">Recipe content</label>
               <textarea
                 class="form-control"
                 id="exampleFormControlTextarea1"
@@ -93,6 +93,30 @@
             <small id="textAreaHelpblock" class="form-text text-muted">
               {{ noteContent.length }}/255
             </small>
+            <div>
+                Recipe visible for others?
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="noteVisibleForOthers" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="noteVisibleForOthers">
+              <label class="form-check-label" for="flexRadioDefault1">
+                No
+              </label> 
+            </div>
+            <div class="form-group">
+              <label for="exampleFormSelect">Set color recipe </label>
+              <select class="form-select" id="selectColor" v-model="noteColor">
+                <option value="text-bg-white">White</option>
+                <option value="text-bg-primary">Light Brown</option>
+                <option value="text-bg-secondary">Dark Brown</option>
+                <option value="text-bg-warning">Light Sea</option>
+              </select>
+            </div>
             <div class="pt-3 pb-3">
               <div class="form-check form-check-inline">
                 <input
@@ -151,55 +175,57 @@
   </div>
 </template>
 <script>
-import { actionTypes } from "@/store/modules/firebasedb";
-import { ref } from "vue";
-import EnhanceTitleButton from "./EnhanceTitleButton.vue";
-import { mapState } from "vuex";
-import { mutationTypes } from "@/store/modules/chatgpt";
+import { actionTypes } from '@/store/modules/firebasedb'
+import { ref } from 'vue'
+import EnhanceTitleButton from './EnhanceTitleButton.vue'
+import { mapState } from 'vuex'
+import { mutationTypes } from '@/store/modules/chatgpt'
 
 export default {
-  name: "NewNoteButton",
+  name: 'NewNoteButton',
   computed: {
     ...mapState({
       enhancedTitle: (state) => state.chatgpt.enhancedTitle,
-      isLoading: (state) => state.firebase.isLoading,
-    }),
+      isLoading: (state) => state.firebase.isLoading
+    })
   },
-  data() {
+  data () {
     return {
-      noteTitle: ref(""),
-      noteContent: "",
+      noteTitle: ref(''),
+      noteContent: '',
       checkedTags: ref([]),
+      noteColor: 'text-bg-white',
       isLoading: false,
-    };
+      noteVisibleForOthers: 'true'
+    }
   },
   methods: {
-    submit() {
+    submit () {
       if (this.noteTitle.length > 0 && this.noteContent.length > 0) {
         this.$store
           .dispatch(actionTypes.addNote, {
             title: this.noteTitle,
             content: this.noteContent,
             tags: this.checkedTags,
-          })
+            color: this.noteColor,
+            visibleForOthers: this.noteVisibleForOthers === 'true'
+          }
+          )
           .then(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 500));
-            this.$router.go();
-          });
+            await new Promise((resolve) => setTimeout(resolve, 500))
+            this.$router.go()
+          })
       }
     },
-    test() {
-      console.log("test");
+    updateTitle () {
+      this.noteTitle = this.enhancedTitle
+      this.$store.commit(mutationTypes.setEnhancedTitle, '')
     },
-    updateTitle() {
-      this.noteTitle = this.enhancedTitle;
-      this.$store.commit(mutationTypes.setEnhancedTitle, "");
-    },
-    discardTitle() {
-      this.noteTitle = "";
-      this.$store.commit(mutationTypes.setEnhancedTitle, "");
-    },
+    discardTitle () {
+      this.noteTitle = ''
+      this.$store.commit(mutationTypes.setEnhancedTitle, '')
+    }
   },
-  components: { EnhanceTitleButton },
-};
+  components: { EnhanceTitleButton }
+}
 </script>

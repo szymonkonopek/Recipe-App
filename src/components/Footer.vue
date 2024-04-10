@@ -1,5 +1,5 @@
 <template>
-  <body class="d-flex flex-column min-vh-100">
+  <div class="d-flex flex-column">
     <footer class="text-center text-black mt-auto" style="background-color:#808080">
       <div class="container p-4 pb-0">
         <section class="">
@@ -17,38 +17,38 @@
         <a class="text-black" href="https://uek.krakow.pl/">Cracow University Of Economy</a>
       </div>
     </footer>
-  </body>
+  </div>
 </template>
 
 <script>
-import {getAuth} from "firebase/auth";
+import { getAuth } from 'firebase/auth'
 
 export default {
-  name: "AppFooter",
-  data() {
+  name: 'AppFooter',
+  data () {
     return {
-      isLoggedIn: "",
-      auth: "",
-    };
+      isLoggedIn: '',
+      auth: ''
+    }
   },
-  mounted() {
-    this.auth = getAuth;
+  mounted () {
+    this.auth = getAuth
     this.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.isLoggedIn = true;
+        this.isLoggedIn = true
       } else {
-        this.isLoggedIn = false;
+        this.isLoggedIn = false
       }
-    });
+    })
   },
   methods: {
-    handleSignOut() {
+    handleSignOut () {
       this.auth()
-          .signOut(this.auth)
-          .then(() => {
-            this.$router.push({name: "home"});
-          });
-    },
-  },
+        .signOut(this.auth)
+        .then(() => {
+          this.$router.push({ name: 'home' })
+        })
+    }
+  }
 }
 </script>

@@ -69,8 +69,8 @@
 
 <script>
 export default {
-  name: "AppHomeView",
-};
+  name: 'AppHomeView'
+}
 </script>
 
 <style>

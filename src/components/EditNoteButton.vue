@@ -3,8 +3,7 @@
   <button
     class="btn btn-link text-info"
     data-bs-toggle="modal"
-    :data-bs-target="'#id' + noteId"
-    noteId
+    :data-bs-target="'#id_edit' + noteId"
   >
     <i class="bi bi-pencil"></i>
   </button>
@@ -12,13 +11,13 @@
   <!-- Modal -->
   <div
     class="modal fade modal-lg"
-    :id="'id' + noteId"
+    :id="'id_edit' + noteId"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div v-bind:class="{'modal-content': true, [noteColor]: true}">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Edit note</h1>
           <button
@@ -43,7 +42,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Note content</label>
+                <label for="exampleFormControlTextarea1">Recipe content</label>
                 <textarea
                   class="form-control"
                   id="exampleFormControlTextarea1"
@@ -55,7 +54,32 @@
                 ></textarea>
               </div>
               <small id="textAreaHelpblock" class="form-text text-muted">
+                {{ noteContent.length }}/255
               </small>
+              <div>
+                Recipe visible for others?
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="noteVisibleForOthers" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="noteVisibleForOthers">
+              <label class="form-check-label" for="flexRadioDefault1">
+                No
+              </label>
+            </div>
+              <div class="form-group">
+              <label for="exampleFormSelect">Note color </label>
+              <select class="form-select" id="selectColor" disabled v-model="noteColor">
+                <option value="text-bg-white">White</option>
+                <option value="text-bg-primary">Light Brown</option>
+                <option value="text-bg-secondary">Dark Brown</option>
+                <option value="text-bg-warning">Light Sea</option>
+              </select>
+            </div>
               <div class="pt-3 pb-3">
                 <div class="form-check form-check-inline">
                   <input
@@ -97,7 +121,7 @@
             </div>
             <div>
               <button
-                class="btn btn-primary p-1 m-1 text-white"
+                class="btn btn-success p-1 m-1 text-white"
                 @click="submit"
               >
                 Submit
@@ -111,36 +135,37 @@
 </template>
 
 <script>
-import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { db } from "@/main.js"
+import { doc, updateDoc, getDoc } from 'firebase/firestore'
+import { db } from '@/main.js'
 
 export default {
-  name: "EditNoteButton",
+  name: 'EditNoteButton',
   props: {
     noteData: {
       type: Object,
-      required: true,
+      required: true
     },
     noteId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
-  data() {
+  data () {
     return {
       noteTitle: this.noteData.title,
       noteContent: this.noteData.content,
       isSchool: this.noteData.tags.includes('School'),
       isWork: this.noteData.tags.includes('Work'),
       isPersonal: this.noteData.tags.includes('Personal'),
-    };
+      noteColor: this.noteData.color,
+      noteVisibleForOthers: this.noteData.visibleForOthers
+    }
   },
   methods: {
-    async submit() {
-
-      const docRef = doc(db, "notes", this.noteId);
-      const docSnapshot = await getDoc(docRef);
-      const currentData = docSnapshot.data();
+    async submit () {
+      const docRef = doc(db, 'notes', this.noteId)
+      const docSnapshot = await getDoc(docRef)
+      const currentData = docSnapshot.data()
 
       // Merge existing data with updated data
       const updatedData = {
@@ -148,21 +173,20 @@ export default {
         data: {
           title: this.noteTitle,
           content: this.noteContent,
+          color: this.noteColor,
+          visibleForOthers: this.noteVisibleForOthers === 'true',
           tags: [
-            this.isSchool ? "School" : null,
-            this.isWork ? "Work" : null,
-            this.isPersonal ? "Personal" : null,
-          ].filter((tag) => tag !== null),
-        },
-      };
-      updateDoc(docRef, updatedData);
+            this.isSchool ? 'School' : null,
+            this.isWork ? 'Work' : null,
+            this.isPersonal ? 'Personal' : null
+          ].filter((tag) => tag !== null)
+        }
+      }
+      updateDoc(docRef, updatedData)
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
-            this.$router.go();
-    },
-  },
-  mounted() {
-    console.log(this.noteData)
+      await new Promise((resolve) => setTimeout(resolve, 500))
+      this.$router.go()
+    }
   }
-};
+}
 </script>
