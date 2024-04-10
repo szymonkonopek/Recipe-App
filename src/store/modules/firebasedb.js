@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
-=======
-import { getAuth, onAuthStateChanged } from "firebase/auth";
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 import {
   collection,
   getDocs,
@@ -13,7 +9,8 @@ import {
   query,
   //deleteDoc,
   //updateDoc,
-  //serverTimestamp,
+  serverTimestamp,
+  orderBy,
   //orderBy,
 } from "firebase/firestore";
 import { db } from "@/main.js";
@@ -21,12 +18,8 @@ import { db } from "@/main.js";
 export const actionTypes = {
   getNotesByUserId: "[firedb] getNotesByUserId",
   addNote: "[firedb] addNote",
-<<<<<<< HEAD
   updatePassword: "[auth] Update Password",
   getUserDetails: "[auth] Get User Details",
-
-=======
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 };
 
 export const mutationType = {
@@ -44,7 +37,6 @@ const mutations = {
     state.notes = payload;
   },
   [mutationType.addNoteSuccess](state) {
-    location.reload();
     state.isLoading = false;
   },
 
@@ -57,9 +49,13 @@ const actions = {
   [actionTypes.getNotesByUserId](context, { uid }) {
     return new Promise((resolve) => {
       context.commit(mutationType.addNoteStart);
-      let q = query(collection(db, "notes"));
+      let q = query(collection(db, "notes"), orderBy("created", "desc"));
       if (uid) {
-        q = query(collection(db, "notes"), where("uid", "==", uid));
+        q = query(
+          collection(db, "notes"),
+          where("uid", "==", uid),
+          orderBy("created", "desc")
+        );
       }
 
       getDocs(q).then((result) => {
@@ -82,24 +78,26 @@ const actions = {
         addDoc(collection(db, "notes"), {
           data: data,
           uid: user.uid,
+          created: serverTimestamp(),
         });
         //context.commit(mutationType.addNoteSuccess);
         resolve();
       });
     });
   },
-<<<<<<< HEAD
 
   [actionTypes.updatePassword](context, { newPassword }) {
     return new Promise((resolve, reject) => {
       const auth = getAuth();
       const user = auth.currentUser;
       if (user) {
-        updatePassword(user, newPassword).then(() => {
-          resolve("Password updated successfully");
-        }).catch((error) => {
-          reject(error);
-        });
+        updatePassword(user, newPassword)
+          .then(() => {
+            resolve("Password updated successfully");
+          })
+          .catch((error) => {
+            reject(error);
+          });
       } else {
         reject("No authenticated user");
       }
@@ -114,9 +112,9 @@ const actions = {
         const userDetails = {
           uid: user.uid,
           email: user.email,
-          providers: user.providerData.map(provider => provider.providerId),
+          providers: user.providerData.map((provider) => provider.providerId),
           created: user.metadata.creationTime,
-          lastSignIn: user.metadata.lastSignInTime
+          lastSignIn: user.metadata.lastSignInTime,
         };
         resolve(userDetails);
       } else {
@@ -124,8 +122,6 @@ const actions = {
       }
     });
   },
-=======
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 };
 export default {
   actions,

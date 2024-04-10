@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div
     class="card border-white mb-3 shadow"
     style="max-width: 50rem; width: 80vw; min-height: 10rem"
@@ -7,7 +6,11 @@
     <div class="card-body position-relative">
       <div class="d-flex align-items-end">
         <h5 class="card-title">{{ note.data.data.title }}</h5>
-        <EditNoteButton v-if="isNoteOwner" :noteId="noteId"></EditNoteButton>
+        <EditNoteButton
+          v-if="isNoteOwner"
+          :noteData="note.data.data"
+          :noteId="noteId"
+        ></EditNoteButton>
       </div>
       <p class="card-text">{{ note.data.data.content }}</p>
       <!-- <p>{{ note.id }}</p> -->
@@ -23,19 +26,6 @@
     </div>
     <div class="position-absolute end-0">
       <DeleteButton v-if="isNoteOwner" :noteId="noteId"></DeleteButton>
-=======
-  <div class="card" style="width: 18rem">
-    <div class="card-body">
-      <h5 class="card-title">{{ note.data.data.title }}</h5>
-      <p class="card-text">{{ note.data.data.content }}</p>
-      <p>{{ note.id }}</p>
-    </div>
-    <div v-for="(tag, index) in note.data.data.tags" :key="index">
-      <span class="badge rounded-pill bg-primary">tag : {{ tag }}</span>
-    </div>
-    <div>
-      <DeleteButton v-if="isNoteOwner"></DeleteButton>
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
     </div>
   </div>
 </template>
@@ -43,10 +33,7 @@
 <script>
 import { getAuth } from "firebase/auth";
 import DeleteButton from "./DeleteButton.vue";
-<<<<<<< HEAD
 import EditNoteButton from "./EditNoteButton.vue";
-=======
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 
 export default {
   name: "AppNotesView",
@@ -60,16 +47,10 @@ export default {
     return {
       auth: "",
       currentUserId: "",
-<<<<<<< HEAD
       noteId: this.note.id,
     };
   },
   components: { DeleteButton, EditNoteButton },
-=======
-    };
-  },
-  components: { DeleteButton },
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
   mounted() {
     this.auth = getAuth;
     this.auth().onAuthStateChanged((user) => {

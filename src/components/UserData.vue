@@ -23,27 +23,20 @@
       </div>
     </div>
   </div>
-  <app-user-form v-if="!editingMode" key="userForm"></app-user-form>
-  <app-user-form-edit-view v-else key="editView"></app-user-form-edit-view>
-  <button type="button" class="btn btn-secondary" @onclick="setEditingMode">Edit</button>
-
+  <app-user-form></app-user-form>
 </template>
 
 <script>
 import {mapActions} from "vuex";
 import {actionTypes} from "@/store/modules/firebasedb";
 import AppUserForm from "@/components/UserForm";
-import AppUserFormEditView from "@/components/UserFormEditView";
 
 export default {
   name: "AppUserData",
-  components: {AppUserForm, AppUserFormEditView},
+  components: {AppUserForm},
   data() {
     return {
       userDetails: null,
-      editingMode: false,
-      userForm: 0,
-      editView: 0
     };
   },
   methods: {
@@ -57,12 +50,6 @@ export default {
         console.error(error);
       });
     },
-    setEditingMode() {
-      this.editingMode = !this.editingMode;
-    },
-    refreshComponent() {
-      this.componentKey++;
-    }
   },
   created() {
     this.fetchUserDetails();

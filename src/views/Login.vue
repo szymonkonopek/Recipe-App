@@ -1,18 +1,13 @@
 <template>
-<<<<<<< HEAD
 <div style="min-height:90vh">
   <div style="height: 100px"></div>
-=======
-<div style="height: 50%">
-  <div style="height: 5vw"></div>
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
   <div class="container-fluid justify-content-center text-center px-4 py-2 mx-auto my-4">
     <div class="card justify-content-center text-center mx-auto" style="width: 30rem; background: rgba(233, 226, 222, 0.85);border-radius: 16px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px);">
       <div class="card-body">
         <div>
           <h1>Login</h1>
+          <div v-if="error" class="alert alert-info small-alert">{{ error }}</div>
           <div class="py-2 my-2">
-          
             <div class="input-group input-group-lg py-2">
               <span class="input-group-text" id="inputGroup-sizing-lg">Email</span>
               <input type="text" class="form-control" placeholser="Email" v-model="email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
@@ -64,6 +59,7 @@ export default {
           this.$router.push({ name: "feed" });
         })
         .catch((error) => {
+          this.error = error;
           console.log(error.code);
         });
       },
@@ -85,6 +81,7 @@ export default {
     return {
       email: "",
       password: "",
+      error: "",
     };
   },
 };

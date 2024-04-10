@@ -2,19 +2,11 @@
   <!-- Button trigger modal -->
   <button
     type="button"
-<<<<<<< HEAD
-    class="btn btn-success position-fixed bottom-0 end-0 m-3"
+    class="btn btn-success position-fixed bottom-0 end-0 m-3 shadow"
     data-bs-toggle="modal"
     data-bs-target="#exampleModal"
   >
     <i class="bi bi-plus-circle display-5"></i>
-=======
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
-  >
-    Add new note
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
   </button>
 
   <!-- Modal -->
@@ -69,11 +61,7 @@
                   class="position-absolute top-50 end-0 translate-middle-y d-flex flex-row"
                 >
                   <button
-<<<<<<< HEAD
                     class="btn btn-link text-info p-0"
-=======
-                    class="btn btn-link text-secondary p-0"
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
                     @click="updateTitle"
                   >
                     <i class="bi bi-check-square-fill"></i>
@@ -145,11 +133,7 @@
             </div>
             <div>
               <button
-<<<<<<< HEAD
                 class="btn btn-success p-1 m-1 text-white"
-=======
-                class="btn btn-primary p-1 m-1 text-white"
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
                 @click="submit"
                 :disabled="isLoading"
               >
@@ -185,9 +169,6 @@ export default {
     return {
       noteTitle: ref(""),
       noteContent: "",
-      isSchool: false,
-      isWork: false,
-      isPersonal: false,
       checkedTags: ref([]),
       isLoading: false,
     };
@@ -202,7 +183,7 @@ export default {
             tags: this.checkedTags,
           })
           .then(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            await new Promise((resolve) => setTimeout(resolve, 500));
             this.$router.go();
           });
       }

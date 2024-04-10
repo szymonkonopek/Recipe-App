@@ -1,27 +1,23 @@
 <template>
-  <div class="footer">
-<<<<<<< HEAD
-    <footer class="text-center text-black" style="background-color:#808080">
-=======
-    <footer class="text-center text-black bg-secondary">
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
-        <div class="container p-4 pb-0">
-          <section class="">
-            <p class="d-flex justify-content-center align-items-center" v-if="!isLoggedIn">
-              <span class="me-3">Register for free</span>
-              <router-link :to="{ name: 'register' }" class="btn btn-outline-dark me-2">Sign Up!</router-link>
-            </p>
-            <p class="d-flex justify-content-center align-items-center" v-if="isLoggedIn">
-              <span class="me-2">Savor the Spark of Knowledge – Revel in Your Daily Notes!</span>
-            </p>
-          </section>
-        </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          © 2023 Copyright |
-          <a class="text-black" href="https://uek.krakow.pl/">Cracow University Of Economy</a>
-        </div>
-      </footer>
-  </div>
+  <body class="d-flex flex-column min-vh-100">
+    <footer class="text-center text-black mt-auto" style="background-color:#808080">
+      <div class="container p-4 pb-0">
+        <section class="">
+          <p class="d-flex justify-content-center align-items-center" v-if="!isLoggedIn">
+            <span class="me-3">Register for free</span>
+            <router-link :to="{ name: 'register' }" class="btn btn-outline-dark me-2">Sign Up!</router-link>
+          </p>
+          <p class="d-flex justify-content-center align-items-center" v-if="isLoggedIn">
+            <span class="me-2">Savor the Spark of Knowledge – Revel in Your Daily Notes!</span>
+          </p>
+        </section>
+      </div>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright |
+        <a class="text-black" href="https://uek.krakow.pl/">Cracow University Of Economy</a>
+      </div>
+    </footer>
+  </body>
 </template>
 
 <script>
@@ -50,7 +46,7 @@ export default {
       this.auth()
           .signOut(this.auth)
           .then(() => {
-            this.$router.push({ name: "home" });
+            this.$router.push({name: "home"});
           });
     },
   },

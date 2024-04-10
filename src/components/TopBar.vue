@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand fw-bold">IdeaMerge</a>
+      <router-link :to="{ name: 'home' }" class="navbar-brand fw-bold" aria-current="page">IdeaMerge</router-link>
       <button
           class="navbar-toggler"
           type="button"
@@ -15,9 +15,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <router-link :to="{ name: 'home' }" class="nav-link active" aria-current="page">Home</router-link>
-          </li>
           <li class="nav-item" v-if="isLoggedIn">
             <router-link :to="{ name: 'feed' }" class="nav-link active" aria-current="page">Feed</router-link>
           </li>

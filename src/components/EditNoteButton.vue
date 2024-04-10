@@ -1,18 +1,18 @@
 <template>
   <!-- Button trigger modal -->
   <button
-    class="btn btn-secondary"
+    class="btn btn-link text-info"
     data-bs-toggle="modal"
-    data-bs-target="#editModal"
-    
+    :data-bs-target="'#id' + noteId"
+    noteId
   >
-    Edit note
+    <i class="bi bi-pencil"></i>
   </button>
 
   <!-- Modal -->
   <div
     class="modal fade modal-lg"
-    id="editModal"
+    :id="'id' + noteId"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -29,20 +29,19 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form @submit.prevent>
             <div>
-              <!-- Display note information here -->
               <div class="mb-3">
-              <label for="titleInput" class="form-label">Title</label>
-              <input
-                type="text"
-                class="form-control"
-                id="titleInput"
-                maxlength="60"
-                aria-describedby="textHelp"
-                disabled
-              />
-            </div>
+                <label for="titleInput" class="form-label">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="titleInput"
+                  maxlength="60"
+                  aria-describedby="textHelp"
+                  v-model="noteTitle"
+                />
+              </div>
               <div class="form-group">
                 <label for="exampleFormControlTextarea1">Note content</label>
                 <textarea
@@ -52,6 +51,7 @@
                   aria-describedby="textAreaHelpblock"
                   maxlength="255"
                   required
+                  v-model="noteContent"
                 ></textarea>
               </div>
               <small id="textAreaHelpblock" class="form-text text-muted">
@@ -99,7 +99,6 @@
               <button
                 class="btn btn-primary p-1 m-1 text-white"
                 @click="submit"
-                :disabled="isLoading"
               >
                 Submit
               </button>
@@ -112,59 +111,58 @@
 </template>
 
 <script>
-import { db } from "@/main.js";
-import {
-  //collection,
-  //getDocs,
-  //getDoc,
-  doc,
-  //addDoc,
-  //where,
-  //query,
-  //deleteDoc,
-  updateDoc,
-  //serverTimestamp,
-  //orderBy,
-} from "firebase/firestore";
-export default {
-name: "EditNoteButton",
-props: {
-  // Props to receive note information
-  note: {
-    type: Object,
-    required: true
-  }
-},
-data() {
-  return {
-  }
-},
-methods: {
-  editNote() {
-    // check the id of note
-    // save the id of note
-    // find the id of the note
-    // save the info about note to variable
-    // display info
-    
-  },
-  submit() {
-    return new Promise((resolve) => {
-      console.log(this.noteContent)
-      const noteRef = doc(db, "notes", this.note.id); // Załóżmy, że "users" to nazwa kolekcji
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { db } from "@/main.js"
 
-      
-      updateDoc(noteRef, {
-          "data.content": this.noteContent,
-          "data.tags": [
+export default {
+  name: "EditNoteButton",
+  props: {
+    noteData: {
+      type: Object,
+      required: true,
+    },
+    noteId: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      noteTitle: this.noteData.title,
+      noteContent: this.noteData.content,
+      isSchool: this.noteData.tags.includes('School'),
+      isWork: this.noteData.tags.includes('Work'),
+      isPersonal: this.noteData.tags.includes('Personal'),
+    };
+  },
+  methods: {
+    async submit() {
+
+      const docRef = doc(db, "notes", this.noteId);
+      const docSnapshot = await getDoc(docRef);
+      const currentData = docSnapshot.data();
+
+      // Merge existing data with updated data
+      const updatedData = {
+        ...currentData,
+        data: {
+          title: this.noteTitle,
+          content: this.noteContent,
+          tags: [
             this.isSchool ? "School" : null,
             this.isWork ? "Work" : null,
             this.isPersonal ? "Personal" : null,
           ].filter((tag) => tag !== null),
-        });
-      resolve()
-    })
-  }
+        },
+      };
+      updateDoc(docRef, updatedData);
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+            this.$router.go();
+    },
   },
+  mounted() {
+    console.log(this.noteData)
+  }
 };
 </script>

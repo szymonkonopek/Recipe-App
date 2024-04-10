@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <button type="button" class="btn btn-link" @click="deleteNote">
     <h4><i class="bi bi-x text-danger"></i></h4>
   </button>
@@ -27,19 +26,4 @@ export default {
     },
   },
 };
-=======
-    <button
-      type="button"
-      class="btn btn-danger"
-    >
-      Delete
-    </button>
-</template>
-
-
-<script>
-export default {
-    name: "DeleteButton",
-}
->>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 </script>
