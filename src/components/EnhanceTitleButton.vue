@@ -1,6 +1,10 @@
 <template>
   <button
+<<<<<<< HEAD
     class="btn btn-info p-1 m-1 text-white"
+=======
+    class="btn btn-primary p-1 m-1 text-white"
+>>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
     @click="enhanceTitle"
     :disabled="isLoading"
   >

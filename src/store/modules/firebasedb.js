@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
+=======
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+>>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 import {
   collection,
   getDocs,
@@ -17,9 +21,12 @@ import { db } from "@/main.js";
 export const actionTypes = {
   getNotesByUserId: "[firedb] getNotesByUserId",
   addNote: "[firedb] addNote",
+<<<<<<< HEAD
   updatePassword: "[auth] Update Password",
   getUserDetails: "[auth] Get User Details",
 
+=======
+>>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 };
 
 export const mutationType = {
@@ -81,6 +88,7 @@ const actions = {
       });
     });
   },
+<<<<<<< HEAD
 
   [actionTypes.updatePassword](context, { newPassword }) {
     return new Promise((resolve, reject) => {
@@ -116,6 +124,8 @@ const actions = {
       }
     });
   },
+=======
+>>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 };
 export default {
   actions,

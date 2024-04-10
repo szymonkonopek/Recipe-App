@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
@@ -65,6 +66,10 @@
       </button>
     </div>
   </div>
+=======
+  <div>home</div>
+  <button type="button" class="btn">Base class</button>
+>>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
 </template>
 
 <script>

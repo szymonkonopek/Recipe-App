@@ -1,6 +1,10 @@
 <template>
   <div class="footer">
+<<<<<<< HEAD
     <footer class="text-center text-black" style="background-color:#808080">
+=======
+    <footer class="text-center text-black bg-secondary">
+>>>>>>> 8fcf12ea80472e24c875fbb1f4ef29c4b595be51
         <div class="container p-4 pb-0">
           <section class="">
             <p class="d-flex justify-content-center align-items-center" v-if="!isLoggedIn">
