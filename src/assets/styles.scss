@@ -10,13 +10,13 @@ $error: #dc3545!important;
 //$form-check-input-checked-color:          $white !default;
 $form-check-input-checked-bg-color:       $success !default;
 
-.auth-form {
-  background: $background-form !important;
-  border-radius: 16px !important; 
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
+// .auth-form {
+//   background: $background-form !important;
+//   border-radius: 16px !important; 
+//   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  
+//   backdrop-filter: blur(8px);
+//   -webkit-backdrop-filter: blur(8px);
+// }
 
 
   // Re-compile Bootstrap with the overridden variables
