@@ -18,4 +18,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+  #app {
+    font-family: 'Helvetica', sans-serif;
+    background-color: WhiteSmoke;
+  }
+</style>
