@@ -8,6 +8,7 @@
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
+    <button @click="share">Share</button>
 
     <div class="carousel-inner">
 
@@ -72,7 +73,25 @@
 <script>
 export default {
   name: 'AppHomeView',
-  
+  methods: {
+    async share() {
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: 'Example Title',
+            text: 'Check out this example!',
+            url: 'https://example.com',
+          });
+          console.log('Shared successfully');
+        } else {
+          console.log('Web Share API not supported');
+          // Fallback to other sharing methods
+        }
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    }
+  }
 }
 </script>
 
