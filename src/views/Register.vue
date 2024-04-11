@@ -63,6 +63,11 @@ export default {
       ).catch((error) => {
         this.error = error
         console.log(error.code)
+        if ("vibrate" in navigator) {
+            navigator.vibrate(100);
+          } else {
+            console.log("Vibration not supported");
+          }
       })
     },
     signInWithGoogle () {
@@ -74,6 +79,11 @@ export default {
         })
         .catch((error) => {
           alert(error.code)
+          if ("vibrate" in navigator) {
+            navigator.vibrate(100);
+          } else {
+            console.log("Vibration not supported");
+          }
         })
     },
     errorToString (error) {

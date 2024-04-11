@@ -61,6 +61,11 @@ export default {
         .catch((error) => {
           this.error = error
           console.log(error.code)
+          if ("vibrate" in navigator) {
+            navigator.vibrate(100);
+          } else {
+            console.log("Vibration not supported");
+          }
         })
     },
 
@@ -73,6 +78,11 @@ export default {
         })
         .catch((error) => {
           alert(error.code)
+          if ("vibrate" in navigator) {
+            navigator.vibrate(100);
+          } else {
+            console.log("Vibration not supported");
+          }
         })
     },
 

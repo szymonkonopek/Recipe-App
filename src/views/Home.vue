@@ -8,7 +8,6 @@
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
-    <button @click="vibrateDevice">Vibrate</button>
 
     <div class="carousel-inner">
 
@@ -73,18 +72,7 @@
 <script>
 export default {
   name: 'AppHomeView',
-  methods: {
-    vibrateDevice() {
-      // Check if the Vibration API is supported by the browser
-      if ("vibrate" in navigator) {
-        // Vibrate for 200ms
-        navigator.vibrate(200);
-      } else {
-        console.log("Vibration not supported");
-        // Handle unsupported cases, e.g., show an alert or a message
-      }
-    }
-  }
+  
 }
 </script>
 
