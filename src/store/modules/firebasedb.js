@@ -2,8 +2,8 @@ import { getAuth, onAuthStateChanged, updatePassword } from 'firebase/auth'
 import {
   collection,
   getDocs,
-  // getDoc,
-  // doc,
+  getDoc,
+  doc,
   addDoc,
   where,
   query,
@@ -19,13 +19,14 @@ export const actionTypes = {
   getRecipesByUserId: '[firedb] getRecipesByUserId',
   addRecipe: '[firedb] addRecipe',
   updatePassword: '[auth] Update Password',
-  getUserDetails: '[auth] Get User Details'
+  getUserDetails: '[auth] Get User Details',
+  getRecipeById: '[firedb] getRecipeById',
 }
 
 export const mutationType = {
   setRecipes: '[firedb] setRecipes',
   addRecipeSuccess: '[firedb] addRecipeSuccess',
-  addRecipeStart: '[firedb] addRecipeStart'
+  addRecipeStart: '[firedb] addRecipeStart',
 }
 
 const state = {
@@ -122,6 +123,26 @@ const actions = {
         // eslint-disable-next-line prefer-promise-reject-errors
         reject('No authenticated user')
       }
+    })
+  },
+  [actionTypes.getRecipeById] (context, { id }) {
+    return new Promise((resolve, reject) => {
+      const docRef = doc(db, 'recipes', id)
+      getDoc(docRef)
+        .then((doc) => {
+          if (doc.exists()) {
+            console.log('Document data:', doc.data())
+            resolve({
+              id: doc.id,
+              data: doc.data().data
+            })
+          } else {
+            reject('No such document')
+          }
+        })
+        .catch((error) => {
+          reject(error)
+        })
     })
   }
 }

@@ -12,11 +12,13 @@
       </div>
 
       <div class="d-flex align-items-end">
+        <router-link :to="{ path: 'recipe/' + recipeId }" class="nav-link active" aria-current="true">Feed</router-link>
         <h5
           class="card-title"
           style="cursor: pointer"
           data-bs-toggle="modal"
           :data-bs-target="'#id' + recipeId"
+          :click="openRecipe"
         >
           {{ recipe.data.data.title }}
         </h5>
@@ -79,6 +81,28 @@ export default {
     isRecipeOwner () {
       return this.recipe.data.uid === this.currentUserId
     }
-  }
+  },
+  // methods: {
+  //   openRecipe () {
+  //     na
+  //   }
+  // }
+  async share() {
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: 'Example Title',
+            text: 'Check out this example!',
+            url: 'https://example.com',
+          });
+          console.log('Shared successfully');
+        } else {
+          console.log('Web Share API not supported');
+          // Fallback to other sharing methods
+        }
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    }
 }
 </script>

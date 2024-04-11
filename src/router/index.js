@@ -4,6 +4,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Feed from '@/views/Feed'
 import Profile from '@/views/Profile'
+import Recipe from '@/views/Recipe'
 import { getAuth } from 'firebase/auth'
 
 const routes = [
@@ -34,6 +35,14 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Profile,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/recipe/:id',
+    name: 'recipe',
+    component: Recipe,
     meta: {
       requiresAuth: true
     }
