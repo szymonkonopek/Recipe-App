@@ -8,6 +8,7 @@
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
+
     <div class="carousel-inner">
 
       <div class="carousel-item active" data-bs-interval="2000">
@@ -63,13 +64,15 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AppHomeView'
+  name: 'AppHomeView',
+  
 }
 </script>
 
