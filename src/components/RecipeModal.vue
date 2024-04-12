@@ -1,13 +1,10 @@
 <template>
   <div class="modal-dialog">
-    <div v-bind:class="{'modal-content': true, [recipeColor]: true}">
+    <div v-bind:class="{ 'modal-content': true, [recipeColor]: true }">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">
           {{ recipeData.title }}
         </h1>
-        <button class="btn ml-2" @click="share">
-          <i class="bi bi-share-fill"></i>
-        </button>
         <button
           type="button"
           class="btn-close"
@@ -37,17 +34,17 @@ export default {
   props: {
     recipeData: {
       type: Object,
-      required: true
+      required: true,
     },
     recipeId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
-      recipeColor: this.recipeData.color
-    }
+      recipeColor: this.recipeData.color,
+    };
   },
 
   methods: {
@@ -67,7 +64,7 @@ export default {
       } catch (error) {
         console.error('Error sharing:', error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

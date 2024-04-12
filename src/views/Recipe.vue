@@ -6,20 +6,18 @@
   </div>
 </template>
 <script>
-
-import RecipePageView from '@/components/RecipePageView.vue'
+import RecipePageView from '@/components/RecipePageView.vue';
 export default {
   name: 'AppRecipeView',
   data() {
     return {
-      recipeId: null
+      recipeId: null,
     };
   },
   created() {
     // Access the recipe ID from the route parameters
     this.recipeId = this.$route.params.id;
   },
-  components: { RecipePageView}
-
-}
+  components: { RecipePageView },
+};
 </script>

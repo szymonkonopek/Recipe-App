@@ -1,5 +1,14 @@
 <template>
-  <div v-bind:class="{'card': true, 'border-white': true, 'mb-3': true, 'shadow': true, [recipeColor]: true }" style="min-height: 10rem">
+  <div
+    v-bind:class="{
+      'card': true,
+      'border-white': true,
+      'mb-3': true,
+      'shadow': true,
+      [recipeColor]: true,
+    }"
+    style="min-height: 10rem"
+  >
     <div class="card-body position-relative">
       <div
         class="modal fade"
@@ -12,7 +21,12 @@
       </div>
 
       <div class="d-flex align-items-end">
-        <router-link :to="{ path: 'recipe/' + recipeId }" class="nav-link active" aria-current="true">Feed</router-link>
+        <router-link
+          :to="{ path: 'recipe/' + recipeId }"
+          class="nav-link active"
+          aria-current="true"
+          >Feed</router-link
+        >
         <h5
           class="card-title"
           style="cursor: pointer"
@@ -46,63 +60,46 @@
 </template>
 
 <script>
-import { getAuth } from 'firebase/auth'
-import DeleteButton from './DeleteButton.vue'
-import EditRecipeButton from './EditRecipeButton.vue'
-import RecipeModal from './RecipeModal.vue'
+import { getAuth } from 'firebase/auth';
+import DeleteButton from './DeleteButton.vue';
+import EditRecipeButton from './EditRecipeButton.vue';
+import RecipeModal from './RecipeModal.vue';
 
 export default {
   name: 'AppRecipesView',
   props: {
     recipe: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       auth: '',
       currentUserId: '',
       recipeId: this.recipe.id,
-      recipeColor: this.recipe.data.data.color
-    }
+      recipeColor: this.recipe.data.data.color,
+    };
   },
   components: { DeleteButton, EditRecipeButton, RecipeModal },
-  mounted () {
-    this.auth = getAuth
+  mounted() {
+    this.auth = getAuth;
     this.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.currentUserId = user.uid
+        this.currentUserId = user.uid;
       }
-    })
+    });
   },
 
   computed: {
-    isRecipeOwner () {
-      return this.recipe.data.uid === this.currentUserId
-    }
+    isRecipeOwner() {
+      return this.recipe.data.uid === this.currentUserId;
+    },
   },
   // methods: {
   //   openRecipe () {
   //     na
   //   }
   // }
-  async share() {
-      try {
-        if (navigator.share) {
-          await navigator.share({
-            title: 'Example Title',
-            text: 'Check out this example!',
-            url: 'https://example.com',
-          });
-          console.log('Shared successfully');
-        } else {
-          console.log('Web Share API not supported');
-          // Fallback to other sharing methods
-        }
-      } catch (error) {
-        console.error('Error sharing:', error);
-      }
-    }
-}
+};
 </script>
