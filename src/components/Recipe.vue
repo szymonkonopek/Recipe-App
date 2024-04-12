@@ -19,7 +19,7 @@
       >
         <RecipeModal :recipeData="recipe.data.data" :recipeId="recipeId" />
       </div>
-
+      {{ username }}'s
       <div class="d-flex align-items-end">
         <router-link
           class="card-title"
@@ -57,6 +57,7 @@ import { getAuth } from 'firebase/auth';
 import DeleteButton from './DeleteButton.vue';
 import EditRecipeButton from './EditRecipeButton.vue';
 import RecipeModal from './RecipeModal.vue';
+import { actionTypes } from '../store/modules/firebasedb';
 
 export default {
   name: 'AppRecipesView',
@@ -72,6 +73,7 @@ export default {
       currentUserId: '',
       recipeId: this.recipe.id,
       recipeColor: this.recipe.data.data.color,
+      username: '',
     };
   },
   components: { DeleteButton, EditRecipeButton, RecipeModal },
@@ -82,6 +84,12 @@ export default {
         this.currentUserId = user.uid;
       }
     });
+    console.log(this.recipe.data.uid);
+    this.$store
+      .dispatch(actionTypes.getUserById, { id: this.recipe.data.uid })
+      .then((user) => {
+        this.username = user.username;
+      });
   },
 
   computed: {

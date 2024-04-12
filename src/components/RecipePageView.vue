@@ -4,10 +4,14 @@
     <button class="btn ml-2" @click="share">
       <i class="bi bi-share-fill"></i>
     </button>
+    <div>
+      <input type="file" @change="handleImageUpload" />
+      <button @click="uploadImage">Upload Image</button>
+    </div>
   </div>
 </template>
 <script>
-// import { actionTypes } from '../store/modules/firebasedb';
+import { actionTypes } from '../store/modules/firebasedb';
 
 export default {
   name: 'AppRecipePageView',
@@ -23,6 +27,11 @@ export default {
       content: this.recipe.data.content,
     };
   },
+  computed: {
+    recipeId() {
+      return this.recipe.id;
+    },
+  },
   methods: {
     async share() {
       try {
@@ -30,7 +39,7 @@ export default {
           await navigator.share({
             title: 'Recipe App',
             text: 'Check out this recipe!',
-            url: 'https://recipes-online.netlify.app/' + this.recipeId,
+            url: 'https://recipes-online.netlify.app/' + this.recipeId(),
           });
           console.log('Shared successfully');
         } else {
@@ -40,6 +49,18 @@ export default {
       } catch (error) {
         console.error('Error sharing:', error);
       }
+    },
+    handleImageUpload(event) {
+      this.image = event.target.files[0];
+    },
+    uploadImage() {
+      console.log('Uploading image');
+      console.log(this.recipe);
+      this.$store.dispatch(actionTypes.uploadImage, {
+        recipeId: this.recipeId,
+        image: this.image,
+        images: this.recipe.images,
+      });
     },
   },
 };

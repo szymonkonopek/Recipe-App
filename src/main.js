@@ -1,16 +1,16 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import { getFirestore } from 'firebase/firestore'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import { getFirestore } from 'firebase/firestore';
 
 // import "bootstrap";
-import './assets/styles.scss'
+import './assets/styles.scss';
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app'
+import { initializeApp } from 'firebase/app';
 
-import './registerServiceWorker'
+import './registerServiceWorker';
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,12 +23,12 @@ const firebaseConfig = {
   projectId: `${process.env.VUE_APP_PROJECTID}`,
   storageBucket: `${process.env.VUE_APP_STORAGEBUCKET}`,
   messagingSenderId: `${process.env.VUE_APP_MESSAGINSENDERID}`,
-  appId: `${process.env.VUE_APP_APPID}`
-}
+  appId: `${process.env.VUE_APP_APPID}`,
+};
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
 // getAnalytics(app);
-export const db = getFirestore(app)
+export const db = getFirestore(app);
 
-createApp(App).use(router).use(store).mount('#app')
+createApp(App).use(router).use(store).mount('#app');
