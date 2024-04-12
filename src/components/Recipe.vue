@@ -22,20 +22,13 @@
 
       <div class="d-flex align-items-end">
         <router-link
-          :to="{ path: 'recipe/' + recipeId }"
-          class="nav-link active"
-          aria-current="true"
-          >Feed</router-link
-        >
-        <h5
           class="card-title"
           style="cursor: pointer"
-          data-bs-toggle="modal"
-          :data-bs-target="'#id' + recipeId"
-          :click="openRecipe"
+          :to="{ path: 'recipe/' + recipeId }"
+          aria-current="true"
         >
           {{ recipe.data.data.title }}
-        </h5>
+        </router-link>
         <EditRecipeButton
           v-if="isRecipeOwner"
           :recipeData="recipe.data.data"

@@ -1,47 +1,75 @@
 <template>
-<div style="min-height:90vh">
-  <div style="height: 100px"></div>
-  <div class="container-fluid justify-content-center text-center col-sm-12 col-lg-8 px-4 py-2 mx-auto my-4">
-    <div class="card justify-content-center text-center w-75 mx-auto auth-form" >
-      <div class="card-body">
-        <div>
-          <h1>Register</h1>
-          <div v-if="error" class="alert alert-danger small-alert">{{ errorToString(error) }}</div>
+  <div style="min-height: 90vh">
+    <div style="height: 100px"></div>
+    <div
+      class="container-fluid justify-content-center text-center col-sm-12 col-lg-8 px-4 py-2 mx-auto my-4"
+    >
+      <div
+        class="card justify-content-center text-center w-75 mx-auto auth-form"
+      >
+        <div class="card-body">
+          <div>
+            <h1>Register</h1>
+            <div v-if="error" class="alert alert-danger small-alert">
+              {{ errorToString(error) }}
+            </div>
 
-          <div class="py-2 my-2">
-            <div class="input-group input-group-lg py-2">
-              <span class="input-group-text" id="inputGroup-sizing-lg">Email</span>
-              <input type="text" class="form-control" placeholser="Email" v-model="email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-            <div class="input-group input-group-lg py-2">
-              <span class="input-group-text" id="inputGroup-sizing-lg">Password</span>
-              <input type="password" class="form-control" placeholser="Password" v-model="password" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-            <div v-if="password.length > 0 && password.length < 8" class="text-danger">Password is too short (min. 8 characters)</div>
-            <div>
-              <button
-                class="btn btn-lg btn-outline-dark my-2"
-                @click="register"
-                :disabled="password.length < 8"
+            <div class="py-2 my-2">
+              <div class="input-group input-group-lg py-2">
+                <span class="input-group-text" id="inputGroup-sizing-lg"
+                  >Email</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholser="Email"
+                  v-model="email"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-lg"
+                />
+              </div>
+              <div class="input-group input-group-lg py-2">
+                <span class="input-group-text" id="inputGroup-sizing-lg"
+                  >Password</span
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholser="Password"
+                  v-model="password"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-lg"
+                />
+              </div>
+              <div
+                v-if="password.length > 0 && password.length < 8"
+                class="text-danger"
               >
-                Submit
-              </button>
-            </div>
-            <div>
-              <button
-                class="btn btn-lg btn-outline-dark my-2"
-                @click="signInWithGoogle"
-              >
-                Sign in with Google
-              </button>
+                Password is too short (min. 8 characters)
+              </div>
+              <div>
+                <button
+                  class="btn btn-lg btn-outline-dark my-2"
+                  @click="register"
+                  :disabled="password.length < 8"
+                >
+                  Submit
+                </button>
+              </div>
+              <div>
+                <button
+                  class="btn btn-lg btn-outline-dark my-2"
+                  @click="signInWithGoogle"
+                >
+                  Sign in with Google
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
 </template>
 
 <script>
@@ -49,67 +77,75 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup
-} from 'firebase/auth'
+  signInWithPopup,
+} from 'firebase/auth';
+import { db } from '@/main.js';
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
+
 export default {
   name: 'AppRegisterView',
   methods: {
-    register () {
-      createUserWithEmailAndPassword(getAuth(), this.email, this.password).then(
-        (data) => {
-          console.log(data)
-          this.$router.push({ name: 'feed' })
-        }
-      ).catch((error) => {
-        this.error = error
-        console.log(error.code)
-        if ("vibrate" in navigator) {
-            navigator.vibrate(100);
-          } else {
-            console.log("Vibration not supported");
-          }
-      })
-    },
-    signInWithGoogle () {
-      const provider = new GoogleAuthProvider()
-      signInWithPopup(getAuth(), provider)
-        .then((result) => {
-          console.log(result)
-          this.$router.push({ name: 'feed' })
+    register() {
+      // actionTypes.createUserWithUsername('111', '222');
+      createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+        .then((data) => {
+          setDoc(doc(db, 'users', data.user.uid), {
+            username: this.email.split('@')[0].split('.')[0],
+            uid: data.user.uid,
+            created: serverTimestamp(),
+          });
+          this.$router.push({ name: 'feed' });
         })
         .catch((error) => {
-          alert(error.code)
-          if ("vibrate" in navigator) {
+          this.error = error;
+          console.log(error.code);
+          if ('vibrate' in navigator) {
             navigator.vibrate(100);
-          } else {
-            console.log("Vibration not supported");
           }
-        })
+        });
     },
-    errorToString (error) {
+    signInWithGoogle() {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(getAuth(), provider)
+        .then((result) => {
+          console.log(result);
+          setDoc(doc(db, 'users', result.user.uid), {
+            username: result.user.displayName,
+            uid: result.user.uid,
+            created: serverTimestamp(),
+          });
+          this.$router.push({ name: 'feed' });
+        })
+        .catch((error) => {
+          alert(error.code);
+          if ('vibrate' in navigator) {
+            navigator.vibrate(100);
+          }
+        });
+    },
+    errorToString(error) {
       switch (error.code) {
         case 'auth/invalid-email':
-          return 'Invalid email'
+          return 'Invalid email';
         case 'auth/user-not-found':
-          return 'User not found'
+          return 'User not found';
         case 'auth/missing-password':
-          return 'Missing password'
+          return 'Missing password';
         case 'auth/invalid-login-credentials':
-          return 'Invalid login credentials'
+          return 'Invalid login credentials';
         case 'auth/missing-email':
-          return 'Missing email'
+          return 'Missing email';
         default:
-          return 'Unknown error'
+          return 'Unknown error';
       }
-    }
+    },
   },
-  data () {
+  data() {
     return {
       email: '',
       password: '',
-      error: ''
-
-    }
-  }
-}
+      error: '',
+    };
+  },
+};
 </script>

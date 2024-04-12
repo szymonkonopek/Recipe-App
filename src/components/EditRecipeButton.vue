@@ -17,7 +17,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div v-bind:class="{'modal-content': true, [recipeColor]: true}">
+      <div v-bind:class="{ 'modal-content': true, [recipeColor]: true }">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Edit recipe</h1>
           <button
@@ -56,30 +56,48 @@
               <small id="textAreaHelpblock" class="form-text text-muted">
                 {{ recipeContent.length }}/255
               </small>
-              <div>
-                Recipe visible for others?
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="recipeVisibleForOthers" checked>
-              <label class="form-check-label" for="flexRadioDefault2">
-                Yes
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="recipeVisibleForOthers">
-              <label class="form-check-label" for="flexRadioDefault1">
-                No
-              </label>
-            </div>
+              <div>Recipe visible for others?</div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault2"
+                  value="true"
+                  v-model="recipeVisibleForOthers"
+                  checked
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Yes
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="flexRadioDefault1"
+                  value="false"
+                  v-model="recipeVisibleForOthers"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  No
+                </label>
+              </div>
               <div class="form-group">
-              <label for="exampleFormSelect">Recipe color </label>
-              <select class="form-select" id="selectColor" disabled v-model="recipeColor">
-                <option value="text-bg-white">White</option>
-                <option value="text-bg-primary">Light Brown</option>
-                <option value="text-bg-secondary">Dark Brown</option>
-                <option value="text-bg-warning">Light Sea</option>
-              </select>
-            </div>
+                <label for="exampleFormSelect">Recipe color </label>
+                <select
+                  class="form-select"
+                  id="selectColor"
+                  disabled
+                  v-model="recipeColor"
+                >
+                  <option value="text-bg-white">White</option>
+                  <option value="text-bg-primary">Light Brown</option>
+                  <option value="text-bg-secondary">Dark Brown</option>
+                  <option value="text-bg-warning">Light Sea</option>
+                </select>
+              </div>
               <div class="pt-3 pb-3">
                 <div class="form-check form-check-inline">
                   <input
@@ -135,22 +153,22 @@
 </template>
 
 <script>
-import { doc, updateDoc, getDoc } from 'firebase/firestore'
-import { db } from '@/main.js'
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { db } from '@/main.js';
 
 export default {
   name: 'EditRecipeButton',
   props: {
     recipeData: {
       type: Object,
-      required: true
+      required: true,
     },
     recipeId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       recipeTitle: this.recipeData.title,
       recipeContent: this.recipeData.content,
@@ -158,14 +176,14 @@ export default {
       isWork: this.recipeData.tags.includes('Work'),
       isPersonal: this.recipeData.tags.includes('Personal'),
       recipeColor: this.recipeData.color,
-      recipeVisibleForOthers: this.recipeData.visibleForOthers
-    }
+      recipeVisibleForOthers: this.recipeData.visibleForOthers,
+    };
   },
   methods: {
-    async submit () {
-      const docRef = doc(db, 'recipes', this.recipeId)
-      const docSnapshot = await getDoc(docRef)
-      const currentData = docSnapshot.data()
+    async submit() {
+      const docRef = doc(db, 'recipes', this.recipeId);
+      const docSnapshot = await getDoc(docRef);
+      const currentData = docSnapshot.data();
 
       // Merge existing data with updated data
       const updatedData = {
@@ -178,15 +196,15 @@ export default {
           tags: [
             this.isSchool ? 'School' : null,
             this.isWork ? 'Work' : null,
-            this.isPersonal ? 'Personal' : null
-          ].filter((tag) => tag !== null)
-        }
-      }
-      updateDoc(docRef, updatedData)
+            this.isPersonal ? 'Personal' : null,
+          ].filter((tag) => tag !== null),
+        },
+      };
+      updateDoc(docRef, updatedData);
 
-      await new Promise((resolve) => setTimeout(resolve, 500))
-      this.$router.go()
-    }
-  }
-}
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      this.$router.go();
+    },
+  },
+};
 </script>
