@@ -1,49 +1,36 @@
 <template>
   <div class="p-5 d-flex flex-column">
-    {{ recipeId }}
-    {{ title }}
+    {{ content }}
     <button class="btn ml-2" @click="share">
       <i class="bi bi-share-fill"></i>
     </button>
-    <button @click="share">Share</button>
   </div>
 </template>
 <script>
-import { actionTypes } from '../store/modules/firebasedb';
+// import { actionTypes } from '../store/modules/firebasedb';
 
 export default {
   name: 'AppRecipePageView',
   props: {
-    recipeId: {
-      type: String,
+    recipe: {
+      type: Object,
       required: true,
     },
   },
   data() {
     return {
-      recipe: null,
-      title: '',
+      title: this.recipe.data.title,
+      content: this.recipe.data.content,
     };
-  },
-  created() {
-    this.$store
-      .dispatch(actionTypes.getRecipeById, {
-        id: this.recipeId,
-      })
-      .then((recipe) => {
-        this.recipe = recipe;
-        console.log(recipe.data.title);
-        this.title = recipe.data.title;
-      });
   },
   methods: {
     async share() {
       try {
         if (navigator.share) {
           await navigator.share({
-            title: 'Example Title',
-            text: 'Check out this example!',
-            url: 'https://example.com',
+            title: 'Recipe App',
+            text: 'Check out this recipe!',
+            url: 'https://recipes-online.netlify.app/' + this.recipeId,
           });
           console.log('Shared successfully');
         } else {
