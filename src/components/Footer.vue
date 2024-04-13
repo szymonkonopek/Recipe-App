@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column">
-    <footer class="text-center text-black mt-auto" style="background-color:#808080">
+    <footer class="text-center text-black mt-auto bg-info">
       <div class="container p-4 pb-0">
         <section class="">
           <p class="d-flex justify-content-center align-items-center" v-if="!isLoggedIn">
@@ -12,7 +12,7 @@
           </p>
         </section>
       </div>
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      <div class="text-center p-3 bg-secondary">
         © 2023 Copyright |
         <a class="text-black" href="https://uek.krakow.pl/">Cracow University Of Economy</a>
       </div>
