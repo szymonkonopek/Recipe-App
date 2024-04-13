@@ -1,6 +1,6 @@
 <template>
   <div style="min-height: 90vh">
-    <div class='text-center justify-content-center p-4'><h1 class="text-center">Create an account</h1></div>
+    <div class='text-center justify-content-center p-4'><h1 class="text-center fw-bold font">Create an account</h1></div>
     <div class="container-fluid justify-content-center text-center pb-4 px-4">
       <div class="card justify-content-center text-center shadow">
         <div class="card-body">
