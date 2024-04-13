@@ -1,54 +1,54 @@
-import { titleParams } from '../../helpers/prompt.js'
-import gptApi from '../../api/gptApi.js'
+import { titleParams } from '../../helpers/prompt.js';
+import gptApi from '../../api/gptApi.js';
 
 export const actionTypes = {
-  enhanceTitle: '[gpt] Enhance Title'
-}
+  enhanceContent: '[gpt] Enhance Content',
+};
 
 export const mutationTypes = {
-  enhanceTitleStart: '[gpt] Enhance Title Start',
-  enhanceTitleSuccess: '[gpt] Enhance Title Success',
-  enhanceTitleFailure: '[gpt] Enhance Title Failure',
+  enhanceContentStart: '[gpt] Enhance Content Start',
+  enhanceContentSuccess: '[gpt] Enhance Content Success',
+  enhanceContentFailure: '[gpt] Enhance Content Failure',
 
-  setEnhancedTitle: '[gpt] Set Enhanced Title'
-}
+  setEnhancedContent: '[gpt] Set Enhanced Content',
+};
 
 const state = {
   isLoading: false,
-  enhancedTitle: ''
-}
+  enhancedContent: '',
+};
 const mutations = {
-  [mutationTypes.enhanceTitleStart] (state) {
-    state.isLoading = true
+  [mutationTypes.enhanceContentStart](state) {
+    state.isLoading = true;
   },
-  [mutationTypes.enhanceTitleSuccess] (state, payload) {
+  [mutationTypes.enhanceContentSuccess](state, payload) {
     // state.isLoading = false;
-    state.enhancedTitle = payload
+    state.enhancedContent = payload;
   },
-  [mutationTypes.enhanceTitleFailure] () {},
+  [mutationTypes.enhanceContentFailure]() {},
 
-  [mutationTypes.setEnhancedTitle] (state, payload) {
-    state.enhancedTitle = payload
-    state.isLoading = false
-  }
-}
+  [mutationTypes.setEnhancedContent](state, payload) {
+    state.enhancedContent = payload;
+    state.isLoading = false;
+  },
+};
 
 const actions = {
-  [actionTypes.enhanceTitle] (context, { recipeTitle, recipeContent }) {
-    titleParams.messages[0].content = `Recipe content: ${recipeContent}, title: ${recipeTitle}`
+  [actionTypes.enhanceContent](context, { recipeTitle, recipeContent }) {
+    titleParams.messages[0].content = `Recipe content: ${recipeContent}, title: ${recipeTitle}`;
     return new Promise((resolve) => {
-      context.commit(mutationTypes.enhanceTitleStart)
-      gptApi.enhanceTitle(titleParams).then((response) => {
-        const newTitle = response.choices[0].message.content
-        context.commit(mutationTypes.enhanceTitleSuccess, newTitle)
-        resolve(newTitle)
-      })
-    })
-  }
-}
+      context.commit(mutationTypes.enhanceContentStart);
+      gptApi.enhanceContent(titleParams).then((response) => {
+        const newTitle = response.choices[0].message.content;
+        context.commit(mutationTypes.enhanceContentSuccess, newTitle);
+        resolve(newTitle);
+      });
+    });
+  },
+};
 
 export default {
   actions,
   mutations,
-  state
-}
+  state,
+};

@@ -18,7 +18,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div v-bind:class="{'modal-content': true, [recipeColor]: true}">
+      <div v-bind:class="{ 'modal-content': true, [recipeColor]: true }">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">New recipe</h1>
           <button
@@ -40,77 +40,87 @@
                 aria-describedby="textHelp"
                 v-model="recipeTitle"
                 required
-                v-if="enhancedTitle.length == 0"
               />
-              <div
-                class="d-flex flex-row position-relative"
-                v-if="enhancedTitle.length > 0"
-              >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="titleInput"
-                  maxlength="60"
-                  aria-describedby="textHelp"
-                  v-model="enhancedTitle"
-                  disabled
-                  required
-                  @click="test"
-                />
-                <div
-                  class="position-absolute top-50 end-0 translate-middle-y d-flex flex-row"
-                >
-                  <button
-                    class="btn btn-link text-info p-0"
-                    @click="updateTitle"
-                  >
-                    <i class="bi bi-check-square-fill"></i>
-                  </button>
-                  <button
-                    class="btn btn-link text-secondary"
-                    @click="discardTitle"
-                  >
-                    <i class="bi bi-x-square"></i>
-                  </button>
-                </div>
-              </div>
-              <div id="textHelp" class="form-text">
-                Type title of your new recipe
-              </div>
             </div>
-            <div class="form-group">
+            <div v-show="enhancedContent == 0" class="form-group">
               <label for="exampleFormControlTextarea1">Recipe content</label>
               <textarea
+                ref="textarea1"
                 class="form-control"
                 id="exampleFormControlTextarea1"
-                rows="3"
+                rows="6"
                 aria-describedby="textAreaHelpblock"
-                maxlength="255"
                 v-model="recipeContent"
+                required
+                v-autoH
+              ></textarea>
+            </div>
+            <div
+              v-show="enhancedContent.length > 0"
+              class="form-group position-relative"
+            >
+              <label for="exampleFormControlTextarea1">Recipe content</label>
+              <div
+                class="position-absolute top-0 end-0 translate-middle-y d-flex flex-row mt-2"
+              >
+                <button class="btn btn-link text-info p-0" @click="updateTitle">
+                  <i class="bi bi-check-square-fill"></i>
+                </button>
+                <button
+                  class="btn btn-link text-secondary"
+                  @click="discardTitle"
+                >
+                  <i class="bi bi-x-square"></i>
+                </button>
+              </div>
+              <textarea
+                ref="textarea2"
+                class="form-control"
+                id="exampleFormControlTextarea2"
+                rows="6"
+                aria-describedby="textAreaHelpblock"
+                v-model="enhancedContent"
                 required
               ></textarea>
             </div>
             <small id="textAreaHelpblock" class="form-text text-muted">
-              {{ recipeContent.length }}/255
+              {{ recipeContent.length }}/2048
             </small>
-            <div>
-                Recipe visible for others?
-            </div>
+            <div>Recipe visible for others?</div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="recipeVisibleForOthers" checked>
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault2"
+                value="true"
+                v-model="recipeVisibleForOthers"
+                checked
+              />
               <label class="form-check-label" for="flexRadioDefault2">
                 Yes
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="recipeVisibleForOthers">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+                value="false"
+                v-model="recipeVisibleForOthers"
+              />
               <label class="form-check-label" for="flexRadioDefault1">
                 No
-              </label> 
+              </label>
             </div>
             <div class="form-group">
               <label for="exampleFormSelect">Set color recipe </label>
-              <select class="form-select" id="selectColor" v-model="recipeColor">
+              <select
+                class="form-select"
+                id="selectColor"
+                v-model="recipeColor"
+              >
                 <option value="text-bg-white">White</option>
                 <option value="text-bg-primary">Light Brown</option>
                 <option value="text-bg-secondary">Dark Brown</option>
@@ -175,32 +185,32 @@
   </div>
 </template>
 <script>
-import { actionTypes } from '@/store/modules/firebasedb'
-import { ref } from 'vue'
-import EnhanceTitleButton from './EnhanceTitleButton.vue'
-import { mapState } from 'vuex'
-import { mutationTypes } from '@/store/modules/chatgpt'
+import { actionTypes } from '@/store/modules/firebasedb';
+import { ref } from 'vue';
+import EnhanceTitleButton from './EnhanceTitleButton.vue';
+import { mapState } from 'vuex';
+import { mutationTypes } from '@/store/modules/chatgpt';
 
 export default {
   name: 'NewRecipeButton',
   computed: {
     ...mapState({
-      enhancedTitle: (state) => state.chatgpt.enhancedTitle,
-      isLoading: (state) => state.firebase.isLoading
-    })
+      enhancedContent: (state) => state.chatgpt.enhancedContent,
+      isLoading: (state) => state.firebase.isLoading,
+    }),
   },
-  data () {
+  data() {
     return {
       recipeTitle: ref(''),
       recipeContent: '',
       checkedTags: ref([]),
       recipeColor: 'text-bg-white',
       isLoading: false,
-      recipeVisibleForOthers: 'true'
-    }
+      recipeVisibleForOthers: 'true',
+    };
   },
   methods: {
-    submit () {
+    submit() {
       if (this.recipeTitle.length > 0 && this.recipeContent.length > 0) {
         this.$store
           .dispatch(actionTypes.addRecipe, {
@@ -208,24 +218,23 @@ export default {
             content: this.recipeContent,
             tags: this.checkedTags,
             color: this.recipeColor,
-            visibleForOthers: this.recipeVisibleForOthers === 'true'
-          }
-          )
-          .then(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 500))
-            this.$router.go()
+            visibleForOthers: this.recipeVisibleForOthers === 'true',
           })
+          .then(async () => {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            this.$router.go();
+          });
       }
     },
-    updateTitle () {
-      this.recipeTitle = this.enhancedTitle
-      this.$store.commit(mutationTypes.setEnhancedTitle, '')
+    updateTitle() {
+      this.recipeContent = this.enhancedContent;
+      this.$store.commit(mutationTypes.setEnhancedContent, '');
     },
-    discardTitle () {
-      this.recipeTitle = ''
-      this.$store.commit(mutationTypes.setEnhancedTitle, '')
-    }
+    discardTitle() {
+      this.recipeContent = '';
+      this.$store.commit(mutationTypes.setEnhancedContent, '');
+    },
   },
-  components: { EnhanceTitleButton }
-}
+  components: { EnhanceTitleButton },
+};
 </script>

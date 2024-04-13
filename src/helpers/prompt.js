@@ -3,17 +3,17 @@ export const titleParams = {
   messages: [
     {
       role: 'user',
-      content: ''
+      content: '',
     },
     {
       role: 'system',
       content:
-        'Type enhanced title, based on recipe Content. Max. 80 characters, return just title string'
-    }
+        'Generate a recipe based on recipe Content. Max. 512 characters, do not generate title',
+    },
   ],
   max_tokens: 250,
   top_p: 1,
   temperature: 0.5,
   frequency_penalty: 0,
-  presence_penalty: 0
-}
+  presence_penalty: 0,
+};
