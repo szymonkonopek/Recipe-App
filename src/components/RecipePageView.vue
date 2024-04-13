@@ -8,7 +8,11 @@
       <input type="file" @change="handleImageUpload" />
       <button @click="uploadImage">Upload Image</button>
     </div>
-    <img v-if="recipe.images" :src="recipe.images[0]" />
+    <div v-if="recipe" class="d-flex flex-column">
+      <div v-for="image in recipe.images" :key="image">
+        <img :src="image" class="h-50 w-50 mt-1" />
+      </div>
+    </div>
   </div>
 </template>
 <script>
