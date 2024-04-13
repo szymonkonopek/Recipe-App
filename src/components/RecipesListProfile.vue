@@ -1,5 +1,17 @@
 <template>
+  <div>
+
     <div
+      v-if="recipes"
+    >
+      <div class="alert alert-success text-black" role="alert">
+        <h4 class="alert-heading">There is no receipes to display!</h4>
+        <p>Add your favorite recipes just by clicking <i class="bi bi-plus-circle display-10"></i> icon, down below.</p>
+      </div>
+    </div>
+
+    <div
+      v-else
       v-for="(recipe) in recipes"
       :key="recipe.id"
       class=""
@@ -7,7 +19,9 @@
     >
       <Recipe :recipe="recipe"></Recipe>
     </div>
-  </template>
+
+  </div>
+</template>
 
 <script>
 import { actionTypes } from '@/store/modules/firebasedb'
