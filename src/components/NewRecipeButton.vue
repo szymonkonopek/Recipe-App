@@ -86,34 +86,6 @@
             <small id="textAreaHelpblock" class="form-text text-muted">
               {{ recipeContent.length }}/2048
             </small>
-            <div>Recipe visible for others?</div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault2"
-                value="true"
-                v-model="recipeVisibleForOthers"
-                checked
-              />
-              <label class="form-check-label" for="flexRadioDefault2">
-                Yes
-              </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-                value="false"
-                v-model="recipeVisibleForOthers"
-              />
-              <label class="form-check-label" for="flexRadioDefault1">
-                No
-              </label>
-            </div>
             <div class="form-group">
               <label for="exampleFormSelect">Set color recipe </label>
               <select
@@ -205,8 +177,7 @@ export default {
       recipeContent: '',
       checkedTags: ref([]),
       recipeColor: 'text-bg-white',
-      isLoading: false,
-      recipeVisibleForOthers: 'true',
+      isLoading: false
     };
   },
   methods: {
@@ -218,7 +189,6 @@ export default {
             content: this.recipeContent,
             tags: this.checkedTags,
             color: this.recipeColor,
-            visibleForOthers: this.recipeVisibleForOthers === 'true',
           })
           .then(async () => {
             await new Promise((resolve) => setTimeout(resolve, 500));
