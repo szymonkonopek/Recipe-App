@@ -76,8 +76,8 @@
                     class="form-check-input"
                     type="checkbox"
                     id="checkbox1"
-                    value="School"
-                    v-model="isSchool"
+                    value="Meat"
+                    v-model="isMeat"
                   />
                   <label class="form-check-label" for="inlineCheckbox1"
                     >Meat</label
@@ -88,8 +88,8 @@
                     class="form-check-input"
                     type="checkbox"
                     id="checkbox2"
-                    value="Work"
-                    v-model="isWork"
+                    value="Vegetarian"
+                    v-model="isVegetarian"
                   />
                   <label class="form-check-label" for="inlineCheckbox2"
                     >Vegetarian</label
@@ -100,8 +100,8 @@
                     class="form-check-input"
                     type="checkbox"
                     id="checkbox3"
-                    value="Personal"
-                    v-model="isPersonal"
+                    value="Vegan"
+                    v-model="isVegan"
                   />
                   <label class="form-check-label" for="inlineCheckbox3"
                     >Vegan</label
@@ -111,11 +111,11 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    id="checkbox3"
-                    value="Personal"
-                    v-model="isPersonal"
+                    id="checkbox4"
+                    value="Sweet"
+                    v-model="isSweet"
                   />
-                  <label class="form-check-label" for="inlineCheckbox3"
+                  <label class="form-check-label" for="inlineCheckbox4"
                     >Sweet</label
                   >
                 </div>
@@ -123,11 +123,11 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    id="checkbox3"
-                    value="Personal"
-                    v-model="isPersonal"
+                    id="checkbox5"
+                    value="Sour"
+                    v-model="isSour"
                   />
-                  <label class="form-check-label" for="inlineCheckbox3"
+                  <label class="form-check-label" for="inlineCheckbox5"
                     >Sour</label
                   >
                 </div>
@@ -135,11 +135,11 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    id="checkbox3"
-                    value="Personal"
-                    v-model="isPersonal"
+                    id="checkbox6"
+                    value="Hot"
+                    v-model="isHot"
                   />
-                  <label class="form-check-label" for="inlineCheckbox3"
+                  <label class="form-check-label" for="inlineCheckbox6"
                     >Hot</label
                   >
                 </div>
@@ -147,11 +147,11 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    id="checkbox3"
-                    value="Personal"
-                    v-model="isPersonal"
+                    id="checkbox7"
+                    value="Salty"
+                    v-model="isSalty"
                   />
-                  <label class="form-check-label" for="inlineCheckbox3"
+                  <label class="form-check-label" for="inlineCheckbox7"
                     >Salty</label
                   >
                 </div>
@@ -159,11 +159,11 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    id="checkbox3"
-                    value="Personal"
-                    v-model="checkedTags"
+                    id="checkbox8"
+                    value="Seafood"
+                    v-model="isSeafood"
                   />
-                  <label class="form-check-label" for="inlineCheckbox3"
+                  <label class="form-check-label" for="inlineCheckbox8"
                     >Seafood</label
                   >
                 </div>
@@ -204,9 +204,14 @@ export default {
     return {
       recipeTitle: this.recipeData.title,
       recipeContent: this.recipeData.content,
-      isSchool: this.recipeData.tags.includes('School'),
-      isWork: this.recipeData.tags.includes('Work'),
-      isPersonal: this.recipeData.tags.includes('Personal'),
+      isMeat: this.recipeData.tags.includes('Meat'),
+      isVegetarian: this.recipeData.tags.includes('Vegetarian'),
+      isVegan: this.recipeData.tags.includes('Vegan'),
+      isSweet: this.recipeData.tags.includes('Sweet'),
+      isSour: this.recipeData.tags.includes('Sour'),
+      isHot: this.recipeData.tags.includes('Hot'),
+      isSalty: this.recipeData.tags.includes('Salty'),
+      isSeafood: this.recipeData.tags.includes('Seafood'),
       recipeColor: this.recipeData.color
     };
   },
@@ -224,9 +229,14 @@ export default {
           content: this.recipeContent,
           color: this.recipeColor,
           tags: [
-            this.isSchool ? 'School' : null,
-            this.isWork ? 'Work' : null,
-            this.isPersonal ? 'Personal' : null,
+            this.isMeat ? 'Meat' : null,
+            this.isVegetarian ? 'Vegetarian' : null,
+            this.isVegan ? 'Vegan' : null,
+            this.isSweet ? 'Sweet' : null,
+            this.isSour ? 'Sour' : null,
+            this.isHot ? 'Hot' : null,
+            this.isSalty ? 'Salty' : null,
+            this.isSeafood ? 'Seafood' : null,
           ].filter((tag) => tag !== null),
         },
       };

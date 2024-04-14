@@ -107,7 +107,7 @@
                   class="form-check-input"
                   type="checkbox"
                   id="checkbox1"
-                  value="School"
+                  value="Meat"
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox1"
@@ -119,7 +119,7 @@
                   class="form-check-input"
                   type="checkbox"
                   id="checkbox2"
-                  value="Work"
+                  value="Vegetarian"
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox2"
@@ -131,7 +131,7 @@
                   class="form-check-input"
                   type="checkbox"
                   id="checkbox3"
-                  value="Personal"
+                  value="Vegan"
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox3"
@@ -142,11 +142,11 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="checkbox3"
-                  value="Personal"
+                  id="checkbox4"
+                  value="Sweet"
                   v-model="checkedTags"
                 />
-                <label class="form-check-label" for="inlineCheckbox3"
+                <label class="form-check-label" for="inlineCheckbox4"
                   >Sweet</label
                 >
               </div>
@@ -154,11 +154,11 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="checkbox3"
-                  value="Personal"
+                  id="checkbox5"
+                  value="Sour"
                   v-model="checkedTags"
                 />
-                <label class="form-check-label" for="inlineCheckbox3"
+                <label class="form-check-label" for="inlineCheckbox5"
                   >Sour</label
                 >
               </div>
@@ -166,11 +166,11 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="checkbox3"
-                  value="Personal"
+                  id="checkbox6"
+                  value="Hot"
                   v-model="checkedTags"
                 />
-                <label class="form-check-label" for="inlineCheckbox3"
+                <label class="form-check-label" for="inlineCheckbox6"
                   >Hot</label
                 >
               </div>
@@ -178,11 +178,11 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="checkbox3"
-                  value="Personal"
+                  id="checkbox7"
+                  value="Salty"
                   v-model="checkedTags"
                 />
-                <label class="form-check-label" for="inlineCheckbox3"
+                <label class="form-check-label" for="inlineCheckbox7"
                   >Salty</label
                 >
               </div>
@@ -190,11 +190,11 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="checkbox3"
-                  value="Personal"
+                  id="checkbox8"
+                  value="Seafood"
                   v-model="checkedTags"
                 />
-                <label class="form-check-label" for="inlineCheckbox3"
+                <label class="form-check-label" for="inlineCheckbox8"
                   >Seafood</label
                 >
               </div>
