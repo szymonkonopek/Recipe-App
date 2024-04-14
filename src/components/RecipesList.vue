@@ -5,7 +5,7 @@
     class=""
     style="width: 100%; max-width: 50rem"
   >
-    <Recipe v-if="recipe.data.data.visibleForOthers == true" :recipe="recipe"></Recipe>
+    <Recipe :recipe="recipe"></Recipe>
   </div>
 </template>
 
