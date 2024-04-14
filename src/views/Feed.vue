@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 d-flex flex-column">
+  <div class="container d-flex flex-column">
     <h2 class="fw-bold font">Recipes</h2>
     <div class="d-flex flex-column align-items-center">
       <RecipesList :uid="''"></RecipesList>

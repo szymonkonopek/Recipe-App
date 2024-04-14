@@ -1,9 +1,9 @@
 <template>
-  <div style="min-height: 90vh">
+  <div style="min-height: 90vh" class="container">
     <div class="text-center justify-content-center p-4">
       <h1 class="text-center fw-bold font">Welcome back!</h1>
     </div>
-    <div class="container-fluid justify-content-center text-center pb-4 px-4">
+    <div class="container-fluid justify-content-center text-center pb-4">
       <div class="card justify-content-center text-center shadow">
         <div class="card-body">
           <div>

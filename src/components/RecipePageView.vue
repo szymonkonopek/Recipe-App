@@ -1,36 +1,33 @@
 <template>
-  <div class="p-5 d-flex flex-column">
+  <div class="d-flex flex-column">
     <div
-      id="carouselExampleControls"
-      class="carousel slide"
-      data-ride="carousel"
+      v-if="recipe.images.length > 0"
+      style="
+        width: 100vw;
+        max-height: 50vw;
+        min-height: 25rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        background-blend-mode: multiply;
+      "
+      :style="{ backgroundImage: 'url(' + recipe.images[0].url + ')' }"
+      class="object-fit-cover position-relative mb-5"
     >
-      <div class="carousel-inner">
-        <div v-for="image in recipe.images" :key="image">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="image.url" alt="First slide" />
-          </div>
-        </div>
+      <div class="position-absolute top-0 start-0 pt-5 ps-4">
+        <h1 class="text-white fw-bold w-75">{{ title }}</h1>
+        <div class="text-white">4.5 <i class="bi bi-star-fill"></i></div>
       </div>
-      <a
-        class="carousel-control-prev"
-        href="#carouselExampleControls"
-        role="button"
-        data-slide="prev"
+      <div
+        class="position-absolute bottom-0 start-0 d-flex flex-row align-items-center pb-5 ps-4"
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a
-        class="carousel-control-next"
-        href="#carouselExampleControls"
-        role="button"
-        data-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+        <img
+          src="../assets/profile/profile-photo.png"
+          class="img-fluid justify-content-center pe-2"
+          style="max-width: 50px"
+        />
+        <div class="text-white fw-bold w-75">{{ user }}</div>
+      </div>
     </div>
+
     {{ content }}
     <button class="btn ml-2" @click="share">
       <i class="bi bi-share-fill"></i>
@@ -63,6 +60,10 @@ export default {
   },
   props: {
     recipe: {
+      type: Object,
+      required: true,
+    },
+    user: {
       type: Object,
       required: true,
     },

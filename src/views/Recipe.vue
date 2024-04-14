@@ -1,7 +1,11 @@
 <template>
-  <div class="p-5 d-flex flex-column">
+  <div class="container d-flex flex-column">
     <div class="d-flex flex-column align-items-center">
-      <RecipePageView v-if="recipe" :recipe="recipe"></RecipePageView>
+      <RecipePageView
+        v-if="recipe"
+        :recipe="recipe"
+        :user="user"
+      ></RecipePageView>
     </div>
   </div>
 </template>

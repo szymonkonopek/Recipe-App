@@ -37,7 +37,7 @@
       </div>
       <p class="card-text">{{ recipe.data.data.content }}</p>
     </div>
-    <div class="d-flex flex-row p-2">
+    <div class="d-flex flex-row flex-wrap p-2">
       <small
         v-for="(tag, index) in recipe.data.data.tags"
         :key="index"
