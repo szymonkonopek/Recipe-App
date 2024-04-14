@@ -1,6 +1,5 @@
 <template>
   <div class="p-5 d-flex flex-column">
-    <h2 class="fw-bold font">{{ user }}'s {{ title }}</h2>
     <div class="d-flex flex-column align-items-center">
       <RecipePageView v-if="recipe" :recipe="recipe"></RecipePageView>
     </div>
