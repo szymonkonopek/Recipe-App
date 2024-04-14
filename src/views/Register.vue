@@ -1,14 +1,17 @@
 <template>
   <div style="min-height: 90vh">
-    <div class='text-center justify-content-center p-4'><h1 class="text-center fw-bold font">Create an account</h1></div>
+    <div class="text-center justify-content-center p-4">
+      <h1 class="text-center fw-bold font">Create an account</h1>
+    </div>
     <div class="container-fluid justify-content-center text-center pb-4 px-4">
       <div class="card justify-content-center text-center shadow">
         <div class="card-body">
           <div>
             <div class="row">
-              <div class="col-lg-6"><img src="../assets/login/signup.png" class="img-fluid"></div>
               <div class="col-lg-6">
-
+                <img src="../assets/login/signup.png" class="img-fluid" />
+              </div>
+              <div class="col-lg-6">
                 <h2>Register to Recipe App</h2>
                 <div v-if="error" class="alert alert-danger small-alert">
                   {{ errorToString(error) }}
@@ -60,17 +63,25 @@
                     </button>
                   </div>
 
-                  <div class='text-center justify-content-center p-1 text-muted'>or</div>
-                  
+                  <div
+                    class="text-center justify-content-center p-1 text-muted"
+                  >
+                    or
+                  </div>
+
                   <div>
                     <button
                       class="btn btn-lg btn-outline-primary my-2 rounded-pill"
                       @click="signInWithGoogle"
                     >
-                      Sign in with Google    <img class="img-fluid justify-content-center" style="max-width: 20px;" src="../assets/login/google-icon.png">
+                      Sign in with Google
+                      <img
+                        class="img-fluid justify-content-center"
+                        style="max-width: 20px"
+                        src="../assets/login/google-icon.png"
+                      />
                     </button>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -95,7 +106,6 @@ export default {
   name: 'AppRegisterView',
   methods: {
     register() {
-      // actionTypes.createUserWithUsername('111', '222');
       createUserWithEmailAndPassword(getAuth(), this.email, this.password)
         .then((data) => {
           setDoc(doc(db, 'users', data.user.uid), {
