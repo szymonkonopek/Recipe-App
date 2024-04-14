@@ -14,7 +14,13 @@ import {
   orderBy,
   // orderBy,
 } from 'firebase/firestore';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 
 import { db } from '@/main.js';
 
@@ -27,6 +33,7 @@ export const actionTypes = {
   createUserWithUsername: '[auth] Create User with username',
   getUserById: '[auth] Get User by ID',
   uploadImage: '[firedb] Upload Image',
+  deleteImage: '[firedb] Delete Image',
 };
 
 export const mutationType = {
@@ -73,6 +80,8 @@ const actions = {
             data: doc.data(),
           };
         });
+
+        console.log('error?');
         context.commit(mutationType.setRecipes, recipes);
         resolve();
       });
@@ -174,7 +183,7 @@ const actions = {
             console.log('user data:', doc.data());
             resolve(doc.data());
           } else {
-            reject('No such document');
+            console.log('No such document');
           }
         })
         .catch((error) => {
@@ -186,22 +195,40 @@ const actions = {
     console.log('recipeId', recipeId);
     console.log('image', image);
     const date = Date.now();
-    return new Promise(() => {
+    return new Promise((resolve) => {
       const storage = getStorage();
       let storageRef = ref(storage, `images/${recipeId}/${image.name}-${date}`);
       uploadBytes(storageRef, image).then((snapshot) => {
         console.log('Uploaded a blob or file!', snapshot);
         getDownloadURL(storageRef).then((url) => {
           console.log('url', url);
+          const imageObject = {
+            name: `${image.name}-${date}`,
+            url: url,
+          };
           const recipeRef = doc(db, 'recipes', recipeId);
           updateDoc(recipeRef, {
-            images: [...images, url],
+            images: [...images, imageObject],
+          }).then(() => {
+            resolve();
           });
         });
-
-        // .then((url) => {
-
-        // });
+      });
+    });
+  },
+  [actionTypes.deleteImage](context, { recipeId, image, images }) {
+    return new Promise((resolve) => {
+      const storage = getStorage();
+      let storageRef = ref(storage, `images/${recipeId}/${image.name}`);
+      deleteObject(storageRef).then(() => {
+        console.log('File deleted successfully');
+        const recipeRef = doc(db, 'recipes', recipeId);
+        const newImages = images.filter((img) => img.name !== image.name);
+        updateDoc(recipeRef, {
+          images: [...newImages],
+        }).then(() => {
+          resolve();
+        });
       });
     });
   },

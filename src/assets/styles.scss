@@ -1,23 +1,26 @@
 // Override the primary color variable
-$primary: #E38B29;
-$secondary: #F1A661;
-$info: #FFD8A9;
-$success: #BECA5C;
-$warning: #FDEEDC;
-$background-form:rgba(233, 226, 222, 0.85);
-$error: #dc3545!important;
+$primary: rgb(227, 139, 41);
+$secondary: #f1a661;
+$info: #ffd8a9;
+$success: #beca5c;
+$warning: #fdeedc;
+$background-form: rgba(233, 226, 222, 0.85);
+$error: #dc3545 !important;
 
 //$form-check-input-checked-color:          $white !default;
-$form-check-input-checked-bg-color:       $success !default;
+$form-check-input-checked-bg-color: $success !default;
 
 // .auth-form {
 //   background: $background-form !important;
-//   border-radius: 16px !important; 
-//   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  
+//   border-radius: 16px !important;
+//   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 //   backdrop-filter: blur(8px);
 //   -webkit-backdrop-filter: blur(8px);
 // }
 
+.bg-primary-transparent {
+  background-color: rgba(227, 139, 41, 0.5) !important;
+}
 
-  // Re-compile Bootstrap with the overridden variables
-@import "../../node_modules/bootstrap/scss/bootstrap";
+// Re-compile Bootstrap with the overridden variables
+@import '../../node_modules/bootstrap/scss/bootstrap';

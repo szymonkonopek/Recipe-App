@@ -4,22 +4,32 @@
     <button class="btn ml-2" @click="share">
       <i class="bi bi-share-fill"></i>
     </button>
-    <div>
+    <div v-if="recipe.uid == currentUserUid">
       <input type="file" @change="handleImageUpload" />
       <button @click="uploadImage">Upload Image</button>
     </div>
     <div v-if="recipe" class="d-flex flex-column">
       <div v-for="image in recipe.images" :key="image">
-        <img :src="image" class="h-50 w-50 mt-1" />
+        <AppImage
+          :image="image"
+          :canDelete="recipe.uid == currentUserUid"
+          :images="recipe.images"
+          :recipeId="recipeId"
+        />
       </div>
     </div>
   </div>
 </template>
 <script>
 import { actionTypes } from '../store/modules/firebasedb';
+import { getAuth } from 'firebase/auth';
+import AppImage from './Image.vue';
 
 export default {
   name: 'AppRecipePageView',
+  components: {
+    AppImage,
+  },
   props: {
     recipe: {
       type: Object,
@@ -30,6 +40,7 @@ export default {
     return {
       title: this.recipe.data.title,
       content: this.recipe.data.content,
+      currentUserUid: '',
     };
   },
   computed: {
@@ -61,12 +72,24 @@ export default {
     uploadImage() {
       console.log('Uploading image');
       console.log(this.recipe);
-      this.$store.dispatch(actionTypes.uploadImage, {
-        recipeId: this.recipeId,
-        image: this.image,
-        images: this.recipe.images,
-      });
+      this.$store
+        .dispatch(actionTypes.uploadImage, {
+          recipeId: this.recipeId,
+          image: this.image,
+          images: this.recipe.images,
+        })
+        .then(async () => {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          this.$router.go();
+        });
     },
+  },
+  mounted() {
+    this.auth = getAuth;
+    this.auth().onAuthStateChanged((user) => {
+      this.currentUserUid = user.uid;
+      console.log('uid', user.uid);
+    });
   },
 };
 </script>
