@@ -27,7 +27,38 @@
         <div class="text-white fw-bold w-75">{{ user }}</div>
       </div>
     </div>
-
+    <div
+      v-if="recipe.images.length == 0"
+      style="
+        width: 100vw;
+        max-height: 50vw;
+        min-height: 25rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        background-blend-mode: multiply;
+      "
+      :style="{
+        backgroundImage:
+          'url(' +
+          'https://firebasestorage.googleapis.com/v0/b/recipeapp-f5c59.appspot.com/o/recipe-cover%2Frecipe-cover.png?alt=media&token=23e17530-5f7f-4e42-96f0-46429473909c' +
+          ')',
+      }"
+      class="object-fit-cover position-relative mb-5"
+    >
+      <div class="position-absolute top-0 start-0 pt-5 ps-4">
+        <h1 class="text-white fw-bold w-75">{{ title }}</h1>
+        <div class="text-white">4.5 <i class="bi bi-star-fill"></i></div>
+      </div>
+      <div
+        class="position-absolute bottom-0 start-0 d-flex flex-row align-items-center pb-5 ps-4"
+      >
+        <img
+          src="../assets/profile/profile-photo.png"
+          class="img-fluid justify-content-center pe-2"
+          style="max-width: 50px"
+        />
+        <div class="text-white fw-bold w-75">{{ user }}</div>
+      </div>
+    </div>
     {{ content }}
     <button class="btn ml-2" @click="share">
       <i class="bi bi-share-fill"></i>
