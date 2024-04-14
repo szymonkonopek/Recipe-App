@@ -60,20 +60,20 @@
               v-show="enhancedContent.length > 0"
               class="form-group position-relative"
             >
+            <div class="d-flex flex-col justify-content-between mb-2">
               <label for="exampleFormControlTextarea1">Recipe content</label>
               <div
-                class="position-absolute top-0 end-0 translate-middle-y d-flex flex-row mt-2"
+                class="d-flex flex-row bg-white px-1 rounded"
               >
-                <button class="btn btn-link text-info p-0" @click="updateTitle">
+                <button class="btn btn-link text-success p-0 px-1" @click="updateTitle">
                   <i class="bi bi-check-square-fill"></i>
                 </button>
-                <button
-                  class="btn btn-link text-secondary"
-                  @click="discardTitle"
-                >
-                  <i class="bi bi-x-square"></i>
+                <button class="btn btn-link text-danger p-0 px-1" @click="discardTitle">
+                  <i class="bi bi-x-square-fill"></i>
                 </button>
               </div>
+            </div>
+            
               <textarea
                 ref="textarea2"
                 class="form-control"
