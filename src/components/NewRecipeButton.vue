@@ -51,8 +51,9 @@
                 rows="6"
                 aria-describedby="textAreaHelpblock"
                 v-model="recipeContent"
+                maxlength="2048"
                 required
-                v-autoH
+                v-auto
               ></textarea>
             </div>
             <div
@@ -78,6 +79,7 @@
                 class="form-control"
                 id="exampleFormControlTextarea2"
                 rows="6"
+                maxlength="2048"
                 aria-describedby="textAreaHelpblock"
                 v-model="enhancedContent"
                 required
@@ -93,10 +95,10 @@
                 id="selectColor"
                 v-model="recipeColor"
               >
-                <option value="text-bg-white">White</option>
-                <option value="text-bg-primary">Light Brown</option>
-                <option value="text-bg-secondary">Dark Brown</option>
-                <option value="text-bg-warning">Light Sea</option>
+                <option value="text-bg-white">White chocolate</option>
+                <option value="text-bg-primary">Orange</option>
+                <option value="text-bg-secondary">Mandarine</option>
+                <option value="text-bg-warning">Prosecco</option>
               </select>
             </div>
             <div class="pt-3 pb-3">
@@ -109,7 +111,7 @@
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox1"
-                  >School</label
+                  >Meat</label
                 >
               </div>
               <div class="form-check form-check-inline">
@@ -121,7 +123,7 @@
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox2"
-                  >Work</label
+                  >Vegetarian</label
                 >
               </div>
               <div class="form-check form-check-inline">
@@ -133,7 +135,67 @@
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox3"
-                  >Personal</label
+                  >Vegan</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox3"
+                  value="Personal"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox3"
+                  >Sweet</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox3"
+                  value="Personal"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox3"
+                  >Sour</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox3"
+                  value="Personal"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox3"
+                  >Hot</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox3"
+                  value="Personal"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox3"
+                  >Salty</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox3"
+                  value="Personal"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox3"
+                  >Seafood</label
                 >
               </div>
             </div>
