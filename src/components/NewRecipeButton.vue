@@ -51,33 +51,35 @@
                 rows="6"
                 aria-describedby="textAreaHelpblock"
                 v-model="recipeContent"
+                maxlength="2048"
                 required
-                v-autoH
+                v-auto
               ></textarea>
             </div>
             <div
               v-show="enhancedContent.length > 0"
               class="form-group position-relative"
             >
+            <div class="d-flex flex-col justify-content-between mb-2">
               <label for="exampleFormControlTextarea1">Recipe content</label>
               <div
-                class="position-absolute top-0 end-0 translate-middle-y d-flex flex-row mt-2"
+                class="d-flex flex-row bg-white px-1 rounded"
               >
-                <button class="btn btn-link text-info p-0" @click="updateTitle">
+                <button class="btn btn-link text-success p-0 px-1" @click="updateTitle">
                   <i class="bi bi-check-square-fill"></i>
                 </button>
-                <button
-                  class="btn btn-link text-secondary"
-                  @click="discardTitle"
-                >
-                  <i class="bi bi-x-square"></i>
+                <button class="btn btn-link text-danger p-0 px-1" @click="discardTitle">
+                  <i class="bi bi-x-square-fill"></i>
                 </button>
               </div>
+            </div>
+            
               <textarea
                 ref="textarea2"
                 class="form-control"
                 id="exampleFormControlTextarea2"
                 rows="6"
+                maxlength="2048"
                 aria-describedby="textAreaHelpblock"
                 v-model="enhancedContent"
                 required
@@ -93,10 +95,10 @@
                 id="selectColor"
                 v-model="recipeColor"
               >
-                <option value="text-bg-white">White</option>
-                <option value="text-bg-primary">Light Brown</option>
-                <option value="text-bg-secondary">Dark Brown</option>
-                <option value="text-bg-warning">Light Sea</option>
+                <option value="text-bg-white">White chocolate</option>
+                <option value="text-bg-primary">Orange</option>
+                <option value="text-bg-secondary">Mandarine</option>
+                <option value="text-bg-warning">Prosecco</option>
               </select>
             </div>
             <div class="pt-3 pb-3">
@@ -105,11 +107,11 @@
                   class="form-check-input"
                   type="checkbox"
                   id="checkbox1"
-                  value="School"
+                  value="Meat"
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox1"
-                  >School</label
+                  >Meat</label
                 >
               </div>
               <div class="form-check form-check-inline">
@@ -117,11 +119,11 @@
                   class="form-check-input"
                   type="checkbox"
                   id="checkbox2"
-                  value="Work"
+                  value="Vegetarian"
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox2"
-                  >Work</label
+                  >Vegetarian</label
                 >
               </div>
               <div class="form-check form-check-inline">
@@ -129,11 +131,71 @@
                   class="form-check-input"
                   type="checkbox"
                   id="checkbox3"
-                  value="Personal"
+                  value="Vegan"
                   v-model="checkedTags"
                 />
                 <label class="form-check-label" for="inlineCheckbox3"
-                  >Personal</label
+                  >Vegan</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox4"
+                  value="Sweet"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox4"
+                  >Sweet</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox5"
+                  value="Sour"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox5"
+                  >Sour</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox6"
+                  value="Hot"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox6"
+                  >Hot</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox7"
+                  value="Salty"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox7"
+                  >Salty</label
+                >
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="checkbox8"
+                  value="Seafood"
+                  v-model="checkedTags"
+                />
+                <label class="form-check-label" for="inlineCheckbox8"
+                  >Seafood</label
                 >
               </div>
             </div>

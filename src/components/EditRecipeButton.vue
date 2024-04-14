@@ -46,9 +46,9 @@
                 <textarea
                   class="form-control"
                   id="exampleFormControlTextarea1"
-                  rows="3"
+                  rows="6"
                   aria-describedby="textAreaHelpblock"
-                  maxlength="255"
+                  maxlength="2048"
                   required
                   v-model="recipeContent"
                 ></textarea>
@@ -64,10 +64,10 @@
                   disabled
                   v-model="recipeColor"
                 >
-                  <option value="text-bg-white">White</option>
-                  <option value="text-bg-primary">Light Brown</option>
-                  <option value="text-bg-secondary">Dark Brown</option>
-                  <option value="text-bg-warning">Light Sea</option>
+                  <option value="text-bg-white">White chocolate</option>
+                  <option value="text-bg-primary">Orange</option>
+                  <option value="text-bg-secondary">Mandarine</option>
+                  <option value="text-bg-warning">Prosecco</option>
                 </select>
               </div>
               <div class="pt-3 pb-3">
@@ -76,11 +76,11 @@
                     class="form-check-input"
                     type="checkbox"
                     id="checkbox1"
-                    value="School"
-                    v-model="isSchool"
+                    value="Meat"
+                    v-model="isMeat"
                   />
                   <label class="form-check-label" for="inlineCheckbox1"
-                    >School</label
+                    >Meat</label
                   >
                 </div>
                 <div class="form-check form-check-inline">
@@ -88,11 +88,11 @@
                     class="form-check-input"
                     type="checkbox"
                     id="checkbox2"
-                    value="Work"
-                    v-model="isWork"
+                    value="Vegetarian"
+                    v-model="isVegetarian"
                   />
                   <label class="form-check-label" for="inlineCheckbox2"
-                    >Work</label
+                    >Vegetarian</label
                   >
                 </div>
                 <div class="form-check form-check-inline">
@@ -100,11 +100,71 @@
                     class="form-check-input"
                     type="checkbox"
                     id="checkbox3"
-                    value="Personal"
-                    v-model="isPersonal"
+                    value="Vegan"
+                    v-model="isVegan"
                   />
                   <label class="form-check-label" for="inlineCheckbox3"
-                    >Personal</label
+                    >Vegan</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="checkbox4"
+                    value="Sweet"
+                    v-model="isSweet"
+                  />
+                  <label class="form-check-label" for="inlineCheckbox4"
+                    >Sweet</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="checkbox5"
+                    value="Sour"
+                    v-model="isSour"
+                  />
+                  <label class="form-check-label" for="inlineCheckbox5"
+                    >Sour</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="checkbox6"
+                    value="Hot"
+                    v-model="isHot"
+                  />
+                  <label class="form-check-label" for="inlineCheckbox6"
+                    >Hot</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="checkbox7"
+                    value="Salty"
+                    v-model="isSalty"
+                  />
+                  <label class="form-check-label" for="inlineCheckbox7"
+                    >Salty</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="checkbox8"
+                    value="Seafood"
+                    v-model="isSeafood"
+                  />
+                  <label class="form-check-label" for="inlineCheckbox8"
+                    >Seafood</label
                   >
                 </div>
               </div>
@@ -144,9 +204,14 @@ export default {
     return {
       recipeTitle: this.recipeData.title,
       recipeContent: this.recipeData.content,
-      isSchool: this.recipeData.tags.includes('School'),
-      isWork: this.recipeData.tags.includes('Work'),
-      isPersonal: this.recipeData.tags.includes('Personal'),
+      isMeat: this.recipeData.tags.includes('Meat'),
+      isVegetarian: this.recipeData.tags.includes('Vegetarian'),
+      isVegan: this.recipeData.tags.includes('Vegan'),
+      isSweet: this.recipeData.tags.includes('Sweet'),
+      isSour: this.recipeData.tags.includes('Sour'),
+      isHot: this.recipeData.tags.includes('Hot'),
+      isSalty: this.recipeData.tags.includes('Salty'),
+      isSeafood: this.recipeData.tags.includes('Seafood'),
       recipeColor: this.recipeData.color
     };
   },
@@ -164,9 +229,14 @@ export default {
           content: this.recipeContent,
           color: this.recipeColor,
           tags: [
-            this.isSchool ? 'School' : null,
-            this.isWork ? 'Work' : null,
-            this.isPersonal ? 'Personal' : null,
+            this.isMeat ? 'Meat' : null,
+            this.isVegetarian ? 'Vegetarian' : null,
+            this.isVegan ? 'Vegan' : null,
+            this.isSweet ? 'Sweet' : null,
+            this.isSour ? 'Sour' : null,
+            this.isHot ? 'Hot' : null,
+            this.isSalty ? 'Salty' : null,
+            this.isSeafood ? 'Seafood' : null,
           ].filter((tag) => tag !== null),
         },
       };
