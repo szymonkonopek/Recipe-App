@@ -11,6 +11,7 @@
       :src="image.url"
       style="height: 20rem; width: 20rem"
       class="object-fit-cover border rounded shadow border-primary"
+      @click="openImage"
     />
   </div>
 </template>
@@ -51,6 +52,9 @@ export default {
           await new Promise((resolve) => setTimeout(resolve, 500));
           this.$router.go();
         });
+    },
+    openImage() {
+      window.open(this.image.url, '_blank');
     },
   },
 };

@@ -19,8 +19,24 @@ $form-check-input-checked-bg-color: $success !default;
 // }
 
 .bg-primary-transparent {
-  background-color: rgba(227, 139, 41, 0.5) !important;
+  background-color: rgba(240, 231, 220, 0.7) !important;
 }
 
 // Re-compile Bootstrap with the overridden variables
 @import '../../node_modules/bootstrap/scss/bootstrap';
+
+.wave {
+  --size: 20px;
+  --m: 0.5;
+  --p: calc(var(--m) * var(--size));
+  --R: calc(var(--size) * sqrt(var(--m) * var(--m) + 1));
+
+  mask: radial-gradient(
+        var(--R) at 50% calc(var(--size) + var(--p)),
+        #000 99%,
+        #0000 101%
+      )
+      calc(50% - 2 * var(--size)) 0 / calc(4 * var(--size)) 100%,
+    radial-gradient(var(--R) at 50% calc(-1 * var(--p)), #0000 99%, #000 101%)
+      50% var(--size) / calc(4 * var(--size)) 100% repeat-x;
+}
