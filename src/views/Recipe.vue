@@ -5,6 +5,7 @@
         v-if="recipe"
         :recipe="recipe"
         :user="user"
+        :averageRating="averageRating"
       ></RecipePageView>
     </div>
   </div>
@@ -21,6 +22,7 @@ export default {
       recipe: null,
       title: '',
       user: '',
+      averageRating: '',
     };
   },
   created() {
@@ -41,6 +43,29 @@ export default {
             this.user = user.username;
           });
       });
+
+    this.$store
+      .dispatch(actionTypes.getReviewsByRecipeId, {
+        recipeId: this.recipeId,
+      })
+      .then((reviews) => {
+        this.reviews = reviews;
+        console.log('reviews', reviews);
+        this.averageRating = this.calculateAverageRating(reviews);
+        console.log('averageRating', this.averageRating);
+      });
+  },
+  methods: {
+    calculateAverageRating(reviews) {
+      if (!reviews.length) {
+        return '';
+      }
+      let total = 0;
+      reviews.forEach((review) => {
+        total += review.data.review;
+      });
+      return `${(total / reviews.length).toFixed(1)}`;
+    },
   },
   components: { RecipePageView },
 };

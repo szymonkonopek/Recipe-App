@@ -34,6 +34,8 @@ export const actionTypes = {
   getUserById: '[auth] Get User by ID',
   uploadImage: '[firedb] Upload Image',
   deleteImage: '[firedb] Delete Image',
+  addReview: '[firedb] Add Review',
+  getReviewsByRecipeId: '[firedb] Get Reviews by Recipe ID',
 };
 
 export const mutationType = {
@@ -229,6 +231,44 @@ const actions = {
         }).then(() => {
           resolve();
         });
+      });
+    });
+  },
+  [actionTypes.addReview](context, { recipeId, review }) {
+    return new Promise((resolve) => {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        console.log('adding doc');
+        addDoc(collection(db, 'reviews'), {
+          uid: user.uid,
+          created: serverTimestamp(),
+          recipeId,
+          review,
+        }).then(() => {
+          resolve();
+        });
+        context.commit(mutationType.addRecipeSuccess);
+      });
+    });
+  },
+  [actionTypes.getReviewsByRecipeId](context, { recipeId }) {
+    return new Promise((resolve) => {
+      let q = query(
+        collection(db, 'reviews'),
+        where('recipeId', '==', recipeId),
+        orderBy('created', 'desc')
+      );
+      getDocs(q).then((result) => {
+        const reviews = result.docs.map((doc) => {
+          doc.data();
+          return {
+            id: doc.id,
+            data: doc.data(),
+          };
+        });
+
+        console.log('error?');
+        resolve(reviews);
       });
     });
   },

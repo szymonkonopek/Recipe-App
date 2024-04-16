@@ -23,7 +23,7 @@
     >
       <div class="position-absolute top-0 start-0 pt-4 ps-4">
         <h1 class="text-white fw-bold w-75">{{ title }}</h1>
-        <div class="text-white">4.5 <i class="bi bi-star-fill"></i></div>
+        <div v-if="averageRating !== ''" class="text-white">{{ averageRating }} <i class="bi bi-star-fill"></i></div>
       </div>
       <div
         class="position-absolute bottom-0 start-0 d-flex flex-row align-items-center pb-4 ps-4"
@@ -42,6 +42,8 @@
         <i class="bi bi-share-fill"></i>
       </button>
     </div>
+
+
     <div class="container mb-5">
       <h1 class="fw-bold">Recipe:</h1>
       <div style="white-space: pre-line">
@@ -64,6 +66,15 @@
         <input class="form-control" type="file" id="formFile" @change="handleImageUpload">
         <button button class="btn btn-secondary mt-3 w-100" @click="uploadImage">Upload Image</button>
       </div>
+          <div class="input-group input-group-sm mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" v-model="review">
+      <button class="btn btn-primary" @click="addReview">Add Review</button>
+    </div>
+
+
       
 </div>
 </template>
@@ -85,6 +96,10 @@ export default {
     user: {
       type: Object,
       required: true,
+    },
+    averageRating: {
+      type: String,
+      required: false,
     },
   },
   data() {
@@ -131,6 +146,17 @@ export default {
         })
         .then(async () => {
           await new Promise((resolve) => setTimeout(resolve, 500));
+          this.$router.go();
+        });
+    },
+    addReview() {
+      this.$store
+        .dispatch(actionTypes.addReview, {
+          recipeId: this.recipeId,
+          review: parseInt(this.review),
+        })
+        .then(() => {
+          this.review = '';
           this.$router.go();
         });
     },
