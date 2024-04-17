@@ -1,33 +1,23 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container-fluid">
-      <router-link :to="{ name: 'home' }" class="navbar-brand fw-bold" aria-current="page">Recipe App</router-link>
-      <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item" v-if="isLoggedIn">
-            <router-link :to="{ name: 'feed' }" class="nav-link active" aria-current="page">Feed</router-link>
-          </li>
-          <li class="nav-item" v-else>
-            <router-link :to="{ name: 'feed' }" class="nav-link disabled">Feed</router-link>
-          </li>
-        </ul>
+
+      <div class="">
         <form class="d-flex">
           <form class="container-fluid justify-content-start">
-            <router-link :to="{ name: 'login' }" class="btn btn-outline-dark me-2" type="button" v-if="!isLoggedIn">Login</router-link>
-            <router-link :to="{ name: 'register' }" class="btn btn-outline-dark me-2" v-if="!isLoggedIn">Register</router-link>
-            <router-link :to="{ name: 'profile' }" class="btn btn-outline-dark me-2" type="button" v-if="isLoggedIn">Profile</router-link>
-            <button class="btn btn-outline-dark me-2" type="button" @click="handleSignOut" v-if="isLoggedIn">Sign Out</button>
+            <router-link :to="{ name: 'home' }" class="navbar-brand fw-bold" aria-current="page">Recipe App</router-link>
+          </form>
+        </form>
+      </div>
+      
+      <div class="">
+        <form class="d-flex">
+          <form class="container-fluid justify-content-start">
+            <router-link :to="{ name: 'feed' }" v-if="isLoggedIn" class="btn btn-outline-dark me-2" aria-current="page"><i class="bi bi-journals"></i></router-link>
+            <router-link :to="{ name: 'login' }" class="btn btn-outline-dark me-2" type="button" v-if="!isLoggedIn"><i class="bi bi-box-arrow-in-left"></i></router-link>
+            <router-link :to="{ name: 'register' }" class="btn btn-outline-dark me-2" v-if="!isLoggedIn"><i class="bi bi-person-plus-fill"></i></router-link>
+            <router-link :to="{ name: 'profile' }" class="btn btn-outline-dark me-2" type="button" v-if="isLoggedIn"><i class="bi bi-person-fill"></i></router-link>
+            <button class="btn btn-outline-dark me-2" type="button" @click="handleSignOut" v-if="isLoggedIn"><i class="bi bi-box-arrow-right"></i></button>
           </form>
         </form>
       </div>
