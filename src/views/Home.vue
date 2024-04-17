@@ -1,70 +1,76 @@
 <template>
-  <div id="carouselExampleDark" class="carousel carousel-dark slide bg-white" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-              aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
+  <div class="container">
+    <div id="cookingCarousel" class="mb-5">
+      <img src="..\assets\carousel\BanerImg.png" class="d-block w-100" alt="Welcome to our Kitchen">
     </div>
 
-    <div class="carousel-inner">
+    <div class="content-container" style="background-color: #FEEBD3;">
+      <div id="containerCarousel1" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="..\assets\carousel\mock.jpg" class="d-block w-100" alt="Image 1">
+          </div>
+          <div class="carousel-item">
+            <img src="..\assets\carousel\mbape.jpg" class="d-block w-100" alt="Image 2">
+          </div>
 
-      <div class="carousel-item active" data-bs-interval="2000">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-11 d-flex flex-column justify-content-center">
-              <img src="../assets/carousel/1-first-slide.png" class="d-block img-fluid" alt="App logo">
-            </div>
-          </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#containerCarousel1" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#containerCarousel1" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-md-11 d-flex flex-column justify-content-center">
-                <img src="../assets/carousel/2-share-recipes.png" class="d-block img-fluid" alt="Information about sharing recipes.">
-              </div>
-            </div>
-          </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-11 d-flex flex-column justify-content-center">
-              <img src="../assets/carousel/3-seek-ideas.png" class="d-block w-100" alt="Information about seeking new ideas.">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-11 d-flex flex-column justify-content-center">
-              <img src="../assets/carousel/4-organize-study.png" class="d-block w-100" alt="Information about organizing your study.">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-11 d-flex flex-column justify-content-center">
-              <img src="../assets/carousel/5-our-team.png" class="d-block w-100" alt="Our team">
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      <p>essa</p>
+    </div>
 
+    <div class="content-container" style="background-color: #E7F1F5;">
+      <div id="containerCarousel2" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="..\assets\carousel\klopsiki.jpg" class="d-block w-100" alt="Image 2">
+          </div>
+          <div class="carousel-item">
+            <img src="..\assets\carousel\mbape.jpg" class="d-block w-100" alt="Image 2">
+          </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#containerCarousel2" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#containerCarousel2" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <p>Rizz</p>
+    </div>
+
+    <div class="content-container" style="background-color: #FADBD8;">
+      <div id="containerCarousel3" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="..\assets\carousel\burger.jpg" class="d-block w-100" alt="Image 3">
+          </div>
+          <div class="carousel-item">
+            <img src="..\assets\carousel\mbape.jpg" class="d-block w-100" alt="Image 2">
+          </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#containerCarousel3" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#containerCarousel3" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <p>Sigma</p>
     </div>
   </div>
 </template>
@@ -72,9 +78,41 @@
 <script>
 export default {
   name: 'AppHomeView',
-
 }
 </script>
 
 <style>
+.container {
+  background-image: url("../assets/homeBackground/backgroundPale.jpg"); 
+  background-repeat: repeat; 
+  
+  /*opacity: 0.5; */
+
+  padding: 20px;
+}
+
+.content-container {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-container p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .content-container {
+    flex-basis: calc(33.33% - 20px);
+  }
+}
 </style>
