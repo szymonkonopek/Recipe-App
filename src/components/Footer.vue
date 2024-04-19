@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column">
     <footer class="text-center text-black mt-auto bg-primary">
-      <div class="container p-4 pb-0">
+      <div class="container p-4 pb-0 d-flex align-items-center justify-content-center">
         <section class="">
           <p
             class="d-flex justify-content-center align-items-center"

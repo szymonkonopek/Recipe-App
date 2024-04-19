@@ -5,7 +5,7 @@
       <img src="..\assets\carousel\BanerImg.png" class="d-block w-100" alt="Welcome to our Kitchen">
     </div>
 
-    <div class="content-container" style="background-color: #FEEBD3;">
+    <div class="bg-white rounded p-3 mb-3 shadow" style="background-color: #FEEBD3;">
       <div id="containerCarousel1" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -28,7 +28,7 @@
       <p>essa</p>
     </div>
 
-    <div class="content-container" style="background-color: #E7F1F5;">
+    <div class="bg-white rounded p-3 mb-3 shadow" style="background-color: #E7F1F5;">
       <div id="containerCarousel2" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -51,7 +51,7 @@
       <p>Rizz</p>
     </div>
 
-    <div class="content-container" style="background-color: #FADBD8;">
+    <div class="bg-white rounded p-3 mb-3 shadow" style="background-color: #FADBD8;">
       <div id="containerCarousel3" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -92,7 +92,7 @@ export default {
   /* padding: 20px; */
 }
 
-.content-container {
+/* .bg-white rounded p-3 mb-3 shadow {
   background-color: white;
   border-radius: 20px;
   padding: 20px;
@@ -100,7 +100,7 @@ export default {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.content-container p {
+.bg-white rounded p-3 mb-3 shadow p {
   text-align: center;
   margin-top: 15px;
 }
@@ -112,8 +112,8 @@ export default {
     justify-content: space-between;
   }
 
-  .content-container {
+  .bg-white rounded p-3 mb-3 shadow {
     flex-basis: calc(33.33% - 20px);
   }
-}
+} */
 </style>
