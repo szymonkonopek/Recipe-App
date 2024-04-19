@@ -1,7 +1,7 @@
 <!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
   <div style="min-height: 90vh" class="container">
-    <div class="text-center justify-content-center p-4">
+    <div class="text-center justify-content-center p-4 col">
       <h1 class="text-center fw-bold font">Welcome back!</h1>
     </div>
     <div class="container-fluid justify-content-center text-center pb-4">
