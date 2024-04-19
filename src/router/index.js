@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/Home';
 import Login from '@/views/Login';

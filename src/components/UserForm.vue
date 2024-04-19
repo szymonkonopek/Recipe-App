@@ -1,3 +1,5 @@
+<!-- eslint-disable max-len -->
+<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div v-if="successMessage" class="alert alert-success small-alert">{{ successMessage }}</div>
   <div v-if="errorMessage" class="alert alert-info small-alert">{{ errorMessage }}</div>

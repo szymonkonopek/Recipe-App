@@ -12,6 +12,7 @@
 </template>
 <script>
 import RecipePageView from '@/components/RecipePageView.vue';
+// eslint-disable-next-line import/no-cycle
 import { actionTypes } from '../store/modules/firebasedb';
 
 export default {

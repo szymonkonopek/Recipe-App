@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-shadow */
 import { titleParams } from '../../helpers/prompt.js';
 import gptApi from '../../api/gptApi.js';
 

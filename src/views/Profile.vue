@@ -14,7 +14,9 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/extensions
 import AppUserData from '@/components/UserData';
+// eslint-disable-next-line import/extensions
 import AppUserRecipes from '@/components/UserRecipes';
 
 export default {

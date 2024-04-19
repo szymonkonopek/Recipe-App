@@ -1,3 +1,5 @@
+<!-- eslint-disable vuejs-accessibility/alt-text -->
+<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div class="position-relative" style="height: 20rem; width: 20rem">
     <button
@@ -50,7 +52,7 @@ export default {
           images: this.images,
         })
         .then(async () => {
-          await new Promise((resolve) => setTimeout(resolve, 500));
+          await new Promise((resolve) => { setTimeout(resolve, 500); });
           this.$router.go();
         });
     },

@@ -1,3 +1,5 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/prefer-default-export */
 import { createApp } from 'vue';
 import { getFirestore } from 'firebase/firestore';
 import App from './App.vue';
@@ -8,6 +10,7 @@ import store from './store';
 import './assets/styles.scss';
 
 // Import the functions you need from the SDKs you need
+// eslint-disable-next-line import/order
 import { initializeApp } from 'firebase/app';
 
 import './registerServiceWorker';

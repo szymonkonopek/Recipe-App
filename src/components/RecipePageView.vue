@@ -1,3 +1,5 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
+<!-- eslint-disable vuejs-accessibility/alt-text -->
 <!-- eslint-disable max-len -->
 <template>
   <div class="d-flex flex-column">

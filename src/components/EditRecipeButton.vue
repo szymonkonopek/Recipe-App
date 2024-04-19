@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <!-- Button trigger modal -->
   <button
@@ -186,6 +187,7 @@
 
 <script>
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
+// eslint-disable-next-line import/extensions
 import { db } from '@/main.js';
 
 export default {
@@ -242,7 +244,7 @@ export default {
       };
       updateDoc(docRef, updatedData);
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => { setTimeout(resolve, 500); });
       this.$router.go();
     },
   },

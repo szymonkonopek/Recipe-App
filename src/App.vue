@@ -8,7 +8,7 @@
 
 <script>
 import AppTopBar from '@/components/TopBar.vue';
-import AppFooter from '@/components/Footer';
+import AppFooter from '@/components/Footer.vue';
 
 export default {
   name: 'App',
@@ -20,12 +20,12 @@ export default {
 </script>
 
 <style>
-  #app {
-    font-family: 'Helvetica', sans-serif;
-    background-color: WhiteSmoke;
-  }
-  .app-style {
-    background-image: url("./assets/homeBackground/backgroundPale.jpg");
+#app {
+  font-family: "Helvetica", sans-serif;
+  background-color: WhiteSmoke;
+}
+.app-style {
+  background-image: url("./assets/homeBackground/backgroundPale.jpg");
   background-repeat: repeat;
-  }
+}
 </style>

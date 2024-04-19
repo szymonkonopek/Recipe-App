@@ -1,3 +1,4 @@
+<!-- eslint-disable max-len -->
 <template>
   <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container-fluid">

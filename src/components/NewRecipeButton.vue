@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <!-- Button trigger modal -->
   <button
@@ -253,7 +254,7 @@ export default {
             color: this.recipeColor,
           })
           .then(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await new Promise((resolve) => { setTimeout(resolve, 500); });
             this.$router.go();
           });
       }

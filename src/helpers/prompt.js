@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const titleParams = {
   model: 'gpt-3.5-turbo',
   messages: [

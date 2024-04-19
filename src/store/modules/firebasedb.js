@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable prefer-promise-reject-errors */
 import { getAuth, onAuthStateChanged, updatePassword } from 'firebase/auth';
 import {
   collection,
@@ -22,6 +24,7 @@ import {
   deleteObject,
 } from 'firebase/storage';
 
+// eslint-disable-next-line import/no-cycle, import/extensions
 import { db } from '@/main.js';
 
 export const actionTypes = {
@@ -180,10 +183,10 @@ const actions = {
     return new Promise((resolve, reject) => {
       const docRef = doc(db, 'users', id);
       getDoc(docRef)
-        .then((doc) => {
-          if (doc.exists()) {
-            console.log('user data:', doc.data());
-            resolve(doc.data());
+        .then((docEl) => {
+          if (docEl.exists()) {
+            console.log('user data:', docEl.data());
+            resolve(docEl.data());
           } else {
             console.log('No such document');
           }
@@ -238,7 +241,6 @@ const actions = {
     return new Promise((resolve) => {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
-        console.log('adding doc');
         addDoc(collection(db, 'reviews'), {
           uid: user.uid,
           created: serverTimestamp(),
@@ -259,11 +261,11 @@ const actions = {
         orderBy('created', 'desc'),
       );
       getDocs(q).then((result) => {
-        const reviews = result.docs.map((doc) => {
-          doc.data();
+        const reviews = result.docs.map((docEl) => {
+          docEl.data();
           return {
-            id: doc.id,
-            data: doc.data(),
+            id: docEl.id,
+            data: docEl.data(),
           };
         });
 

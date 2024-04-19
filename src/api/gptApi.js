@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const client = axios.create({
   headers: {
+    // eslint-disable-next-line no-useless-concat
     Authorization: 'Bearer ' + `${process.env.VUE_APP_OPENAI_KEY}`,
   },
 });

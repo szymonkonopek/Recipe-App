@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
   <div class="container justify-content-center" v-if="userDetails">
     <div class="row justify-content-center">
@@ -43,6 +44,7 @@
 <script>
 import { mapActions } from 'vuex';
 import { actionTypes } from '@/store/modules/firebasedb';
+// eslint-disable-next-line import/extensions
 import AppUserForm from '@/components/UserForm';
 
 export default {

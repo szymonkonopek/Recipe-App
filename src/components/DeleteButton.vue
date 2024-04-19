@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/heading-has-content -->
 <template>
   <button type="button" class="btn btn-link" @click="deleteRecipe">
     <h4><i class="bi bi-x text-danger"></i></h4>
@@ -5,6 +6,7 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/extensions
 import { db } from '@/main.js';
 import { doc, deleteDoc } from 'firebase/firestore';
 

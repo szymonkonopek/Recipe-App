@@ -1,3 +1,4 @@
+<!-- eslint-disable max-len -->
 <template>
   <div class="container">
     <div id="cookingCarousel" class="mb-5">

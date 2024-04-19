@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
   <div style="min-height: 90vh" class="container">
     <div class="text-center justify-content-center p-4">
@@ -86,6 +87,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
+// eslint-disable-next-line import/no-cycle, import/extensions
 import { db } from '@/main.js';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 

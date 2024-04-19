@@ -4,7 +4,9 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/extensions
 import RecipesListProfileView from '@/components/RecipesListProfile';
+// eslint-disable-next-line import/extensions
 import NewRecipeButton from '@/components/NewRecipeButton';
 import { mapActions } from 'vuex';
 import { actionTypes } from '@/store/modules/firebasedb';
