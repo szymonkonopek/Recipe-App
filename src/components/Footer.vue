@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column">
-    <footer class="text-center text-black mt-auto bg-info">
+    <footer class="text-center text-black mt-auto bg-primary">
       <div class="container p-4 pb-0">
         <section class="">
           <p
@@ -23,7 +23,7 @@
         </section>
       </div>
       <div class="text-center p-3 bg-secondary">
-        © 2023 Copyright |
+        © 2024 Copyright |
         <a class="text-black" href="https://uek.krakow.pl/"
           >Cracow University Of Economy</a
         >

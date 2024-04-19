@@ -39,6 +39,7 @@ export const actionTypes = {
   deleteImage: '[firedb] Delete Image',
   addReview: '[firedb] Add Review',
   getReviewsByRecipeId: '[firedb] Get Reviews by Recipe ID',
+  checkifCanReview: '[firedb] Check if can review',
 };
 
 export const mutationType = {
@@ -199,28 +200,71 @@ const actions = {
   [actionTypes.uploadImage](context, { recipeId, image, images }) {
     console.log('recipeId', recipeId);
     console.log('image', image);
-    const date = Date.now();
-    return new Promise((resolve) => {
-      const storage = getStorage();
-      const storageRef = ref(storage, `images/${recipeId}/${image.name}-${date}`);
-      uploadBytes(storageRef, image).then((snapshot) => {
-        console.log('Uploaded a blob or file!', snapshot);
-        getDownloadURL(storageRef).then((url) => {
-          console.log('url', url);
-          const imageObject = {
-            name: `${image.name}-${date}`,
-            url,
-          };
-          const recipeRef = doc(db, 'recipes', recipeId);
-          updateDoc(recipeRef, {
-            images: [...images, imageObject],
-          }).then(() => {
-            resolve();
+
+    // Function to resize and compress image
+    const resizeAndCompressImage = (img, maxWidth, maxHeight, quality) => {
+      const canvas = document.createElement('canvas');
+      let { width } = img;
+      let { height } = img;
+
+      if (width > height) {
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+      } else if (height > maxHeight) {
+        width *= maxHeight / height;
+        height = maxHeight;
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+
+      return canvas.toDataURL('image/jpeg', quality);
+    };
+
+    // Create a new image element
+    const img = new Image();
+    img.src = URL.createObjectURL(image);
+
+    // Wait for the image to load
+    img.onload = function () {
+      // Resize and compress the image
+      // eslint-disable-next-line max-len
+      const resizedAndCompressedDataURL = resizeAndCompressImage(img, 800, 600, 0.7); // Adjust quality as needed
+
+      // Convert data URL back to a Blob
+      fetch(resizedAndCompressedDataURL)
+        .then((res) => res.blob())
+        .then((resizedAndCompressedBlob) => {
+          const date = Date.now();
+          return new Promise((resolve) => {
+            const storage = getStorage();
+            const storageRef = ref(storage, `images/${recipeId}/${image.name}-${date}`);
+            uploadBytes(storageRef, resizedAndCompressedBlob).then((snapshot) => {
+              console.log('Uploaded a blob or file!', snapshot);
+              getDownloadURL(storageRef).then((url) => {
+                console.log('url', url);
+                const imageObject = {
+                  name: `${image.name}-${date}`,
+                  url,
+                };
+                const recipeRef = doc(db, 'recipes', recipeId);
+                updateDoc(recipeRef, {
+                  images: [...images, imageObject],
+                }).then(() => {
+                  resolve();
+                });
+              });
+            });
           });
         });
-      });
-    });
+    };
   },
+
   [actionTypes.deleteImage](context, { recipeId, image, images }) {
     return new Promise((resolve) => {
       const storage = getStorage();
@@ -271,6 +315,29 @@ const actions = {
 
         console.log('error?');
         resolve(reviews);
+      });
+    });
+  },
+  [actionTypes.checkifCanReview](context, { recipeId }) {
+    return new Promise((resolve) => {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const q = query(
+            collection(db, 'reviews'),
+            where('recipeId', '==', recipeId),
+            where('uid', '==', user.uid),
+          );
+          getDocs(q).then((result) => {
+            if (result.docs.length > 0) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          });
+        } else {
+          resolve(false);
+        }
       });
     });
   },

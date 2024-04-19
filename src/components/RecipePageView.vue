@@ -2,7 +2,7 @@
 <!-- eslint-disable vuejs-accessibility/alt-text -->
 <!-- eslint-disable max-len -->
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column w-100">
     <div
       v-if="recipe"
       style="
@@ -12,6 +12,8 @@
         background-color: rgba(0, 0, 0, 0.5);
         background-blend-mode: multiply;
         margin-left: -12px;
+        background-size: cover;
+
       "
 
       :style="
@@ -50,11 +52,12 @@
       </button>
     </div>
 
-    <div class="container mb-5">
+    <div class="container mb-5 d-flex flex-column">
       <h1 class="fw-bold">Recipe:</h1>
-      <div style="white-space: pre-line" class="bg-light p-3 rounded shadow-lg">
+      <div style="white-space: pre-line; min-height: 25vh;" class="bg-light p-3 rounded shadow-lg">
         {{ content.replace(/(?<!\d)\./g, ".\n") }}
       </div>
+      <ReviewStars :recipe-id="recipeId"></ReviewStars>
       </div>
       <div style="width: calc(100% + 24px); margin-left:-12px">
       <div
@@ -84,23 +87,14 @@
           button
           class="btn btn-secondary mt-3 w-100"
           @click="uploadImage"
+          :disabled="!imageSet || imageUploading"
         >
+        <span v-if="imageUploading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
           Upload Image
         </button>
       </div>
-      <div class="input-group input-group-sm">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
-        </div>
-        <input
-          type="text"
-          class="form-control"
-          aria-label="Small"
-          aria-describedby="inputGroup-sizing-sm"
-          v-model="review"
-        />
-        <button class="btn btn-primary" @click="addReview">Add Review</button>
-      </div>
+
     </div>
   </div>
 </template>
@@ -108,11 +102,13 @@
 import { getAuth } from 'firebase/auth';
 import { actionTypes } from '../store/modules/firebasedb';
 import AppImage from './Image.vue';
+import ReviewStars from './ReviewStars.vue';
 
 export default {
   name: 'AppRecipePageView',
   components: {
     AppImage,
+    ReviewStars,
   },
   props: {
     recipe: {
@@ -133,6 +129,8 @@ export default {
       title: this.recipe.data.title,
       content: this.recipe.data.content,
       currentUserUid: '',
+      imageSet: false,
+      imageUploading: false,
     };
   },
   computed: {
@@ -159,32 +157,24 @@ export default {
       }
     },
     handleImageUpload(event) {
+      this.imageSet = true;
       [this.image] = event.target.files;
     },
 
     uploadImage() {
       console.log('Uploading image');
       console.log(this.recipe);
+      this.imageUploading = true;
       this.$store
         .dispatch(actionTypes.uploadImage, {
           recipeId: this.recipeId,
           image: this.image,
           images: this.recipe.images,
         })
-        .then(async () => {
-          await new Promise((resolve) => { setTimeout(resolve, 500); });
-          this.$router.go();
-        });
-    },
-    addReview() {
-      this.$store
-        .dispatch(actionTypes.addReview, {
-          recipeId: this.recipeId,
-          review: parseInt(this.review, 10),
-        })
         .then(() => {
-          this.review = '';
-          this.$router.go();
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
         });
     },
   },

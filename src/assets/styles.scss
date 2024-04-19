@@ -25,6 +25,7 @@ $form-check-input-checked-bg-color: $success !default;
 // Re-compile Bootstrap with the overridden variables
 @import '../../node_modules/bootstrap/scss/bootstrap';
 
+
 .wave {
   --size: 20px;
   --m: 0.5;
