@@ -82,13 +82,13 @@ export default {
 </script>
 
 <style>
-.container {
-  background-image: url("../assets/homeBackground/backgroundPale.jpg"); 
-  background-repeat: repeat; 
+  .container {
+  /* background-image: url("../assets/homeBackground/backgroundPale.jpg"); 
+  background-repeat: repeat;  */
   
   /*opacity: 0.5; */
 
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .content-container {
