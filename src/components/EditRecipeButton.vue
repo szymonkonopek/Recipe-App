@@ -212,7 +212,7 @@ export default {
       isHot: this.recipeData.tags.includes('Hot'),
       isSalty: this.recipeData.tags.includes('Salty'),
       isSeafood: this.recipeData.tags.includes('Seafood'),
-      recipeColor: this.recipeData.color
+      recipeColor: this.recipeData.color,
     };
   },
   methods: {

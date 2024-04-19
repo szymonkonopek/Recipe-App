@@ -10,35 +10,35 @@
 </template>
 
 <script>
-import { actionTypes } from '@/store/modules/firebasedb'
-import { mapState } from 'vuex'
-import Recipe from '@/components/Recipe.vue'
+import { actionTypes } from '@/store/modules/firebasedb';
+import { mapState } from 'vuex';
+import Recipe from '@/components/Recipe.vue';
 
 export default {
   name: 'AppRecipesView',
   props: {
     uid: {
       type: String,
-      required: false
+      required: false,
     },
 
     onlyMyRecipes: {
       type: Boolean,
-      required: false
-    }
+      required: false,
+    },
   },
   components: {
-    Recipe
+    Recipe,
   },
   computed: {
     ...mapState({
-      recipes: (state) => state.firebasedb.recipes
-    })
+      recipes: (state) => state.firebasedb.recipes,
+    }),
   },
-  mounted () {
+  mounted() {
     this.$store.dispatch(actionTypes.getRecipesByUserId, {
-      uid: this.uid
-    })
-  }
-}
+      uid: this.uid,
+    });
+  },
+};
 </script>

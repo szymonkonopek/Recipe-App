@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
+import { getFirestore } from 'firebase/firestore';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import { getFirestore } from 'firebase/firestore';
 
 // import "bootstrap";
 import './assets/styles.scss';

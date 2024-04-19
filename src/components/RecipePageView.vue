@@ -1,3 +1,4 @@
+<!-- eslint-disable max-len -->
 <template>
   <div class="d-flex flex-column">
     <div
@@ -10,6 +11,7 @@
         background-blend-mode: multiply;
         margin-left: -12px;
       "
+
       :style="
         recipe.images.length > 0
           ? { backgroundImage: 'url(' + recipe.images[0].url + ')' }
@@ -101,8 +103,8 @@
   </div>
 </template>
 <script>
-import { actionTypes } from '../store/modules/firebasedb';
 import { getAuth } from 'firebase/auth';
+import { actionTypes } from '../store/modules/firebasedb';
 import AppImage from './Image.vue';
 
 export default {
@@ -143,7 +145,7 @@ export default {
           await navigator.share({
             title: 'Recipe App',
             text: 'Check out this recipe!',
-            url: 'https://recipes-online.netlify.app/' + this.recipeId(),
+            url: `https://recipes-online.netlify.app/${this.recipeId()}`,
           });
           console.log('Shared successfully');
         } else {
@@ -155,8 +157,9 @@ export default {
       }
     },
     handleImageUpload(event) {
-      this.image = event.target.files[0];
+      [this.image] = event.target.files;
     },
+
     uploadImage() {
       console.log('Uploading image');
       console.log(this.recipe);
@@ -167,7 +170,7 @@ export default {
           images: this.recipe.images,
         })
         .then(async () => {
-          await new Promise((resolve) => setTimeout(resolve, 500));
+          await new Promise((resolve) => { setTimeout(resolve, 500); });
           this.$router.go();
         });
     },
@@ -175,7 +178,7 @@ export default {
       this.$store
         .dispatch(actionTypes.addReview, {
           recipeId: this.recipeId,
-          review: parseInt(this.review),
+          review: parseInt(this.review, 10),
         })
         .then(() => {
           this.review = '';

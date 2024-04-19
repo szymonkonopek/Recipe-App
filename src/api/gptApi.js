@@ -6,13 +6,9 @@ const client = axios.create({
   },
 });
 
-const enhanceContent = (params) => {
-  return client
-    .post('https://api.openai.com/v1/chat/completions', params)
-    .then((result) => {
-      return result.data;
-    });
-};
+const enhanceContent = (params) => client
+  .post('https://api.openai.com/v1/chat/completions', params)
+  .then((result) => result.data);
 
 export default {
   enhanceContent,

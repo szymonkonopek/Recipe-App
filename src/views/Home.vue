@@ -78,14 +78,14 @@
 <script>
 export default {
   name: 'AppHomeView',
-}
+};
 </script>
 
 <style>
   .container {
-  /* background-image: url("../assets/homeBackground/backgroundPale.jpg"); 
+  /* background-image: url("../assets/homeBackground/backgroundPale.jpg");
   background-repeat: repeat;  */
-  
+
   /*opacity: 0.5; */
 
   /* padding: 20px; */

@@ -70,7 +70,7 @@ const actions = {
         q = query(
           collection(db, 'recipes'),
           where('uid', '==', uid),
-          orderBy('created', 'desc')
+          orderBy('created', 'desc'),
         );
       }
 
@@ -199,14 +199,14 @@ const actions = {
     const date = Date.now();
     return new Promise((resolve) => {
       const storage = getStorage();
-      let storageRef = ref(storage, `images/${recipeId}/${image.name}-${date}`);
+      const storageRef = ref(storage, `images/${recipeId}/${image.name}-${date}`);
       uploadBytes(storageRef, image).then((snapshot) => {
         console.log('Uploaded a blob or file!', snapshot);
         getDownloadURL(storageRef).then((url) => {
           console.log('url', url);
           const imageObject = {
             name: `${image.name}-${date}`,
-            url: url,
+            url,
           };
           const recipeRef = doc(db, 'recipes', recipeId);
           updateDoc(recipeRef, {
@@ -221,7 +221,7 @@ const actions = {
   [actionTypes.deleteImage](context, { recipeId, image, images }) {
     return new Promise((resolve) => {
       const storage = getStorage();
-      let storageRef = ref(storage, `images/${recipeId}/${image.name}`);
+      const storageRef = ref(storage, `images/${recipeId}/${image.name}`);
       deleteObject(storageRef).then(() => {
         console.log('File deleted successfully');
         const recipeRef = doc(db, 'recipes', recipeId);
@@ -253,10 +253,10 @@ const actions = {
   },
   [actionTypes.getReviewsByRecipeId](context, { recipeId }) {
     return new Promise((resolve) => {
-      let q = query(
+      const q = query(
         collection(db, 'reviews'),
         where('recipeId', '==', recipeId),
-        orderBy('created', 'desc')
+        orderBy('created', 'desc'),
       );
       getDocs(q).then((result) => {
         const reviews = result.docs.map((doc) => {

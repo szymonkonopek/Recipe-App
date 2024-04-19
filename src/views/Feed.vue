@@ -11,6 +11,7 @@
 <script>
 import RecipesList from '@/components/RecipesList.vue';
 import NewRecipeButton from '@/components/NewRecipeButton.vue';
+
 export default {
   name: 'AppFeedView',
   components: { RecipesList, NewRecipeButton },

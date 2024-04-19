@@ -73,7 +73,7 @@
                 </button>
               </div>
             </div>
-            
+
               <textarea
                 ref="textarea2"
                 class="form-control"
@@ -221,9 +221,9 @@
 <script>
 import { actionTypes } from '@/store/modules/firebasedb';
 import { ref } from 'vue';
-import EnhanceTitleButton from './EnhanceTitleButton.vue';
 import { mapState } from 'vuex';
 import { mutationTypes } from '@/store/modules/chatgpt';
+import EnhanceTitleButton from './EnhanceTitleButton.vue';
 
 export default {
   name: 'NewRecipeButton',
@@ -239,7 +239,7 @@ export default {
       recipeContent: '',
       checkedTags: ref([]),
       recipeColor: 'text-bg-white',
-      isLoading: false
+      isLoading: false,
     };
   },
   methods: {

@@ -9,7 +9,7 @@
           </form>
         </form>
       </div>
-      
+
       <div class="">
         <form class="d-flex">
           <form class="container-fluid justify-content-start">
@@ -26,34 +26,34 @@
 </template>
 
 <script>
-import { getAuth } from 'firebase/auth'
+import { getAuth } from 'firebase/auth';
 
 export default {
   name: 'AppTopBar',
-  data () {
+  data() {
     return {
       isLoggedIn: '',
-      auth: ''
-    }
+      auth: '',
+    };
   },
-  mounted () {
-    this.auth = getAuth
+  mounted() {
+    this.auth = getAuth;
     this.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.isLoggedIn = true
+        this.isLoggedIn = true;
       } else {
-        this.isLoggedIn = false
+        this.isLoggedIn = false;
       }
-    })
+    });
   },
   methods: {
-    handleSignOut () {
+    handleSignOut() {
       this.auth()
         .signOut(this.auth)
         .then(() => {
-          this.$router.push({ name: 'home' })
-        })
-    }
-  }
-}
+          this.$router.push({ name: 'home' });
+        });
+    },
+  },
+};
 </script>

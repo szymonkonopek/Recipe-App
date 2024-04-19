@@ -7,15 +7,16 @@
 </template>
 
 <script>
-import AppTopBar from '@/components/TopBar.vue'
-import AppFooter from '@/components/Footer'
+import AppTopBar from '@/components/TopBar.vue';
+import AppFooter from '@/components/Footer';
+
 export default {
   name: 'App',
   components: {
     AppTopBar,
-    AppFooter
-  }
-}
+    AppFooter,
+  },
+};
 </script>
 
 <style>
@@ -24,7 +25,7 @@ export default {
     background-color: WhiteSmoke;
   }
   .app-style {
-    background-image: url("./assets/homeBackground/backgroundPale.jpg"); 
-  background-repeat: repeat; 
+    background-image: url("./assets/homeBackground/backgroundPale.jpg");
+  background-repeat: repeat;
   }
 </style>

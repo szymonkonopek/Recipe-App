@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { actionTypes } from '@/store/modules/firebasedb'
+import { mapActions } from 'vuex';
+import { actionTypes } from '@/store/modules/firebasedb';
 
 export default {
   name: 'AppUserForm',
@@ -41,48 +41,48 @@ export default {
   props: {
     userId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       userDetails: null,
       editingMode: false,
       newPassword: '',
       repeatPassword: '',
       successMessage: '',
-      errorMessage: ''
-    }
+      errorMessage: '',
+    };
   },
   methods: {
     ...mapActions({
       getUserDetails: actionTypes.getUserDetails,
-      updatePassword: actionTypes.updatePassword
+      updatePassword: actionTypes.updatePassword,
     }),
-    fetchUserDetails () {
-      this.getUserDetails().then(userDetails => {
-        this.userDetails = userDetails
-      }).catch(error => {
-        console.error(error)
-      })
-    },
-    setEditingMode () {
-      this.editingMode = !this.editingMode
-    },
-    changePassword () {
-      this.updatePassword({ newPassword: this.newPassword }).then(() => {
-        this.successMessage = 'Password change successfully!'
+    fetchUserDetails() {
+      this.getUserDetails().then((userDetails) => {
+        this.userDetails = userDetails;
       }).catch((error) => {
-        this.errorMessage = 'An error occurred while changing the password - Sign Out and Sign In and try again.'
-        console.log(error)
-      })
-      this.setEditingMode()
-    }
+        console.error(error);
+      });
+    },
+    setEditingMode() {
+      this.editingMode = !this.editingMode;
+    },
+    changePassword() {
+      this.updatePassword({ newPassword: this.newPassword }).then(() => {
+        this.successMessage = 'Password change successfully!';
+      }).catch((error) => {
+        this.errorMessage = 'An error occurred while changing the password - Sign Out and Sign In and try again.';
+        console.log(error);
+      });
+      this.setEditingMode();
+    },
   },
-  created () {
-    this.fetchUserDetails()
-  }
-}
+  created() {
+    this.fetchUserDetails();
+  },
+};
 </script>
 
 <style>

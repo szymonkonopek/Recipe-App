@@ -4,36 +4,36 @@
 </template>
 
 <script>
-import RecipesListProfileView from '@/components/RecipesListProfile'
-import NewRecipeButton from '@/components/NewRecipeButton'
-import { mapActions } from 'vuex'
-import { actionTypes } from '@/store/modules/firebasedb'
+import RecipesListProfileView from '@/components/RecipesListProfile';
+import NewRecipeButton from '@/components/NewRecipeButton';
+import { mapActions } from 'vuex';
+import { actionTypes } from '@/store/modules/firebasedb';
 
 export default {
   name: 'AppUserRecipes',
   components: { RecipesListProfileView, NewRecipeButton },
-  data () {
+  data() {
     return {
-      userDetails: null
-    }
+      userDetails: null,
+    };
   },
   methods: {
     ...mapActions({
-      getUserDetails: actionTypes.getUserDetails
+      getUserDetails: actionTypes.getUserDetails,
     }),
-    fetchUserDetails () {
-      this.getUserDetails().then(userDetails => {
-        this.userDetails = userDetails
-      }).catch(error => {
-        console.error(error)
-      })
-    }
+    fetchUserDetails() {
+      this.getUserDetails().then((userDetails) => {
+        this.userDetails = userDetails;
+      }).catch((error) => {
+        console.error(error);
+      });
+    },
   },
-  mounted () {
-    this.fetchUserDetails()
+  mounted() {
+    this.fetchUserDetails();
   },
-  created () {
-    this.fetchUserDetails()
-  }
-}
+  created() {
+    this.fetchUserDetails();
+  },
+};
 </script>

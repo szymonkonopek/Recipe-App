@@ -18,6 +18,7 @@
 
 <script>
 import { actionTypes } from '../store/modules/firebasedb';
+
 export default {
   name: 'AppImage',
   props: {

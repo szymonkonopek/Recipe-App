@@ -11,6 +11,7 @@
 <script>
 import { mapState } from 'vuex';
 import { actionTypes } from '../store/modules/chatgpt';
+
 export default {
   name: 'EnhanceTitleButton',
   props: {

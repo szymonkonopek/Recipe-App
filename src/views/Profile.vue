@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import AppUserData from '@/components/UserData'
-import AppUserRecipes from '@/components/UserRecipes'
+import AppUserData from '@/components/UserData';
+import AppUserRecipes from '@/components/UserRecipes';
 
 export default {
   name: 'AppProfileView',
-  components: { AppUserRecipes, AppUserData }
-}
+  components: { AppUserRecipes, AppUserData },
+};
 </script>

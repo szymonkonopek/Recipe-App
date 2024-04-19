@@ -5,25 +5,26 @@
 </template>
 
 <script>
-import { db } from '@/main.js'
-import { doc, deleteDoc } from 'firebase/firestore'
+import { db } from '@/main.js';
+import { doc, deleteDoc } from 'firebase/firestore';
+
 export default {
   name: 'DeleteButton',
   props: {
     recipeId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    deleteRecipe () {
+    deleteRecipe() {
       return new Promise((resolve) => {
         deleteDoc(doc(db, 'recipes', this.recipeId)).then(() => {
-          this.$router.go()
-          resolve()
-        })
-      })
-    }
-  }
-}
+          this.$router.go();
+          resolve();
+        });
+      });
+    },
+  },
+};
 </script>
