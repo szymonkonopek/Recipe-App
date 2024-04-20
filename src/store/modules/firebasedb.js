@@ -170,6 +170,7 @@ const actions = {
               data: doc.data().data,
               uid: doc.data().uid,
               images: doc.data().images,
+              created: doc.data().created
             });
           } else {
             reject('No such document');
