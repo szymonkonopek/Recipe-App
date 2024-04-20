@@ -2,7 +2,7 @@
 <template>
   <!-- Button trigger modal -->
   <button
-    class="btn btn-link text-info"
+    class="btn btn-link text-black"
     data-bs-toggle="modal"
     :data-bs-target="'#id_edit' + recipeId"
   >

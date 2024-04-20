@@ -7,11 +7,11 @@
       'shadow': true,
       [recipeColor]: true,
     }"
-    style="min-height: 10rem"
+    style="min-height: 12rem"
   >
     <div class="card-body position-relative">
       <div
-        class="modal fade"
+        class="modal fade pt-1"
         :id="'id' + recipeId"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
@@ -35,17 +35,19 @@
           :recipeId="recipeId"
         ></EditRecipeButton>
       </div>
-      <p class="card-text">{{ recipe.data.data.content }}</p>
+      <p class="card-text"><small class="text-body-secondary">Last update on: {{ recipeCreated }}</small></p> 
+      <div class="d-flex flex-row flex-wrap mb-2">
+        <small
+          v-for="(tag, index) in recipe.data.data.tags"
+          :key="index"
+          class="p-1 fw-bold text-white me-2 badge bg-success border"
+        >
+          {{ tag }}
+        </small>
+      </div>
+       
     </div>
-    <div class="d-flex flex-row flex-wrap p-2">
-      <small
-        v-for="(tag, index) in recipe.data.data.tags"
-        :key="index"
-        class="p-1 fw-bold text-white me-2 mt-2 badge bg-success border"
-      >
-        {{ tag }}
-      </small>
-    </div>
+    
     <div class="position-absolute end-0">
       <DeleteButton v-if="isRecipeOwner" :recipeId="recipeId"></DeleteButton>
     </div>
@@ -74,6 +76,7 @@ export default {
       recipeId: this.recipe.id,
       recipeColor: this.recipe.data.data.color,
       username: '',
+      recipeCreated: ''
     };
   },
   components: { DeleteButton, EditRecipeButton, RecipeModal },
@@ -90,6 +93,10 @@ export default {
       .then((user) => {
         this.username = user.username;
       });
+
+    const timestamp = this.recipe.data.created;
+    const date = timestamp.toDate();
+    this.recipeCreated = date.toLocaleString();
   },
 
   computed: {

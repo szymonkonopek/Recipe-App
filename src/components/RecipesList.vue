@@ -1,12 +1,13 @@
 <template>
-  <div
-    v-for="recipe in recipes"
-    :key="recipe.id"
-    class=""
-    style="width: 100%; max-width: 50rem"
-  >
-    <Recipe :recipe="recipe"></Recipe>
-  </div>
+  <div class="row">
+    <div
+      v-for="recipe in recipes"
+      :key="recipe.id"
+      class="col-md-4"
+    >
+      <Recipe :recipe="recipe"></Recipe>
+    </div>
+</div>
 </template>
 
 <script>
