@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
-  <div class="container justify-content-center" v-if="userDetails">
+  <div class="container justify-content-center bg-white shadow border rounded-2 p-3" v-if="userDetails">
     <div class="row justify-content-center">
       <div class="col-md-4 text-center">
         <img
@@ -38,6 +38,7 @@
       </div>
     </div>
   </div>
+  <div class="m-3"></div>
   <app-user-form></app-user-form>
 </template>
 

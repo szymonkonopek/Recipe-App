@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-5 mt-4">
-        <div class="badge bg-success text-wrap fs-5 mb-4">Your Profile</div>
+        <div class="badge bg-success text-wrap fs-5 mb-4 shadow border border-3 border-white">Your Profile</div>
         <app-user-data></app-user-data>
       </div>
       <div class="col-lg-7 mt-4">
-        <div class="badge bg-success text-wrap fs-5 mb-4">Your recipes</div>
+        <div class="badge bg-success text-wrap fs-5 mb-4 shadow border border-3 border-white">Your recipes</div>
         <app-user-recipes></app-user-recipes>
       </div>
     </div>

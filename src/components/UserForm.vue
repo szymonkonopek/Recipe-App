@@ -3,7 +3,8 @@
 <template>
   <div v-if="successMessage" class="alert alert-success small-alert">{{ successMessage }}</div>
   <div v-if="errorMessage" class="alert alert-info small-alert">{{ errorMessage }}</div>
-  <form class="was-validated" v-if="userDetails" @submit.prevent="changePassword">
+  <form class="was-validated container bg-white shadow border rounded-2 p-3" v-if="userDetails" @submit.prevent="changePassword">
+    <h5>Update your credentials</h5>
     <fieldset :disabled="!editingMode">
       <div class="mb-3">
         <fieldset :disabled="editingMode">
@@ -27,9 +28,9 @@
         </div>
       </div>
     </fieldset>
-    <button type="button" class="btn btn-primary mb-5 mt-4" @click="setEditingMode" v-if="!editingMode">Edit</button>
-    <button type="submit" class="btn btn-secondary mb-5 mt-4" :disabled="!newPassword || newPassword.length < 6" @click="changePassword" v-if="editingMode">Submit</button>
-    <button type="button" class="btn btn-info mb-5 mx-2 mt-4" @click="setEditingMode" v-if="editingMode">Cancel</button>
+    <button type="button" class="btn btn-primary mb-4 mt-4" @click="setEditingMode" v-if="!editingMode">Edit</button>
+    <button type="submit" class="btn btn-secondary mb-4 mt-4" :disabled="!newPassword || newPassword.length < 6" @click="changePassword" v-if="editingMode">Submit</button>
+    <button type="button" class="btn btn-info mb-4 mx-2 mt-4" @click="setEditingMode" v-if="editingMode">Cancel</button>
   </form>
 </template>
 
