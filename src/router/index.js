@@ -68,7 +68,7 @@ router.beforeEach(async (to, from, next) => {
     if (await getCurrentUser()) {
       next();
     } else {
-      alert('you dont have access');
+      alert("You don't have an access. Please log in to see the Recipe App");
       next('/');
     }
   } else {
