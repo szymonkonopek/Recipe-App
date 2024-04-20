@@ -22,14 +22,14 @@
       <div v-else>
         <label for="inputPassword5" class="form-label">Password</label>
         <input type="password" id="inputPassword5" required v-model="newPassword" class="form-control" aria-describedby="passwordHelpBlock"
-               placeholder="•••••••••••" minlength="6">
+               placeholder="•••••••••••" minlength="8">
         <div class="invalid-feedback">
-          Please enter 6 characters password.
+          Please enter 8 characters password.
         </div>
       </div>
     </fieldset>
     <button type="button" class="btn btn-primary mb-4 mt-4" @click="setEditingMode" v-if="!editingMode">Edit</button>
-    <button type="submit" class="btn btn-secondary mb-4 mt-4" :disabled="!newPassword || newPassword.length < 6" @click="changePassword" v-if="editingMode">Submit</button>
+    <button type="submit" class="btn btn-secondary mb-4 mt-4" :disabled="!newPassword || newPassword.length < 8" @click="changePassword" v-if="editingMode">Submit</button>
     <button type="button" class="btn btn-info mb-4 mx-2 mt-4" @click="setEditingMode" v-if="editingMode">Cancel</button>
   </form>
 </template>

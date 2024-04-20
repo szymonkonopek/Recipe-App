@@ -18,7 +18,7 @@
             <router-link :to="{ name: 'login' }" class="btn btn-outline-dark me-2" type="button" v-if="!isLoggedIn"><i class="bi bi-box-arrow-in-left"></i></router-link>
             <router-link :to="{ name: 'register' }" class="btn btn-outline-dark me-2" v-if="!isLoggedIn"><i class="bi bi-person-plus-fill"></i></router-link>
             <router-link :to="{ name: 'profile' }" class="btn btn-outline-dark me-2" type="button" v-if="isLoggedIn"><i class="bi bi-person-fill"></i></router-link>
-            <button class="btn btn-outline-dark me-2" type="button" @click="handleSignOut" v-if="isLoggedIn"><i class="bi bi-box-arrow-right"></i></button>
+            <button class="btn btn-outline-dark" type="button" @click="handleSignOut" v-if="isLoggedIn"><i class="bi bi-box-arrow-right"></i></button>
           </form>
         </form>
       </div>
