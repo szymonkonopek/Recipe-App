@@ -46,25 +46,5 @@ export default {
       recipeColor: this.recipeData.color,
     };
   },
-
-  methods: {
-    async share() {
-      try {
-        if (navigator.share) {
-          await navigator.share({
-            title: 'Example Title',
-            text: 'Check out this example!',
-            url: `https://recipes-online.netlify.app/feed/${this.recipeId}`,
-          });
-          console.log('Shared successfully');
-        } else {
-          console.log('Web Share API not supported');
-          // Fallback to other sharing methods
-        }
-      } catch (error) {
-        console.error('Error sharing:', error);
-      }
-    },
-  },
 };
 </script>

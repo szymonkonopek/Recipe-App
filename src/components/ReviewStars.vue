@@ -38,6 +38,9 @@ export default {
         .dispatch(actionTypes.addReview, {
           recipeId: this.recipeId,
           review: this.rating,
+        }).then(() => {
+          this.canReview = false;
+          this.$router.go();
         });
     },
   },

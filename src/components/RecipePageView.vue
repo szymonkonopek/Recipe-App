@@ -139,21 +139,16 @@ export default {
     },
   },
   methods: {
-    async share() {
+    share() {
       try {
-        if (navigator.share) {
-          await navigator.share({
-            title: 'Recipe App',
-            text: 'Check out this recipe!',
-            url: `https://recipes-online.netlify.app/${this.recipeId()}`,
-          });
-          console.log('Shared successfully');
-        } else {
-          console.log('Web Share API not supported');
-          // Fallback to other sharing methods
-        }
+        navigator.share({
+          title: 'Recipe App',
+          text: 'Check out this recipe!',
+          url: 'https://recipes-online.netlify.app',
+        });
+        console.log('Shared successfully');
       } catch (error) {
-        console.error('Error sharing:', error);
+        console.log('Error sharing:', error);
       }
     },
     handleImageUpload(event) {
