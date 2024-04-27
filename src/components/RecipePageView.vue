@@ -44,12 +44,21 @@
         />
         <div class="text-white fw-bold w-75">{{ user }}</div>
       </div>
-      <button
-        class="btn ml-2 position-absolute bottom-0 end-0 bg-primary mb-4 me-4"
-        @click="share"
-      >
-        <i class="bi bi-share-fill"></i>
-      </button>
+        <div class="position-absolute bottom-0 end-0 d-flex justify-content-center align-items-center">
+        <button
+          class="btn ml-2 bg-primary mb-4 me-4 "
+          @click="share"
+        >
+          <i class="bi bi-share-fill"></i>
+        </button>
+          <div class="bg-primary mb-4 me-4 rounded ">
+            <EditRecipeButton
+            v-if="isRecipeOwner"
+            :recipe-data="recipe.data"
+            :recipe-id="recipe.id"
+            />
+        </div>
+      </div>
     </div>
 
     <div class="container mb-5 d-flex flex-column">
@@ -103,12 +112,14 @@ import { getAuth } from 'firebase/auth';
 import { actionTypes } from '../store/modules/firebasedb';
 import AppImage from './Image.vue';
 import ReviewStars from './ReviewStars.vue';
+import EditRecipeButton from './EditRecipeButton.vue';
 
 export default {
   name: 'AppRecipePageView',
   components: {
     AppImage,
     ReviewStars,
+    EditRecipeButton,
   },
   props: {
     recipe: {
@@ -136,6 +147,9 @@ export default {
   computed: {
     recipeId() {
       return this.recipe.id;
+    },
+    isRecipeOwner() {
+      return this.recipe.uid === this.currentUserUid;
     },
   },
   methods: {
