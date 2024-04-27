@@ -6,7 +6,7 @@
       <div class="">
         <form class="d-flex">
           <form class="container-fluid justify-content-start">
-            <router-link :to="{ name: 'home' }" class="navbar-brand fw-bold" aria-current="page">Recipe App</router-link>
+            <router-link :to="{ name: 'home' }" class="navbar-brand fw-light" aria-current="page">Recipe App</router-link>
           </form>
         </form>
       </div>
@@ -19,7 +19,7 @@
             <router-link :to="{ name: 'register' }" class="btn btn-outline-dark me-2" v-if="!isLoggedIn"><i class="bi bi-person-plus-fill"></i></router-link>
             <router-link :to="{ name: 'profile' }" class="btn btn-outline-dark me-2" type="button" v-if="isLoggedIn"><i class="bi bi-person-fill"></i></router-link>
             <button class="btn btn-outline-dark" type="button" @click="handleSignOut" v-if="isLoggedIn"><i class="bi bi-box-arrow-right"></i></button>
-            
+
           </form>
         </form>
       </div>
