@@ -6,7 +6,7 @@
       <div class="">
         <form class="d-flex">
           <form class="container-fluid justify-content-start">
-            <router-link :to="{ name: 'home' }" class="navbar-brand fw-light" aria-current="page">Recipe App</router-link>
+            <router-link :to="isLoggedIn ? { name: 'feed' } : { name: 'home'}" class="navbar-brand fw-light" aria-current="page">Recipe App</router-link>
           </form>
         </form>
       </div>

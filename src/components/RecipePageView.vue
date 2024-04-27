@@ -26,12 +26,21 @@
                 ')',
             }
       "
-      class="object-fit-cover position-relative mb-4 shadow-lg border-bottom border-5 border-primary"
+      class="object-fit-cover position-relative shadow-lg border-bottom border-5 border-primary mb-3"
     >
       <div class="position-absolute top-0 start-0 pt-4 ps-4">
         <h1 class="text-white fw-bold w-75">{{ title }}</h1>
         <div v-if="averageRating !== ''" class="text-white">
           {{ averageRating }} <i class="bi bi-star-fill"></i>
+        </div>
+        <div class="d-flex flex-row flex-wrap mb-2 mt-3 rounded w-75"  v-if="recipe.data.tags.length > 0">
+          <small
+            v-for="(tag, index) in recipe.data.tags"
+            :key="index"
+            class="p-1 my-2 fw-bold text-white me-2 badge bg-success border"
+          >
+            {{ tag }}
+          </small>
         </div>
       </div>
       <div
