@@ -35,3 +35,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### UML ###
 ![alt text](RecipeAppUml.jpg)
+
+### Marvel ###
+https://marvelapp.com/prototype/6h85f75
