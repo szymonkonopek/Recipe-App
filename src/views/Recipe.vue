@@ -33,6 +33,9 @@ export default {
         id: this.recipeId,
       })
       .then((recipe) => {
+        if (recipe === null) {
+          this.$router.push({ name: 'notfound' });
+        }
         this.recipe = recipe;
         this.title = recipe.data.title;
         this.$store

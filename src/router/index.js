@@ -6,6 +6,7 @@ import Register from '@/views/Register';
 import Feed from '@/views/Feed';
 import Profile from '@/views/Profile';
 import Recipe from '@/views/Recipe';
+import NotFound from '@/views/NotFound';
 import { getAuth } from 'firebase/auth';
 
 const routes = [
@@ -48,6 +49,16 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/notfound',
+    name: 'notfound',
+    component: NotFound,
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: { name: 'notfound' },
+  },
+
 ];
 
 export const getCurrentUser = () => new Promise((resolve, reject) => {
