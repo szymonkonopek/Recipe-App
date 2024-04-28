@@ -1,7 +1,10 @@
 <template>
   <div class="bg-light app-style">
+    <!-- Top bar (COMPONENT) -->
     <app-top-bar></app-top-bar>
     <router-view style="min-height: 100vh"></router-view>
+
+    <!-- Footer bar (COMPONENT) -->
     <app-footer></app-footer>
   </div>
 </template>

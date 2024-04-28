@@ -10,7 +10,13 @@
     </div>
 </template>
 <script>
+
+/**
+    *Page for displaying not found recource
+*/
+
 export default {
   name: 'NotFound',
 };
 </script>
+

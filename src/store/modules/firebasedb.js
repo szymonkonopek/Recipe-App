@@ -66,6 +66,16 @@ const mutations = {
 };
 
 const actions = {
+
+  /** getRecipesByUserId():
+ * Action to fetch recipes by user ID from Firestore.
+ * Retrieves recipes ordered by creation date, optionally filtered by user ID.
+ * Commits a mutation to indicate the start of adding recipes.
+ * Fetches recipes from Firestore based on the provided user ID.
+ * Commits a mutation to set fetched recipes in the state.
+ * Resolves the Promise once recipes are fetched and mutations are committed.
+ */
+
   [actionTypes.getRecipesByUserId](context, { uid }) {
     return new Promise((resolve) => {
       context.commit(mutationType.addRecipeStart);
@@ -93,6 +103,15 @@ const actions = {
       });
     });
   },
+
+  /** addRecipe:
+ * Action to add a new recipe to Firestore.
+ * Listens for authentication state changes to get the current user.
+ * Adds the recipe document to the 'recipes' collection with user ID and timestamp.
+ * Commits a mutation to indicate the successful addition of a recipe.
+ * Resolves the Promise once the recipe is successfully added.
+ */
+
   [actionTypes.addRecipe](context, data) {
     return new Promise((resolve) => {
       const auth = getAuth();
@@ -109,6 +128,12 @@ const actions = {
     });
   },
 
+/** createUserWithUsername
+ * Action to create a new user with a username in Firestore.
+ * Adds a new user document to the 'users' collection with the provided username and ID.
+ * Resolves the Promise once the user is successfully created.
+ */
+
   [actionTypes.createUserWithUsername](context, { id, username }) {
     return new Promise(() => {
       addDoc(collection(db, 'users'), {
@@ -118,6 +143,13 @@ const actions = {
       });
     });
   },
+/** updatePassword
+ * Action to update the password of the currently authenticated user.
+ * Retrieves the current user's authentication instance.
+ * If the user is authenticated, updates the password using the provided new password.
+ * Resolves with a success message if the password is updated successfully.
+ * Rejects with an error if there is no authenticated user.
+ */
 
   [actionTypes.updatePassword](context, { newPassword }) {
     return new Promise((resolve, reject) => {
@@ -137,6 +169,14 @@ const actions = {
       }
     });
   },
+
+/** getUserDetails
+ * Action to get details of the currently authenticated user.
+ * Retrieves the current user's authentication instance.
+ * If the user is authenticated, constructs and resolves with an object containing user details,
+ * such as UID, email, authentication providers, creation time, and last sign-in time.
+ * Rejects with an error if there is no authenticated user.
+ */
 
   [actionTypes.getUserDetails]() {
     return new Promise((resolve, reject) => {
@@ -158,6 +198,16 @@ const actions = {
       }
     });
   },
+
+/** getRecipeById
+ * Action to fetch a recipe by its ID from Firestore.
+ * Constructs a document reference for the recipe using the provided ID.
+ * Fetches the document data from Firestore.
+ * If the document exists, resolves with an object containing the recipe details.
+ * If the document doesn't exist, resolves with null.
+ * Rejects with an error if there is any issue with fetching the document.
+ */
+
   [actionTypes.getRecipeById](context, { id }) {
     return new Promise((resolve, reject) => {
       const docRef = doc(db, 'recipes', id);
@@ -182,6 +232,16 @@ const actions = {
         });
     });
   },
+
+/** getUserById
+ * Action to fetch a user by their ID from Firestore.
+ * Constructs a document reference for the user using the provided ID.
+ * Fetches the document data from Firestore.
+ * If the document exists, resolves with an object containing the user details.
+ * If the document doesn't exist, logs a message and resolves with null.
+ * Rejects with an error if there is any issue with fetching the document.
+ */
+
   [actionTypes.getUserById](context, { id }) {
     return new Promise((resolve, reject) => {
       const docRef = doc(db, 'users', id);
@@ -199,6 +259,15 @@ const actions = {
         });
     });
   },
+
+/** uploadImage
+ * Action to upload and add an image to a recipe in Firestore storage.
+ * Resizes and compresses the image before uploading.
+ * Converts the image to a data URL and then to a Blob.
+ * Uploads the Blob to Firestore storage and retrieves the download URL.
+ * Adds the image details (name and URL) to the recipe document in Firestore.
+ */
+
   [actionTypes.uploadImage](context, { recipeId, image, images }) {
     console.log('recipeId', recipeId);
     console.log('image', image);
@@ -267,6 +336,13 @@ const actions = {
     };
   },
 
+  /** deleteImage
+ * Action to delete an image associated with a recipe from Firestore storage and remove its reference from the recipe document.
+ * Constructs a reference to the image in Firestore storage.
+ * Deletes the image object from Firestore storage.
+ * Updates the recipe document in Firestore to remove the deleted image from the list of images.
+ */
+
   [actionTypes.deleteImage](context, { recipeId, image, images }) {
     return new Promise((resolve) => {
       const storage = getStorage();
@@ -283,6 +359,15 @@ const actions = {
       });
     });
   },
+
+/** addReview
+ * Action to add a review for a recipe to Firestore.
+ * Listens for authentication state changes to get the current user.
+ * Adds a new review document to the 'reviews' collection with user ID, creation timestamp, recipe ID, and review content.
+ * Commits a mutation to indicate the successful addition of a review.
+ * Resolves the Promise once the review is successfully added.
+ */
+
   [actionTypes.addReview](context, { recipeId, review }) {
     return new Promise((resolve) => {
       const auth = getAuth();
@@ -299,6 +384,14 @@ const actions = {
       });
     });
   },
+/** getReviewsByRecipeId
+ * Action to fetch reviews for a recipe by its ID from Firestore.
+ * Constructs a query to filter reviews by the provided recipe ID and order them by creation timestamp.
+ * Fetches the reviews documents from Firestore based on the constructed query.
+ * Maps the fetched documents to an array of review objects containing their IDs and data.
+ * Resolves the Promise with the array of reviews.
+ */
+
   [actionTypes.getReviewsByRecipeId](context, { recipeId }) {
     return new Promise((resolve) => {
       const q = query(
@@ -320,6 +413,14 @@ const actions = {
       });
     });
   },
+
+  /** checkifCanReview
+ * Action to check if the current user can review a recipe by its ID.
+ * Listens for authentication state changes to get the current user.
+ * Constructs a query to check if the user has already reviewed the recipe.
+ * Resolves with true if the user can review the recipe (has not reviewed it yet), otherwise resolves with false.
+ */
+
   [actionTypes.checkifCanReview](context, { recipeId }) {
     return new Promise((resolve) => {
       const auth = getAuth();

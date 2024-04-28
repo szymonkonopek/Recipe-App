@@ -14,6 +14,8 @@
               </div>
               <div class="col-lg-6">
                 <h2>Sign in to Recipe App</h2>
+
+                <!-- If the error with authentication occurs, then it displays appropriate information. (FUNCTION)-->
                 <div v-if="error" class="alert alert-danger small-alert">
                   {{ errorToString(error) }}
                 </div>
@@ -45,6 +47,7 @@
                     />
                   </div>
                   <div>
+                    <!-- Button responsible for signing in with email. (FUNCTION)-->
                     <button
                       class="btn btn-primary btn-lg text-black my-2 rounded-pill"
                       @click="login"
@@ -58,6 +61,8 @@
                     or
                   </div>
                   <div>
+
+                    <!-- Button responsible for signing in with google. (FUNCTION)-->
                     <button
                       class="btn btn-lg btn-outline-primary my-2 rounded-pill"
                       @click="signInWithGoogle"
@@ -94,6 +99,19 @@ import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 export default {
   name: 'AppLoginView',
   methods: {
+
+    /** login():
+ * Performs user login using email and password authentication.
+ * Utilizes Firebase's signInWithEmailAndPassword method for authentication.
+ * Upon successful login:
+ *   - Logs user information.
+ *   - Saves user data to Firestore database.
+ *   - Redirects the user to the feed page.
+ * Handles login errors by setting the 'error' property and logging the error code.
+ * If the browser supports vibration, triggers a short vibration upon error.
+ */
+
+
     login() {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
@@ -117,6 +135,19 @@ export default {
         });
     },
 
+/**  signInWithGoogle():
+ * Initiates Google sign-in authentication flow.
+ * Uses Firebase's GoogleAuthProvider to create a sign-in provider.
+ * Displays a pop-up for Google sign-in authentication.
+ * Upon successful authentication:
+ *   - Logs the user information.
+ *   - Saves user data to Firestore database.
+ *   - Redirects the user to the feed page.
+ * Handles errors by displaying the error code in an alert.
+ * If the browser supports vibration, triggers a short vibration upon error.
+ */
+
+
     signInWithGoogle() {
       const provider = new GoogleAuthProvider();
       signInWithPopup(getAuth(), provider)
@@ -139,6 +170,13 @@ export default {
         });
     },
 
+    /** errorToString(error):
+ * Converts Firebase authentication error codes to human-readable error messages.
+ * Handles common authentication error cases like invalid email, user not found, missing password,
+ * and invalid login credentials, providing corresponding error messages.
+ * If the error code is not recognized, returns a generic "Unknown error" message.
+ */
+
     errorToString(error) {
       switch (error.code) {
         case 'auth/invalid-email':
@@ -154,6 +192,11 @@ export default {
       }
     },
   },
+
+/**
+ *  data option is used to define the initial state of a component.
+ *  It returns an object containing the data properties that will be used within the component.
+ */
   data() {
     return {
       email: '',

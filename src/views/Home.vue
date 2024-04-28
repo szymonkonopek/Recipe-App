@@ -85,38 +85,4 @@ export default {
 };
 </script>
 
-<style>
-  .container {
-  /* background-image: url("../assets/homeBackground/backgroundPale.jpg");
-  background-repeat: repeat;  */
-
-  /*opacity: 0.5; */
-
-  /* padding: 20px; */
-}
-
-/* .bg-white rounded p-3 mb-3 shadow {
-  background-color: white;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.bg-white rounded p-3 mb-3 shadow p {
-  text-align: center;
-  margin-top: 15px;
-}
-
-@media (min-width: 768px) {
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .bg-white rounded p-3 mb-3 shadow {
-    flex-basis: calc(33.33% - 20px);
-  }
-} */
-</style>
+<!-- Home page containing carousel galleries with photos. -->

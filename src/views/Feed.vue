@@ -26,7 +26,9 @@
     </div>
     
     <div class="d-flex flex-column align-items-center">
+      <!-- Responsible for displaying a list of recipes. (COMPONENT) -->
       <RecipesList :uid="''"></RecipesList>
+      <!-- Represents a button for adding a new recipe. (COMPONENT) -->
       <NewRecipeButton></NewRecipeButton>
     </div>
   </div>

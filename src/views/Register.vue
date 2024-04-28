@@ -13,6 +13,8 @@
                 <img src="../assets/login/signup.png" class="img-fluid" />
               </div>
               <div class="col-lg-6">
+
+                <!-- If the error with authentication occurs, then it displays appropriate information. (FUNCTION)-->
                 <h2>Register to Recipe App</h2>
                 <div v-if="error" class="alert alert-danger small-alert">
                   {{ errorToString(error) }}
@@ -46,7 +48,7 @@
                       aria-describedby="inputGroup-sizing"
                     />
                   </div>
-
+                  <!-- Flexible element which displays an information if the password has an appropriate length. (ELEMENT) -->
                   <div
                     v-if="password.length > 0 && password.length < 8"
                     class="text-danger"
@@ -55,6 +57,7 @@
                   </div>
 
                   <div>
+                    <!-- Button responsible for registering in with email. Disabled when password has less than 8 letters. (FUNCTION)-->
                     <button
                       class="btn btn-lg btn-primary text-black my-2 rounded-pill"
                       @click="register"
@@ -71,6 +74,7 @@
                   </div>
 
                   <div>
+                    <!-- Button responsible for signing in with google. (FUNCTION)-->
                     <button
                       class="btn btn-lg btn-outline-primary my-2 rounded-pill"
                       @click="signInWithGoogle"
@@ -107,6 +111,17 @@ import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 export default {
   name: 'AppRegisterView',
   methods: {
+
+/** register():
+ * Registers a new user using email and password authentication.
+ * Utilizes Firebase's createUserWithEmailAndPassword method for registration.
+ * Upon successful registration:
+ *   - Saves user data to Firestore database.
+ *   - Redirects the user to the feed page.
+ * Handles registration errors by setting the 'error' property and logging the error code.
+ * If the browser supports vibration, triggers a short vibration upon error.
+ */
+
     register() {
       createUserWithEmailAndPassword(getAuth(), this.email, this.password)
         .then((data) => {
@@ -125,6 +140,19 @@ export default {
           }
         });
     },
+
+/**  signInWithGoogle():
+ * Initiates Google sign-in authentication flow.
+ * Uses Firebase's GoogleAuthProvider to create a sign-in provider.
+ * Displays a pop-up for Google sign-in authentication.
+ * Upon successful authentication:
+ *   - Logs the user information.
+ *   - Saves user data to Firestore database.
+ *   - Redirects the user to the feed page.
+ * Handles errors by displaying the error code in an alert.
+ * If the browser supports vibration, triggers a short vibration upon error.
+ */
+
     signInWithGoogle() {
       const provider = new GoogleAuthProvider();
       signInWithPopup(getAuth(), provider)
@@ -144,6 +172,14 @@ export default {
           }
         });
     },
+
+    /** errorToString(error):
+ * Converts Firebase authentication error codes to human-readable error messages.
+ * Handles common authentication error cases like invalid email, user not found, missing password,
+ * and invalid login credentials, providing corresponding error messages.
+ * If the error code is not recognized, returns a generic "Unknown error" message.
+ */
+
     errorToString(error) {
       switch (error.code) {
         case 'auth/invalid-email':
@@ -161,6 +197,12 @@ export default {
       }
     },
   },
+
+  /**
+ *  data option is used to define the initial state of a component.
+ *  It returns an object containing the data properties that will be used within the component.
+ */
+
   data() {
     return {
       email: '',
