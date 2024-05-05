@@ -11,9 +11,9 @@ module.exports = defineConfig({
       appleTouchIcon: 'mitten.png', // Path to your Apple touch icon (152x152)
       maskIcon: 'cookingIcon1.svg', // Path to your maskable icon (SVG format)
       msTileImage: 'cookingIcon144.png', // Path to your Microsoft Tile icon (144x144)
-    }
+    },
   },
-  // devServer: {
-  //   https: true,
-  // },
+  devServer: {
+    https: true,
+  },
 });
