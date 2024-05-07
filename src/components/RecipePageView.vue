@@ -167,7 +167,7 @@ export default {
         navigator.share({
           title: 'Recipe App',
           text: 'Check out this recipe!',
-          url: 'https://recipes-online.netlify.app',
+          url: `https://recipes-online.netlify.app/${this.$recipe.id}`,
         });
         console.log('Shared successfully');
       } catch (error) {
