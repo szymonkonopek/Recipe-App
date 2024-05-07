@@ -163,11 +163,12 @@ export default {
   },
   methods: {
     share() {
+      console.log('Recipe ID:', this.recipeId);
       try {
         navigator.share({
           title: 'Recipe App',
           text: 'Check out this recipe!',
-          url: `https://recipes-online.netlify.app/${this.$recipe.id}`,
+          url: `https://recipes-online.netlify.app/recipe/${this.recipeId}`,
         });
         console.log('Shared successfully');
       } catch (error) {
