@@ -9,7 +9,7 @@
       </div>
       <div class="col-lg-7 mt-4">
         <div class="badge bg-success text-wrap fs-5 mb-4 shadow border border-3 border-white">Your recipes</div>
-        
+
         <!-- Responsible for displaying the user's created recipes-->
         <app-user-recipes></app-user-recipes>
       </div>

@@ -128,7 +128,7 @@ const actions = {
     });
   },
 
-/** createUserWithUsername
+  /** createUserWithUsername
  * Action to create a new user with a username in Firestore.
  * Adds a new user document to the 'users' collection with the provided username and ID.
  * Resolves the Promise once the user is successfully created.
@@ -143,7 +143,7 @@ const actions = {
       });
     });
   },
-/** updatePassword
+  /** updatePassword
  * Action to update the password of the currently authenticated user.
  * Retrieves the current user's authentication instance.
  * If the user is authenticated, updates the password using the provided new password.
@@ -170,7 +170,7 @@ const actions = {
     });
   },
 
-/** getUserDetails
+  /** getUserDetails
  * Action to get details of the currently authenticated user.
  * Retrieves the current user's authentication instance.
  * If the user is authenticated, constructs and resolves with an object containing user details,
@@ -182,24 +182,39 @@ const actions = {
     return new Promise((resolve, reject) => {
       const auth = getAuth();
       const user = auth.currentUser;
+      let username = '';
 
-      if (user) {
-        const userDetails = {
-          uid: user.uid,
-          email: user.email,
-          providers: user.providerData.map((provider) => provider.providerId),
-          created: user.metadata.creationTime,
-          lastSignIn: user.metadata.lastSignInTime,
-        };
-        resolve(userDetails);
-      } else {
-        // eslint-disable-next-line prefer-promise-reject-errors
-        reject('No authenticated user');
-      }
+      const docRef = doc(db, 'users', user.uid);
+      getDoc(docRef)
+        .then((docEl) => {
+          if (docEl.exists()) {
+            console.log('user data:', docEl.data());
+            username = docEl.data().username;
+            if (user) {
+              const userDetails = {
+                uid: user.uid,
+                email: user.email,
+                providers: user.providerData.map((provider) => provider.providerId),
+                created: user.metadata.creationTime,
+                lastSignIn: user.metadata.lastSignInTime,
+                username,
+              };
+              resolve(userDetails);
+            } else {
+              // eslint-disable-next-line prefer-promise-reject-errors
+              reject('No authenticated user');
+            }
+          } else {
+            console.log('No such document');
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   },
 
-/** getRecipeById
+  /** getRecipeById
  * Action to fetch a recipe by its ID from Firestore.
  * Constructs a document reference for the recipe using the provided ID.
  * Fetches the document data from Firestore.
@@ -233,7 +248,7 @@ const actions = {
     });
   },
 
-/** getUserById
+  /** getUserById
  * Action to fetch a user by their ID from Firestore.
  * Constructs a document reference for the user using the provided ID.
  * Fetches the document data from Firestore.
@@ -260,7 +275,7 @@ const actions = {
     });
   },
 
-/** uploadImage
+  /** uploadImage
  * Action to upload and add an image to a recipe in Firestore storage.
  * Resizes and compresses the image before uploading.
  * Converts the image to a data URL and then to a Blob.
@@ -360,7 +375,7 @@ const actions = {
     });
   },
 
-/** addReview
+  /** addReview
  * Action to add a review for a recipe to Firestore.
  * Listens for authentication state changes to get the current user.
  * Adds a new review document to the 'reviews' collection with user ID, creation timestamp, recipe ID, and review content.
@@ -384,7 +399,7 @@ const actions = {
       });
     });
   },
-/** getReviewsByRecipeId
+  /** getReviewsByRecipeId
  * Action to fetch reviews for a recipe by its ID from Firestore.
  * Constructs a query to filter reviews by the provided recipe ID and order them by creation timestamp.
  * Fetches the reviews documents from Firestore based on the constructed query.

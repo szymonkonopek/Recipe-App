@@ -2,12 +2,13 @@
 <template>
   <div class="container justify-content-center bg-white shadow border rounded-2 p-3" v-if="userDetails">
     <div class="row justify-content-center">
-      <div class="col-md-4 text-center">
+      <div class="col-md-4 text-center d-flex flex-column align-items-center">
         <img
           src="../assets/profile/profile-photo.png"
           class="img-fluid justify-content-center"
           style="max-width: 80px"
         />
+        {{ userDetails.username }}
       </div>
 
       <div class="col-md-8 justify-content-center m-0">
@@ -39,7 +40,7 @@
     </div>
   </div>
   <div class="m-3"></div>
-  <app-user-form></app-user-form>
+  <!-- <app-user-form></app-user-form> -->
 </template>
 
 <script>
@@ -59,11 +60,13 @@ export default {
   methods: {
     ...mapActions({
       getUserDetails: actionTypes.getUserDetails,
+      getUserById: actionTypes.getUserById,
     }),
     fetchUserDetails() {
       this.getUserDetails()
         .then((userDetails) => {
           this.userDetails = userDetails;
+          console.log('userDetails', userDetails);
         })
         .catch((error) => {
           console.error(error);
